@@ -101,6 +101,17 @@ const buildSubmissionMeta = () => ({
   source_page: window.location.pathname || "unknown",
 });
 
+const showFormNotice = (form, text) => {
+  if (!form) return;
+  let notice = form.querySelector(".form-notice");
+  if (!notice) {
+    notice = document.createElement("p");
+    notice.className = "form-notice";
+    form.appendChild(notice);
+  }
+  notice.textContent = text;
+};
+
 const strategyForm = document.querySelector("#strategy-form");
 if (strategyForm) {
   strategyForm.addEventListener("submit", (event) => {
@@ -134,6 +145,7 @@ if (strategyForm) {
       ...buildSubmissionMeta(),
     });
 
+    showFormNotice(strategyForm, "Submitted successfully. We will review your request within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     strategyForm.reset();
@@ -168,6 +180,7 @@ if (websiteBriefForm) {
       ...buildSubmissionMeta(),
     });
 
+    showFormNotice(websiteBriefForm, "Submitted successfully. We will review your request within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     websiteBriefForm.reset();
@@ -210,6 +223,7 @@ if (collabForm) {
       ...buildSubmissionMeta(),
     });
 
+    showFormNotice(collabForm, "Application sent. We will review your profile within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     collabForm.reset();
