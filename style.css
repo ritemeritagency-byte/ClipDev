@@ -1601,6 +1601,19 @@ body::before {
     margin-top: 2px;
 }
 
+.apply-response-time {
+    margin-top: 4px;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+}
+
+.form-notice {
+    margin-top: 6px;
+    font-size: 0.86rem;
+    color: #0f6e5f;
+    font-weight: 600;
+}
+
 .collab-form label {
     font-size: 0.84rem;
     color: var(--primary-ink);
