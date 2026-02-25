@@ -83,6 +83,9 @@ diamondShowcases.forEach((showcase) => {
 });
 
 const whatsappNumber = "639603780196";
+const buildWhatsAppUrl = (text) =>
+  `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(text)}`;
+
 const buildSubmissionMeta = () => ({
   submitted_at: new Date().toISOString(),
   source_page: window.location.pathname || "unknown",
@@ -121,11 +124,7 @@ if (strategyForm) {
       ...buildSubmissionMeta(),
     });
 
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(payload)}`,
-      "_blank",
-      "noopener"
-    );
+    window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     strategyForm.reset();
   });
@@ -159,11 +158,7 @@ if (websiteBriefForm) {
       ...buildSubmissionMeta(),
     });
 
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(payload)}`,
-      "_blank",
-      "noopener"
-    );
+    window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     websiteBriefForm.reset();
   });
@@ -205,11 +200,7 @@ if (collabForm) {
       ...buildSubmissionMeta(),
     });
 
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(payload)}`,
-      "_blank",
-      "noopener"
-    );
+    window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
 
     collabForm.reset();
   });
@@ -236,8 +227,7 @@ if (waWidget) {
   if (send && input) {
     send.addEventListener("click", () => {
       const raw = input.value.trim() || "Hi, I want help with my website or recruitment project.";
-      const text = encodeURIComponent(raw);
-      window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank", "noopener");
+      window.open(buildWhatsAppUrl(raw), "_blank", "noopener");
     });
   }
 }
