@@ -514,30 +514,30 @@ body::before {
 }
 
 .testimonial-card.tone-ocean {
-    background: linear-gradient(145deg, #ffffff, #eef6ff);
-    border-color: rgba(50, 111, 194, 0.22);
+    background: linear-gradient(145deg, #f8fcff, #dcebff);
+    border-color: rgba(50, 111, 194, 0.35);
 }
 
 .testimonial-card.tone-ocean::before {
-    border-top-color: #4f8fd9;
+    border-top-color: #3e7fcc;
 }
 
 .testimonial-card.tone-sun {
-    background: linear-gradient(145deg, #ffffff, #fff7e9);
-    border-color: rgba(212, 149, 35, 0.24);
+    background: linear-gradient(145deg, #fffdf7, #ffe8bd);
+    border-color: rgba(212, 149, 35, 0.38);
 }
 
 .testimonial-card.tone-sun::before {
-    border-top-color: #d89a3b;
+    border-top-color: #d08920;
 }
 
 .testimonial-card.tone-mint {
-    background: linear-gradient(145deg, #ffffff, #ebfcf6);
-    border-color: rgba(28, 154, 124, 0.24);
+    background: linear-gradient(145deg, #f7fffc, #d8f8ec);
+    border-color: rgba(28, 154, 124, 0.36);
 }
 
 .testimonial-card.tone-mint::before {
-    border-top-color: #23a884;
+    border-top-color: #1d9c7b;
 }
 
 .section-title {
