@@ -188,7 +188,7 @@ if (collabForm) {
     const message = collabForm.querySelector("[name='message']")?.value?.trim() || "";
 
     const payload = [
-      "New ClipDev Collaboration Signup",
+      "New ClipDev Talent Signup",
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Location: ${location}`,
@@ -199,7 +199,7 @@ if (collabForm) {
     ].join("\n");
 
     sendToGoogleSheet({
-      form_type: "collaboration_signup",
+      form_type: "talent_signup",
       name,
       phone,
       location,
