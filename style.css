@@ -1256,6 +1256,45 @@ body::before {
     margin: 0 auto 18px;
 }
 
+.collab-apply-section {
+    padding-top: 34px;
+}
+
+.collab-apply-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.3fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.collab-apply-guide {
+    position: sticky;
+    top: 94px;
+}
+
+.apply-highlights {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(17, 38, 61, 0.12);
+}
+
+.apply-highlights h4 {
+    color: var(--primary-ink);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.apply-highlights ol {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.apply-highlights li {
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
 .community-updates {
     padding-top: 24px;
 }
@@ -1423,6 +1462,76 @@ body::before {
     padding: 20px;
     display: grid;
     gap: 8px;
+}
+
+.collab-form-redesign {
+    gap: 12px;
+    padding: 22px;
+}
+
+.collab-progress {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.progress-pill {
+    border: 1px solid rgba(17, 38, 61, 0.15);
+    color: var(--secondary-ink);
+    background: #f5fafb;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.progress-pill.active {
+    background: var(--accent-soft);
+    border-color: rgba(27, 179, 169, 0.5);
+}
+
+.form-step {
+    border: 1px solid rgba(17, 38, 61, 0.12);
+    border-radius: 12px;
+    padding: 14px;
+    margin: 0;
+}
+
+.form-step legend {
+    color: var(--primary-ink);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0 8px;
+}
+
+.build-type-cards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 3px 0 8px;
+}
+
+.build-type-cards span {
+    border: 1px solid rgba(17, 38, 61, 0.14);
+    background: #f7fbff;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 0.75rem;
+    color: var(--secondary-ink);
+    font-weight: 600;
+}
+
+.consent-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+}
+
+.consent-check input {
+    margin-top: 2px;
 }
 
 .collab-form label {
@@ -1671,6 +1780,8 @@ button:focus-visible {
     .collab-wrap { grid-template-columns: 1fr; }
     .collab-showcase { grid-template-columns: 1fr; }
     .collab-media-stack { min-height: 380px; }
+    .collab-apply-layout { grid-template-columns: 1fr; }
+    .collab-apply-guide { position: static; }
     .tracks-grid { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr; }
     .insights-feature { grid-template-columns: 1fr; }
