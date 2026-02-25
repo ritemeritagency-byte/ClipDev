@@ -1017,6 +1017,181 @@ body::before {
     box-shadow: 0 18px 38px rgba(13, 27, 42, 0.12);
 }
 
+/* Unified Professional Card Highlights */
+.service-card,
+.service-showcase-card,
+.lead-system-feature,
+.policy-item,
+.package-card,
+.system-step-card,
+.insight-link-card,
+.showcase-card,
+.track-card,
+.step-card,
+.update-card,
+.insight-story-card,
+.insight-panel,
+.insights-step-card,
+.workflow-step,
+.subpage-card,
+.stat-card {
+    position: relative;
+}
+
+.service-card::before,
+.service-showcase-card::before,
+.lead-system-feature::before,
+.policy-item::before,
+.package-card::before,
+.system-step-card::before,
+.insight-link-card::before,
+.showcase-card::before,
+.track-card::before,
+.step-card::before,
+.update-card::before,
+.insight-story-card::before,
+.insight-panel::before,
+.insights-step-card::before,
+.workflow-step::before,
+.subpage-card::before,
+.stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+/* Ocean tone */
+.services-grid .service-card:nth-child(3n + 1),
+.services-highlight-grid .service-showcase-card:nth-child(3n + 1),
+.lead-system-stack .lead-system-feature:nth-child(3n + 1),
+.policy-grid .policy-item:nth-child(3n + 1),
+.package-grid .package-card:nth-child(3n + 1),
+.system-steps-grid .system-step-card:nth-child(3n + 1),
+.insight-link-grid .insight-link-card:nth-child(3n + 1),
+.showcase-grid .showcase-card:nth-child(3n + 1),
+.tracks-grid .track-card:nth-child(3n + 1),
+.steps-grid .step-card:nth-child(3n + 1),
+.updates-grid .update-card:nth-child(3n + 1),
+.insight-story-grid .insight-story-card:nth-child(3n + 1),
+.insights-mosaic .insight-panel:nth-child(3n + 1),
+.insights-steps .insights-step-card:nth-child(3n + 1),
+.workflow-grid .workflow-step:nth-child(3n + 1),
+.subpage-grid .subpage-card:nth-child(3n + 1),
+.stats-grid .stat-card:nth-child(3n + 1) {
+    background: linear-gradient(145deg, #ffffff, #edf5ff);
+    border-color: rgba(50, 111, 194, 0.2);
+}
+
+.services-grid .service-card:nth-child(3n + 1)::before,
+.services-highlight-grid .service-showcase-card:nth-child(3n + 1)::before,
+.lead-system-stack .lead-system-feature:nth-child(3n + 1)::before,
+.policy-grid .policy-item:nth-child(3n + 1)::before,
+.package-grid .package-card:nth-child(3n + 1)::before,
+.system-steps-grid .system-step-card:nth-child(3n + 1)::before,
+.insight-link-grid .insight-link-card:nth-child(3n + 1)::before,
+.showcase-grid .showcase-card:nth-child(3n + 1)::before,
+.tracks-grid .track-card:nth-child(3n + 1)::before,
+.steps-grid .step-card:nth-child(3n + 1)::before,
+.updates-grid .update-card:nth-child(3n + 1)::before,
+.insight-story-grid .insight-story-card:nth-child(3n + 1)::before,
+.insights-mosaic .insight-panel:nth-child(3n + 1)::before,
+.insights-steps .insights-step-card:nth-child(3n + 1)::before,
+.workflow-grid .workflow-step:nth-child(3n + 1)::before,
+.subpage-grid .subpage-card:nth-child(3n + 1)::before,
+.stats-grid .stat-card:nth-child(3n + 1)::before {
+    background: #3f82cf;
+}
+
+/* Sun tone */
+.services-grid .service-card:nth-child(3n + 2),
+.services-highlight-grid .service-showcase-card:nth-child(3n + 2),
+.lead-system-stack .lead-system-feature:nth-child(3n + 2),
+.policy-grid .policy-item:nth-child(3n + 2),
+.package-grid .package-card:nth-child(3n + 2),
+.system-steps-grid .system-step-card:nth-child(3n + 2),
+.insight-link-grid .insight-link-card:nth-child(3n + 2),
+.showcase-grid .showcase-card:nth-child(3n + 2),
+.tracks-grid .track-card:nth-child(3n + 2),
+.steps-grid .step-card:nth-child(3n + 2),
+.updates-grid .update-card:nth-child(3n + 2),
+.insight-story-grid .insight-story-card:nth-child(3n + 2),
+.insights-mosaic .insight-panel:nth-child(3n + 2),
+.insights-steps .insights-step-card:nth-child(3n + 2),
+.workflow-grid .workflow-step:nth-child(3n + 2),
+.subpage-grid .subpage-card:nth-child(3n + 2),
+.stats-grid .stat-card:nth-child(3n + 2) {
+    background: linear-gradient(145deg, #ffffff, #fff5e4);
+    border-color: rgba(212, 149, 35, 0.2);
+}
+
+.services-grid .service-card:nth-child(3n + 2)::before,
+.services-highlight-grid .service-showcase-card:nth-child(3n + 2)::before,
+.lead-system-stack .lead-system-feature:nth-child(3n + 2)::before,
+.policy-grid .policy-item:nth-child(3n + 2)::before,
+.package-grid .package-card:nth-child(3n + 2)::before,
+.system-steps-grid .system-step-card:nth-child(3n + 2)::before,
+.insight-link-grid .insight-link-card:nth-child(3n + 2)::before,
+.showcase-grid .showcase-card:nth-child(3n + 2)::before,
+.tracks-grid .track-card:nth-child(3n + 2)::before,
+.steps-grid .step-card:nth-child(3n + 2)::before,
+.updates-grid .update-card:nth-child(3n + 2)::before,
+.insight-story-grid .insight-story-card:nth-child(3n + 2)::before,
+.insights-mosaic .insight-panel:nth-child(3n + 2)::before,
+.insights-steps .insights-step-card:nth-child(3n + 2)::before,
+.workflow-grid .workflow-step:nth-child(3n + 2)::before,
+.subpage-grid .subpage-card:nth-child(3n + 2)::before,
+.stats-grid .stat-card:nth-child(3n + 2)::before {
+    background: #d28d1d;
+}
+
+/* Mint tone */
+.services-grid .service-card:nth-child(3n),
+.services-highlight-grid .service-showcase-card:nth-child(3n),
+.lead-system-stack .lead-system-feature:nth-child(3n),
+.policy-grid .policy-item:nth-child(3n),
+.package-grid .package-card:nth-child(3n),
+.system-steps-grid .system-step-card:nth-child(3n),
+.insight-link-grid .insight-link-card:nth-child(3n),
+.showcase-grid .showcase-card:nth-child(3n),
+.tracks-grid .track-card:nth-child(3n),
+.steps-grid .step-card:nth-child(3n),
+.updates-grid .update-card:nth-child(3n),
+.insight-story-grid .insight-story-card:nth-child(3n),
+.insights-mosaic .insight-panel:nth-child(3n),
+.insights-steps .insights-step-card:nth-child(3n),
+.workflow-grid .workflow-step:nth-child(3n),
+.subpage-grid .subpage-card:nth-child(3n),
+.stats-grid .stat-card:nth-child(3n) {
+    background: linear-gradient(145deg, #ffffff, #e8fbf4);
+    border-color: rgba(28, 154, 124, 0.2);
+}
+
+.services-grid .service-card:nth-child(3n)::before,
+.services-highlight-grid .service-showcase-card:nth-child(3n)::before,
+.lead-system-stack .lead-system-feature:nth-child(3n)::before,
+.policy-grid .policy-item:nth-child(3n)::before,
+.package-grid .package-card:nth-child(3n)::before,
+.system-steps-grid .system-step-card:nth-child(3n)::before,
+.insight-link-grid .insight-link-card:nth-child(3n)::before,
+.showcase-grid .showcase-card:nth-child(3n)::before,
+.tracks-grid .track-card:nth-child(3n)::before,
+.steps-grid .step-card:nth-child(3n)::before,
+.updates-grid .update-card:nth-child(3n)::before,
+.insight-story-grid .insight-story-card:nth-child(3n)::before,
+.insights-mosaic .insight-panel:nth-child(3n)::before,
+.insights-steps .insights-step-card:nth-child(3n)::before,
+.workflow-grid .workflow-step:nth-child(3n)::before,
+.subpage-grid .subpage-card:nth-child(3n)::before,
+.stats-grid .stat-card:nth-child(3n)::before {
+    background: #1d9c7b;
+}
+
 /* Scroll animation: cards move toward center when visible, then reset when out of view */
 .scroll-merge {
     --merge-x: 0px;
