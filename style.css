@@ -718,29 +718,54 @@ body::before {
     margin-bottom: 20px;
 }
 
-.lead-system-grid {
+.lead-system-stack {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
 }
 
-.lead-system-card {
+.lead-system-feature {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
     background: white;
     border: 1px solid rgba(17, 38, 61, 0.1);
     border-radius: 16px;
-    overflow: hidden;
     box-shadow: 0 12px 26px rgba(13, 27, 42, 0.08);
+    overflow: hidden;
+}
+
+.lead-system-feature.is-reverse {
+    grid-template-columns: 1fr 1.05fr;
+}
+
+.lead-system-visual {
+    background: linear-gradient(155deg, #f3f8ff, #eefbf7);
+    border-right: 1px solid rgba(17, 38, 61, 0.08);
+    padding: 12px;
+}
+
+.lead-system-feature.is-reverse .lead-system-visual {
+    border-right: 0;
+    border-left: 1px solid rgba(17, 38, 61, 0.08);
+    order: 2;
+}
+
+.lead-system-feature.is-reverse .lead-system-content {
+    order: 1;
 }
 
 .lead-system-media {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
+    height: 320px;
+    object-fit: contain;
+    object-position: center;
+    background: #ffffff;
+    border-radius: 10px;
     display: block;
 }
 
 .lead-system-content {
-    padding: 16px;
+    padding: 20px;
+    align-self: center;
 }
 
 .lead-system-content h3 {
@@ -1887,7 +1912,12 @@ button:focus-visible {
     .testimonials-grid { grid-template-columns: 1fr; }
     .updates-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
-    .lead-system-grid { grid-template-columns: 1fr; }
+    .lead-system-feature { grid-template-columns: 1fr; }
+    .lead-system-feature.is-reverse { grid-template-columns: 1fr; }
+    .lead-system-feature.is-reverse .lead-system-visual { order: 1; border-left: 0; border-right: 0; border-bottom: 1px solid rgba(17, 38, 61, 0.08); }
+    .lead-system-feature.is-reverse .lead-system-content { order: 2; }
+    .lead-system-visual { border-right: 0; border-bottom: 1px solid rgba(17, 38, 61, 0.08); }
+    .lead-system-media { height: 260px; }
     .services-highlight-grid { grid-template-columns: 1fr; }
     .policy-grid { grid-template-columns: 1fr; }
     .package-grid { grid-template-columns: 1fr; }
