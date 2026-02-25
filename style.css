@@ -1224,6 +1224,15 @@ body::before {
     object-fit: cover;
 }
 
+/* Portfolio: keep full client website screenshots visible without cropping */
+.page-portfolio .showcase-media {
+    height: 320px;
+    object-fit: contain;
+    object-position: center;
+    background: #0e2036;
+    padding: 10px;
+}
+
 .showcase-content {
     padding: 22px;
 }
@@ -2151,6 +2160,7 @@ button:focus-visible {
     .system-steps-grid { grid-template-columns: 1fr; }
     .insight-link-grid { grid-template-columns: 1fr; }
     .showcase-grid { grid-template-columns: 1fr; }
+    .page-portfolio .showcase-media { height: 280px; }
     .subpage-grid { grid-template-columns: 1fr; }
     .diamond-showcase { grid-template-columns: 1fr; }
     .diamond-preview img { height: 320px; }
@@ -2180,6 +2190,7 @@ button:focus-visible {
     .diamond-cloud { width: 280px; height: 280px; }
     .diamond-tile { width: 72px; height: 72px; }
     .diamond-preview img { height: 250px; }
+    .page-portfolio .showcase-media { height: 220px; }
     .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     .footer-link-button { margin-left: 0; margin-top: 10px; }
