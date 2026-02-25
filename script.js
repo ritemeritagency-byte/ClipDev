@@ -20,7 +20,7 @@ mergeCards.forEach((card) => observer.observe(card));
 
 // Paste your deployed Google Apps Script Web App URL here.
 // Example: https://script.google.com/macros/s/AKfycb.../exec
-const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx-8ef5b35PpRKz8oNhBevQBju7BV6ry1Oo2eTWlGIPRnJXaP6HBdLQpH8C9T6Vwg7kzQ/exec";
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby05ygLXtRFHJVjqQ9sTju23nDqPn8Z_OsdMYuk_UMuEaCl2kZ9ePyj0C6llogUXf94Mg/exec";
 
 const sendToGoogleSheet = async (payload) => {
   if (!GOOGLE_SHEET_WEBHOOK_URL) return;
