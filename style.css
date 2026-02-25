@@ -754,6 +754,73 @@ body::before {
     margin-top: 26px;
 }
 
+.service-policy-block,
+.service-packages-block {
+    margin-top: 30px;
+}
+
+.policy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.policy-item {
+    background: white;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(13, 27, 42, 0.07);
+    padding: 18px;
+}
+
+.policy-item h3 {
+    color: var(--primary-ink);
+    margin-bottom: 6px;
+}
+
+.policy-item h3 i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+.policy-item p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.package-card {
+    background: linear-gradient(145deg, #ffffff, #f5fbfb);
+    border: 1px solid rgba(17, 38, 61, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 12px 26px rgba(13, 27, 42, 0.08);
+    padding: 18px;
+}
+
+.package-card h3 {
+    color: var(--primary-ink);
+    margin: 6px 0;
+}
+
+.package-price {
+    color: var(--secondary-ink);
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.pricing-note {
+    margin-top: 12px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
 .system-steps-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1769,6 +1836,8 @@ button:focus-visible {
     .updates-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .services-highlight-grid { grid-template-columns: 1fr; }
+    .policy-grid { grid-template-columns: 1fr; }
+    .package-grid { grid-template-columns: 1fr; }
     .system-steps-grid { grid-template-columns: 1fr; }
     .insight-link-grid { grid-template-columns: 1fr; }
     .showcase-grid { grid-template-columns: 1fr; }
