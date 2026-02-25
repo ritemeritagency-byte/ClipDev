@@ -130,60 +130,103 @@
             </div>
         </section>
 
-        <section class="container">
+        <section class="container collab-apply-section">
             <div class="section-title">
                 <h2>Apply to Collaborate</h2>
                 <div class="underline"></div>
             </div>
 
-            <div class="about-card policy-card">
-                <h3>Collaboration Policy</h3>
-                <ul class="collab-list">
-                    <li>Project compensation depends on the client's available budget.</li>
-                    <li>Collaborators are not employees under ClipDev.</li>
-                    <li>Collaboration scope includes website design, graphics design, social media content, and social media management support.</li>
-                    <li>This is a collaboration and learning environment with shared responsibilities.</li>
-                    <li>Main focus: real-world experience, portfolio growth, and helping people reach goals.</li>
-                </ul>
+            <div class="collab-apply-layout">
+                <aside class="about-card policy-card collab-apply-guide">
+                    <p class="meta-pill">Before You Apply</p>
+                    <h3>Collaboration Policy</h3>
+                    <ul class="collab-list">
+                        <li>Project compensation depends on each client's available budget.</li>
+                        <li>Collaborators are not employees under ClipDev.</li>
+                        <li>Scope includes websites, graphics, social content, and social media support.</li>
+                        <li>This is a shared-learning environment with team accountability.</li>
+                        <li>Main goal: real-world experience, portfolio growth, and community impact.</li>
+                    </ul>
+
+                    <div class="apply-highlights">
+                        <h4>Application Flow</h4>
+                        <ol>
+                            <li>Step 1: Basic details</li>
+                            <li>Step 2: Skills and project fit</li>
+                            <li>Step 3: Motivation and submit</li>
+                        </ol>
+                    </div>
+                </aside>
+
+                <form class="collab-form collab-form-redesign" id="collab-form">
+                    <div class="collab-progress">
+                        <span class="progress-pill active">Step 1</span>
+                        <span class="progress-pill">Step 2</span>
+                        <span class="progress-pill">Step 3</span>
+                    </div>
+
+                    <fieldset class="form-step">
+                        <legend>Step 1: Basic Information</legend>
+
+                        <label for="collab-name">Full Name</label>
+                        <input id="collab-name" name="name" type="text" placeholder="Your full name" required>
+
+                        <label for="collab-phone">Phone Number</label>
+                        <input id="collab-phone" name="phone" type="tel" placeholder="+63..." required>
+
+                        <label for="collab-location">Location</label>
+                        <input id="collab-location" name="location" type="text" placeholder="City / Country" required>
+                    </fieldset>
+
+                    <fieldset class="form-step">
+                        <legend>Step 2: Skills and Project Fit</legend>
+
+                        <label for="collab-role">Current Level</label>
+                        <select id="collab-role" name="role" required>
+                            <option value="">Select your level</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+
+                        <label for="collab-stack">Skills / Tools</label>
+                        <input id="collab-stack" name="stack" type="text" placeholder="HTML, CSS, JS, React, UI Design, etc.">
+
+                        <div class="build-type-cards" aria-hidden="true">
+                            <span>Website Build</span>
+                            <span>Landing Page</span>
+                            <span>Graphics Design</span>
+                            <span>Social Content</span>
+                            <span>Social Management</span>
+                        </div>
+
+                        <label for="collab-type">What do you want to build?</label>
+                        <select id="collab-type" name="build_type" required>
+                            <option value="">Select project type</option>
+                            <option>Business Website</option>
+                            <option>Landing Page</option>
+                            <option>Graphics Design Project</option>
+                            <option>Social Media Content Project</option>
+                            <option>Social Media Management Support</option>
+                            <option>Other</option>
+                        </select>
+                    </fieldset>
+
+                    <fieldset class="form-step">
+                        <legend>Step 3: Motivation</legend>
+
+                        <label for="collab-message">Why do you want to join ClipDev collaboration?</label>
+                        <textarea id="collab-message" name="message" rows="4" placeholder="Tell us your goals..." required></textarea>
+
+                        <label class="consent-check">
+                            <input type="checkbox" required>
+                            <span>I understand this is collaboration-based work, not employment.</span>
+                        </label>
+                    </fieldset>
+
+                    <button type="submit" class="cta-button">Apply to Join ClipDev Community</button>
+                </form>
             </div>
-
-            <form class="collab-form" id="collab-form">
-                <label for="collab-name">Name</label>
-                <input id="collab-name" name="name" type="text" placeholder="Your full name" required>
-
-                <label for="collab-phone">Phone Number</label>
-                <input id="collab-phone" name="phone" type="tel" placeholder="+63..." required>
-
-                <label for="collab-location">Location</label>
-                <input id="collab-location" name="location" type="text" placeholder="City / Country" required>
-
-                <label for="collab-role">Current Level</label>
-                <select id="collab-role" name="role" required>
-                    <option value="">Select your level</option>
-                    <option>Beginner</option>
-                    <option>Intermediate</option>
-                    <option>Advanced</option>
-                </select>
-
-                <label for="collab-stack">Skills / Tools</label>
-                <input id="collab-stack" name="stack" type="text" placeholder="HTML, CSS, JS, React, UI Design, etc.">
-
-                <label for="collab-type">What do you want to build?</label>
-                <select id="collab-type" name="build_type" required>
-                    <option value="">Select project type</option>
-                    <option>Business Website</option>
-                    <option>Landing Page</option>
-                    <option>Graphics Design Project</option>
-                    <option>Social Media Content Project</option>
-                    <option>Social Media Management Support</option>
-                    <option>Other</option>
-                </select>
-
-                <label for="collab-message">Why do you want to join?</label>
-                <textarea id="collab-message" name="message" rows="4" placeholder="Tell us your goals..." required></textarea>
-
-                <button type="submit" class="cta-button">Join the ClipDev Family</button>
-            </form>
         </section>
 
         <section class="container community-updates">
