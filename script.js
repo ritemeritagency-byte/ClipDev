@@ -25,12 +25,22 @@ const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx-8ef
 const sendToGoogleSheet = async (payload) => {
   if (!GOOGLE_SHEET_WEBHOOK_URL) return;
 
+  const body = JSON.stringify(payload);
+
+  // Prefer sendBeacon because it is more reliable during navigation/new tab opens.
+  if (navigator.sendBeacon) {
+    const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+    const queued = navigator.sendBeacon(GOOGLE_SHEET_WEBHOOK_URL, blob);
+    if (queued) return;
+  }
+
   try {
     await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      body,
+      keepalive: true,
     });
   } catch (error) {
     console.error("Google Sheets submission failed:", error);
