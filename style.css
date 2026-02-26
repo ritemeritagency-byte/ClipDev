@@ -2221,8 +2221,9 @@ button:focus-visible {
         box-shadow: -14px 0 28px rgba(8, 20, 30, 0.32);
         transform: translateX(102%);
         transition: transform 0.28s ease;
-        z-index: 1200;
+        z-index: 1301;
     }
+    body.nav-open .navbar { z-index: 1300; }
     body.nav-open .nav-links { transform: translateX(0); }
     body.nav-open { overflow: hidden; }
     body.nav-open::after {
@@ -2230,7 +2231,7 @@ button:focus-visible {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.42);
-        z-index: 1100;
+        z-index: 1200;
     }
     .hero-content h1 { font-size: 2.5rem; }
     .insight-grid { grid-template-columns: 1fr; }
