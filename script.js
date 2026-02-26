@@ -227,7 +227,7 @@ if (collabForm) {
     const message = collabForm.querySelector("[name='message']")?.value?.trim() || "";
 
     const payload = [
-      "New Clipdevs Talent Signup",
+      "New ClipDevs Talent Signup",
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Location: ${location}`,
