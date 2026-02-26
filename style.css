@@ -1,4 +1,4 @@
-﻿/* 1. GLOBAL SETTINGS & BRAND COLORS */
+/* 1. GLOBAL SETTINGS & BRAND COLORS */
 :root {
     --primary-ink: #0a1b2b;
     --secondary-ink: #11263d;
@@ -160,6 +160,51 @@ body::before {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+
+.nav-search-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-search {
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input {
+    width: 184px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+}
+
+.nav-search input::placeholder {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.nav-search input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-color: rgba(255, 209, 230, 0.9);
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* 3. HERO SECTION */
@@ -2269,7 +2314,6 @@ button:focus-visible {
     .insights-steps { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width: 768px) {
     .navbar { flex-direction: row; padding: 10px 6%; }
     .nav-toggle { display: inline-flex; }
@@ -2289,6 +2333,9 @@ button:focus-visible {
         transition: transform 0.28s ease;
         z-index: 1301;
     }
+    .nav-search-item { width: 100%; }
+    .nav-search { width: 100%; }
+    .nav-search input { width: 100%; }
     body.nav-open .navbar { z-index: 1300; }
     body.nav-open .nav-links { transform: translateX(0); }
     body.nav-open { overflow: hidden; }
@@ -2320,3 +2367,4 @@ button:focus-visible {
     .insights-feature-media img { height: 260px; }
     .insights-steps { grid-template-columns: 1fr; }
 }
+

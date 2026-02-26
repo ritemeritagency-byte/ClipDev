@@ -44,6 +44,63 @@ const observer = new IntersectionObserver(
 
 mergeCards.forEach((card) => observer.observe(card));
 
+
+const siteSearchForm = document.querySelector("[data-site-search]");
+if (siteSearchForm) {
+  const siteSearchInput = siteSearchForm.querySelector("input[name='q']");
+  const siteSearchList = siteSearchForm.querySelector("#site-search-list");
+
+  const searchEntries = [
+    { label: "Home", url: "index.html", keywords: ["home", "landing", "clipdevs"] },
+    { label: "About", url: "index.html#about", keywords: ["about", "company", "profile"] },
+    { label: "Services", url: "services.html", keywords: ["service", "offer", "website", "ads", "database"] },
+    { label: "Insights", url: "insights.html", keywords: ["insight", "strategy", "framework"] },
+    { label: "Portfolio", url: "portfolio.html", keywords: ["portfolio", "case", "projects", "results"] },
+    { label: "Talent", url: "collaboration.html", keywords: ["talent", "join", "collaboration", "apply"] },
+    { label: "Contact", url: "index.html#contact", keywords: ["contact", "whatsapp", "reach"] },
+    { label: "Privacy Policy", url: "privacy.html", keywords: ["privacy", "policy", "legal"] },
+    { label: "Terms of Service", url: "terms.html", keywords: ["terms", "service", "legal"] },
+    { label: "Talent Terms", url: "talent-terms.html", keywords: ["talent terms", "community terms", "legal"] },
+    { label: "Applicants Framework", url: "insights.html#applicants-framework", keywords: ["100+ daily applicants", "khalid"] },
+    { label: "Office Show System", url: "insights.html#office-show-system", keywords: ["40+ office shows", "rite merit"] }
+  ];
+
+  if (siteSearchList) {
+    siteSearchList.innerHTML = searchEntries
+      .map((entry) => `<option value="${entry.label}"></option>`)
+      .join("");
+  }
+
+  const normalize = (value) => (value || "").toLowerCase().trim();
+
+  const findBestMatch = (rawQuery) => {
+    const query = normalize(rawQuery);
+    if (!query) return null;
+
+    const exact = searchEntries.find((entry) => normalize(entry.label) === query);
+    if (exact) return exact;
+
+    return searchEntries.find((entry) => {
+      const label = normalize(entry.label);
+      const keywords = (entry.keywords || []).map(normalize);
+      return label.includes(query) || keywords.some((keyword) => keyword.includes(query));
+    });
+  };
+
+  siteSearchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const match = findBestMatch(siteSearchInput?.value);
+    if (match) window.location.href = match.url;
+  });
+
+  if (siteSearchInput) {
+    siteSearchInput.addEventListener("change", () => {
+      const match = findBestMatch(siteSearchInput.value);
+      if (match) window.location.href = match.url;
+    });
+  }
+}
+
 // Paste your deployed Google Apps Script Web App URL here.
 // Example: https://script.google.com/macros/s/AKfycb.../exec
 const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby05ygLXtRFHJVjqQ9sTju23nDqPn8Z_OsdMYuk_UMuEaCl2kZ9ePyj0C6llogUXf94Mg/exec";
@@ -281,4 +338,5 @@ if (waWidget) {
     });
   }
 }
+
 
