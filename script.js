@@ -1,5 +1,31 @@
 const mergeCards = document.querySelectorAll(".scroll-merge");
 
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+if (navToggle && navLinks) {
+  const setNavOpen = (isOpen) => {
+    document.body.classList.toggle("nav-open", isOpen);
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  };
+
+  navToggle.addEventListener("click", () => {
+    setNavOpen(!document.body.classList.contains("nav-open"));
+  });
+
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setNavOpen(false));
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setNavOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setNavOpen(false);
+  });
+}
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -201,7 +227,7 @@ if (collabForm) {
     const message = collabForm.querySelector("[name='message']")?.value?.trim() || "";
 
     const payload = [
-      "New ClipDev Talent Signup",
+      "New clipdevs Talent Signup",
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Location: ${location}`,

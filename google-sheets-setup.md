@@ -1,4 +1,4 @@
-# Connect ClipDev Forms to Google Sheets
+# Connect clipdevs Forms to Google Sheets
 
 ## 1) Create a Google Sheet
 - Create a new Google Sheet.
