@@ -105,6 +105,12 @@ body::before {
     display: flex;
     list-style: none;
     gap: 28px;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
 }
 
 .nav-toggle {
@@ -134,6 +140,9 @@ body::before {
     font-weight: 500;
     transition: 0.3s;
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
     padding: 0;
     border-radius: 0;
     background: transparent;
@@ -174,10 +183,11 @@ body::before {
 }
 
 .nav-search input {
-    width: 184px;
+    width: 164px;
+    height: 42px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 999px;
-    padding: 8px 12px;
+    padding: 0 14px;
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
     font-family: var(--font-body);
