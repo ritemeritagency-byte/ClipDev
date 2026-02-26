@@ -695,6 +695,15 @@ body::before {
     color: var(--text-muted);
 }
 
+.doc-expertise-list {
+    margin: 10px 0 12px 18px;
+    color: var(--secondary-ink);
+}
+
+.doc-expertise-list li {
+    margin-bottom: 6px;
+}
+
 /* 6. EXPERTISE SECTION */
 .dark-section {
     background: radial-gradient(600px 350px at 80% 10%, rgba(255, 95, 162, 0.2), transparent 65%), #0d1b2a;
