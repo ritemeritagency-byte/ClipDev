@@ -2,8 +2,8 @@
 :root {
     --primary-ink: #0a1b2b;
     --secondary-ink: #11263d;
-    --accent: #1bb3a9;
-    --accent-soft: #d8f4f1;
+    --accent: #ff5fa2;
+    --accent-soft: #ffd1e6;
     --white: #ffffff;
     --paper: #f6f7fb;
     --text-main: #1b1f2a;
@@ -84,7 +84,7 @@ body::before {
 }
 
 .logo-icon .fa-bolt {
-    color: #74dbff;
+    color: #ffd1e6;
     font-size: 0.72em;
     transform: translateY(-0.5px);
 }
@@ -165,7 +165,7 @@ body::before {
 /* 3. HERO SECTION */
 .hero-section {
     min-height: 70vh;
-    background: radial-gradient(700px 400px at 15% 20%, rgba(27, 179, 169, 0.25), transparent 60%),
+    background: radial-gradient(700px 400px at 15% 20%, rgba(255, 95, 162, 0.25), transparent 60%),
                 linear-gradient(145deg, rgba(10, 27, 43, 0.95), rgba(16, 40, 58, 0.92)),
                 url("https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1350&q=80");
     background-size: cover;
@@ -194,7 +194,7 @@ body::before {
 .hero-section::before {
     width: 360px;
     height: 360px;
-    background: radial-gradient(circle at 30% 30%, rgba(27, 179, 169, 0.45), rgba(27, 179, 169, 0));
+    background: radial-gradient(circle at 30% 30%, rgba(255, 95, 162, 0.45), rgba(255, 95, 162, 0));
     top: -90px;
     left: -60px;
 }
@@ -202,7 +202,7 @@ body::before {
 .hero-section::after {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle at 60% 40%, rgba(88, 150, 255, 0.35), rgba(88, 150, 255, 0));
+    background: radial-gradient(circle at 60% 40%, rgba(255, 209, 230, 0.35), rgba(255, 209, 230, 0));
     bottom: -100px;
     right: -60px;
     animation-duration: 12s;
@@ -261,7 +261,7 @@ body::before {
     font-weight: bold;
     border-radius: 50px;
     transition: 0.3s;
-    box-shadow: 0 10px 20px rgba(27, 179, 169, 0.3);
+    box-shadow: 0 10px 20px rgba(255, 95, 162, 0.3);
     animation: pulseGlow 2.2s ease-in-out infinite;
 }
 
@@ -641,7 +641,7 @@ body::before {
 
 /* 6. EXPERTISE SECTION */
 .dark-section {
-    background: radial-gradient(600px 350px at 80% 10%, rgba(27, 179, 169, 0.2), transparent 65%), #0d1b2a;
+    background: radial-gradient(600px 350px at 80% 10%, rgba(255, 95, 162, 0.2), transparent 65%), #0d1b2a;
 }
 
 .dark-section .section-title h2 {
@@ -1293,13 +1293,13 @@ body::before {
 
 .project-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(27, 179, 169, 0.35);
+    box-shadow: 0 8px 18px rgba(255, 95, 162, 0.35);
 }
 
 @keyframes pulseGlow {
-    0% { box-shadow: 0 10px 20px rgba(27, 179, 169, 0.28); }
-    50% { box-shadow: 0 12px 28px rgba(27, 179, 169, 0.52); }
-    100% { box-shadow: 0 10px 20px rgba(27, 179, 169, 0.28); }
+    0% { box-shadow: 0 10px 20px rgba(255, 95, 162, 0.28); }
+    50% { box-shadow: 0 12px 28px rgba(255, 95, 162, 0.52); }
+    100% { box-shadow: 0 10px 20px rgba(255, 95, 162, 0.28); }
 }
 
 /* 8.5 HOMEPAGE SUBPAGE LINKS */
@@ -1878,7 +1878,7 @@ body::before {
 
 .progress-pill.active {
     background: var(--accent-soft);
-    border-color: rgba(27, 179, 169, 0.5);
+    border-color: rgba(255, 95, 162, 0.5);
 }
 
 .form-step {
@@ -2111,7 +2111,7 @@ body::before {
     text-decoration: none;
     font-weight: bold;
     margin: 20px 0;
-    box-shadow: 0 12px 25px rgba(27, 179, 169, 0.25);
+    box-shadow: 0 12px 25px rgba(255, 95, 162, 0.25);
 }
 
 .footer-link-button {
