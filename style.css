@@ -639,6 +639,62 @@ body::before {
     box-shadow: 0 18px 40px rgba(13, 27, 42, 0.15);
 }
 
+.documentation-block {
+    padding-top: 22px;
+}
+
+.doc-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+.doc-media {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.1);
+    padding: 14px;
+}
+
+.doc-main-photo {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+}
+
+.doc-thumb-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.doc-thumb-grid img {
+    width: 100%;
+    height: 122px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+}
+
+.doc-content {
+    max-width: none;
+}
+
+.doc-content h3 {
+    color: var(--primary-ink);
+    margin: 8px 0 10px;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+}
+
+.doc-content p {
+    color: var(--text-muted);
+}
+
 /* 6. EXPERTISE SECTION */
 .dark-section {
     background: radial-gradient(600px 350px at 80% 10%, rgba(255, 95, 162, 0.2), transparent 65%), #0d1b2a;
@@ -2186,6 +2242,7 @@ button:focus-visible {
     .showcase-grid { grid-template-columns: 1fr; }
     .page-portfolio .showcase-media { height: 280px; }
     .subpage-grid { grid-template-columns: 1fr; }
+    .doc-layout { grid-template-columns: 1fr; }
     .diamond-showcase { grid-template-columns: 1fr; }
     .diamond-preview img { height: 320px; }
     .cta-banner { flex-direction: column; align-items: flex-start; }
