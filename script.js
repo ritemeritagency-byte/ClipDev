@@ -2,6 +2,34 @@ const mergeCards = document.querySelectorAll(".scroll-merge");
 
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
+const GA4_MEASUREMENT_ID = "";
+
+const trackAnalyticsEvent = (eventName, params = {}) => {
+  if (!eventName) return;
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+  }
+};
+
+const setupGA4 = () => {
+  if (!GA4_MEASUREMENT_ID) return;
+  if (document.querySelector(`script[src*="${GA4_MEASUREMENT_ID}"]`)) return;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag("js", new Date());
+  window.gtag("config", GA4_MEASUREMENT_ID);
+};
+
+setupGA4();
 
 if (navToggle && navLinks) {
   const setNavOpen = (isOpen) => {
@@ -51,18 +79,18 @@ if (siteSearchForm) {
   const siteSearchList = siteSearchForm.querySelector("#site-search-list");
 
   const searchEntries = [
-    { label: "Home", url: "index.html", keywords: ["home", "landing", "clipdevs"] },
-    { label: "About", url: "index.html#about", keywords: ["about", "company", "profile"] },
-    { label: "Services", url: "services.html", keywords: ["service", "offer", "website", "ads", "database"] },
-    { label: "Insights", url: "insights.html", keywords: ["insight", "strategy", "framework"] },
-    { label: "Portfolio", url: "portfolio.html", keywords: ["portfolio", "case", "projects", "results"] },
-    { label: "Talent", url: "collaboration.html", keywords: ["talent", "join", "collaboration", "apply"] },
-    { label: "Contact", url: "index.html#contact", keywords: ["contact", "whatsapp", "reach"] },
-    { label: "Privacy Policy", url: "privacy.html", keywords: ["privacy", "policy", "legal"] },
-    { label: "Terms of Service", url: "terms.html", keywords: ["terms", "service", "legal"] },
-    { label: "Talent Terms", url: "talent-terms.html", keywords: ["talent terms", "community terms", "legal"] },
-    { label: "Applicants Framework", url: "insights.html#applicants-framework", keywords: ["100+ daily applicants", "khalid"] },
-    { label: "Office Show System", url: "insights.html#office-show-system", keywords: ["40+ office shows", "rite merit"] }
+    { label: "Home", url: "/", keywords: ["home", "landing", "clipdevs"] },
+    { label: "About", url: "/#about", keywords: ["about", "company", "profile"] },
+    { label: "Services", url: "/services", keywords: ["service", "offer", "website", "ads", "database"] },
+    { label: "Insights", url: "/insights", keywords: ["insight", "strategy", "framework"] },
+    { label: "Portfolio", url: "/portfolio", keywords: ["portfolio", "case", "projects", "results"] },
+    { label: "Talent", url: "/collaboration", keywords: ["talent", "join", "collaboration", "apply"] },
+    { label: "Contact", url: "/#contact", keywords: ["contact", "whatsapp", "reach"] },
+    { label: "Privacy Policy", url: "/privacy", keywords: ["privacy", "policy", "legal"] },
+    { label: "Terms of Service", url: "/terms", keywords: ["terms", "service", "legal"] },
+    { label: "Talent Terms", url: "/talent-terms", keywords: ["talent terms", "community terms", "legal"] },
+    { label: "Applicants Framework", url: "/insights#applicants-framework", keywords: ["100+ daily applicants", "khalid"] },
+    { label: "Office Show System", url: "/insights#office-show-system", keywords: ["40+ office shows", "rite merit"] }
   ];
 
   if (siteSearchList) {
@@ -100,6 +128,16 @@ if (siteSearchForm) {
     });
   }
 }
+
+document.querySelectorAll(".btn-primary, .project-link, .contact-button").forEach((element) => {
+  element.addEventListener("click", () => {
+    const label = (element.textContent || "").trim();
+    trackAnalyticsEvent("cta_click", {
+      cta_label: label || "unknown",
+      page_path: window.location.pathname || "/",
+    });
+  });
+});
 
 // Paste your deployed Google Apps Script Web App URL here.
 // Example: https://script.google.com/macros/s/AKfycb.../exec
@@ -227,6 +265,7 @@ if (strategyForm) {
       message,
       ...buildSubmissionMeta(),
     });
+    trackAnalyticsEvent("generate_lead", { form_type: "strategy_call" });
 
     showFormNotice(strategyForm, "Submitted successfully. We will review your request within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
@@ -262,6 +301,7 @@ if (websiteBriefForm) {
       message,
       ...buildSubmissionMeta(),
     });
+    trackAnalyticsEvent("generate_lead", { form_type: "website_brief" });
 
     showFormNotice(websiteBriefForm, "Submitted successfully. We will review your request within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
@@ -305,6 +345,7 @@ if (collabForm) {
       message,
       ...buildSubmissionMeta(),
     });
+    trackAnalyticsEvent("generate_lead", { form_type: "talent_signup" });
 
     showFormNotice(collabForm, "Application sent. We will review your profile within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
