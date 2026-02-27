@@ -2101,6 +2101,42 @@ body::before {
     font-weight: 600;
 }
 
+.proposal-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.proposal-meta span {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+.proposal-alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #fff2d8;
+    border: 1px solid #f3c46f;
+    color: #513b14;
+    margin-bottom: 14px;
+}
+
+.proposal-list {
+    margin: 8px 0 14px 18px;
+    color: var(--text-main);
+}
+
+.proposal-list li {
+    margin-bottom: 6px;
+}
+
 .collab-form label {
     font-size: 0.84rem;
     color: var(--primary-ink);

@@ -9,6 +9,7 @@
     { "source": "/collaboration.html", "destination": "/collaboration", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/terms.html", "destination": "/terms", "permanent": true },
-    { "source": "/talent-terms.html", "destination": "/talent-terms", "permanent": true }
+    { "source": "/talent-terms.html", "destination": "/talent-terms", "permanent": true },
+    { "source": "/proposal-template.html", "destination": "/proposal-template", "permanent": true }
   ]
 }
