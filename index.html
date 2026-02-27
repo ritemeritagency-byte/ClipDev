@@ -21,21 +21,53 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "ClipDevs",
-      "url": "https://www.clipdevs.com/",
-      "image": "https://www.clipdevs.com/logo/Logo.png",
-      "telephone": "+639603780196",
-      "areaServed": [
-        "Philippines",
-        "Bahrain",
-        "Qatar",
-        "United Arab Emirates"
-      ],
-      "serviceType": [
-        "Business Website Development",
-        "Recruitment Funnel Setup",
-        "Documentation Workflow Consulting"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.clipdevs.com/#organization",
+          "name": "ClipDevs",
+          "url": "https://www.clipdevs.com/",
+          "logo": "https://www.clipdevs.com/logo/Logo.png",
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61587017711303"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.clipdevs.com/#website",
+          "url": "https://www.clipdevs.com/",
+          "name": "ClipDevs",
+          "publisher": {
+            "@id": "https://www.clipdevs.com/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.clipdevs.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://www.clipdevs.com/#professional-service",
+          "name": "ClipDevs",
+          "url": "https://www.clipdevs.com/",
+          "image": "https://www.clipdevs.com/logo/Logo.png",
+          "telephone": "+639603780196",
+          "areaServed": [
+            "Philippines",
+            "Bahrain",
+            "Qatar",
+            "United Arab Emirates"
+          ],
+          "serviceType": [
+            "Business Website Development",
+            "Recruitment Funnel Setup",
+            "Documentation Workflow Consulting"
+          ],
+          "provider": {
+            "@id": "https://www.clipdevs.com/#organization"
+          }
+        }
       ]
     }
     </script>
