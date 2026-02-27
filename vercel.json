@@ -6,6 +6,9 @@
     { "source": "/services.html", "destination": "/services", "permanent": true },
     { "source": "/insights.html", "destination": "/insights", "permanent": true },
     { "source": "/portfolio.html", "destination": "/portfolio", "permanent": true },
-    { "source": "/collaboration.html", "destination": "/collaboration", "permanent": true }
+    { "source": "/collaboration.html", "destination": "/collaboration", "permanent": true },
+    { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
+    { "source": "/terms.html", "destination": "/terms", "permanent": true },
+    { "source": "/talent-terms.html", "destination": "/talent-terms", "permanent": true }
   ]
 }

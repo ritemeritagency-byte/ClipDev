@@ -327,7 +327,7 @@ body::before {
 .btn-primary:hover {
     transform: translateY(-3px);
     background: var(--accent-strong);
-    color: #ffffff;
+    color: var(--primary-ink);
 }
 
 .btn-secondary {
@@ -2285,7 +2285,7 @@ body::before {
 
 .contact-button:hover {
     background: var(--accent-strong);
-    color: #ffffff;
+    color: var(--primary-ink);
 }
 
 .footer-link-button {
