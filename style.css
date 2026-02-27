@@ -1435,6 +1435,13 @@ body::before {
     margin-bottom: 10px;
 }
 
+.live-pill {
+    background: #dff8ea;
+    color: #0f6b47;
+    border: 1px solid #73c9a1;
+    letter-spacing: 0.04em;
+}
+
 .project-link {
     display: inline-block;
     margin-top: 8px;
