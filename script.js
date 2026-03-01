@@ -35,6 +35,7 @@ if (navToggle && navLinks) {
   const setNavOpen = (isOpen) => {
     document.body.classList.toggle("nav-open", isOpen);
     navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    navToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
   };
 
   navToggle.addEventListener("click", () => {
@@ -70,7 +71,11 @@ const observer = new IntersectionObserver(
   }
 );
 
-mergeCards.forEach((card) => observer.observe(card));
+if ("IntersectionObserver" in window) {
+  mergeCards.forEach((card) => observer.observe(card));
+} else {
+  mergeCards.forEach((card) => card.classList.add("in-view"));
+}
 
 
 const siteSearchForm = document.querySelector("[data-site-search]");
@@ -117,8 +122,17 @@ if (siteSearchForm) {
 
   siteSearchForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const match = findBestMatch(siteSearchInput?.value);
-    if (match) window.location.href = match.url;
+    const rawQuery = siteSearchInput?.value || "";
+    const match = findBestMatch(rawQuery);
+    if (match) {
+      window.location.href = match.url;
+      return;
+    }
+
+    const query = normalize(rawQuery);
+    if (query) {
+      window.location.href = `/?q=${encodeURIComponent(rawQuery.trim())}`;
+    }
   });
 
   if (siteSearchInput) {
@@ -228,6 +242,8 @@ const showFormNotice = (form, text) => {
   if (!notice) {
     notice = document.createElement("p");
     notice.className = "form-notice";
+    notice.setAttribute("role", "status");
+    notice.setAttribute("aria-live", "polite");
     form.appendChild(notice);
   }
   notice.textContent = text;
@@ -362,12 +378,27 @@ if (waWidget) {
   const send = waWidget.querySelector("[data-wa-send]");
 
   if (toggle && panel) {
+    if (!panel.id) panel.id = "wa-panel";
+    toggle.setAttribute("aria-controls", panel.id);
+    toggle.setAttribute("aria-expanded", "false");
+
     toggle.addEventListener("click", () => {
       const hidden = panel.hasAttribute("hidden");
       if (hidden) {
         panel.removeAttribute("hidden");
+        toggle.setAttribute("aria-expanded", "true");
+        input?.focus();
       } else {
         panel.setAttribute("hidden", "");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !panel.hasAttribute("hidden")) {
+        panel.setAttribute("hidden", "");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.focus();
       }
     });
   }

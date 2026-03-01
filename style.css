@@ -2196,6 +2196,17 @@ body::before {
     box-shadow: 0 14px 28px rgba(8, 20, 30, 0.28);
 }
 
+.cta-button:focus-visible,
+.wa-toggle:focus-visible,
+.wa-send:focus-visible,
+.nav-toggle:focus-visible,
+.project-link:focus-visible,
+.contact-button:focus-visible,
+.footer-link-button:focus-visible {
+    outline: 3px solid var(--accent-deep);
+    outline-offset: 2px;
+}
+
 /* 8.8 WHATSAPP WIDGET */
 .wa-widget {
     position: fixed;
