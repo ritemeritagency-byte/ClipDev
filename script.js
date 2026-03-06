@@ -1,8 +1,11 @@
-const mergeCards = document.querySelectorAll(".scroll-merge");
-
+const body = document.body;
+const root = document.documentElement;
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const GA4_MEASUREMENT_ID = "";
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+body.classList.add("has-motion-js");
 
 const trackAnalyticsEvent = (eventName, params = {}) => {
   if (!eventName) return;
@@ -31,6 +34,211 @@ const setupGA4 = () => {
 
 setupGA4();
 
+const syncMotionPreference = () => {
+  body.classList.toggle("reduced-motion", reducedMotionQuery.matches);
+};
+
+syncMotionPreference();
+
+if (typeof reducedMotionQuery.addEventListener === "function") {
+  reducedMotionQuery.addEventListener("change", syncMotionPreference);
+} else if (typeof reducedMotionQuery.addListener === "function") {
+  reducedMotionQuery.addListener(syncMotionPreference);
+}
+
+const normalizePath = (value) => {
+  if (!value) return "/";
+  const pathname = value.replace(/\/+$/, "");
+  return pathname || "/";
+};
+
+const getGridRevealMeta = (element) => {
+  const group = element.closest(
+    ".stats-grid, .subpage-grid, .testimonials-grid, .services-grid, .services-highlight-grid, .policy-grid, .package-grid, .tracks-grid, .steps-grid, .updates-grid, .insight-story-grid, .insights-mosaic, .insights-steps, .workflow-grid, .lead-system-stack"
+  );
+
+  if (!group || !element.parentElement || element.parentElement !== group) return null;
+
+  const items = Array.from(group.children);
+  const index = items.indexOf(element);
+
+  if (index < 0) return null;
+
+  const directions = ["left", "center", "right"];
+  return {
+    index,
+    direction: directions[index % directions.length],
+  };
+};
+
+const inferRevealDirection = (element) => {
+  if (element.classList.contains("merge-left")) return "left";
+  if (element.classList.contains("merge-right")) return "right";
+  if (element.classList.contains("merge-center")) return "center";
+  if (element.matches(".doc-media, .collab-media-stack, .insights-feature-media")) return "right";
+  if (
+    element.matches(
+      ".about-card, .starter-form, .section-title, .footer-grid, .footer-bottom, .collab-form, .cta-banner"
+    )
+  ) {
+    return "center";
+  }
+
+  return getGridRevealMeta(element)?.direction || "center";
+};
+
+const getRevealDelay = (element) => {
+  const gridMeta = getGridRevealMeta(element);
+  if (gridMeta) return Math.min(gridMeta.index * 90, 360);
+
+  if (element.matches(".footer-bottom")) return 120;
+  return 0;
+};
+
+const revealTargets = Array.from(
+  new Set(
+    Array.from(
+      document.querySelectorAll(
+        ".section-title, .stat-card, .featured-case-card, .about-card, .doc-media, .subpage-card, .starter-form, .workflow-step, .testimonial-card, .track-card, .step-card, .policy-item, .package-card, .update-card, .service-card, .service-showcase-card, .lead-system-feature, .insights-feature-media, .insights-feature-copy, .insight-story-card, .insight-panel, .insights-step-card, .cta-banner, .footer-grid, .footer-bottom, .collab-media-stack, .diamond-showcase, .showcase-card, .insight-link-card, .timeline-card"
+      )
+    )
+  )
+);
+
+const setVisibleImmediately = (elements) => {
+  elements.forEach((element) => element.classList.add("is-visible"));
+};
+
+const setupRevealAnimations = () => {
+  revealTargets.forEach((element) => {
+    element.classList.add("reveal-item", `reveal-${inferRevealDirection(element)}`);
+    element.style.setProperty("--reveal-delay", `${getRevealDelay(element)}ms`);
+  });
+
+  if (reducedMotionQuery.matches || !("IntersectionObserver" in window)) {
+    setVisibleImmediately(revealTargets);
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -12% 0px",
+    }
+  );
+
+  revealTargets.forEach((element) => revealObserver.observe(element));
+};
+
+const navAnchors = Array.from(document.querySelectorAll(".nav-links a"));
+
+const setCurrentNavLink = (activeLink) => {
+  navAnchors.forEach((link) => {
+    const isCurrent = link === activeLink;
+    link.classList.toggle("is-current", isCurrent);
+
+    if (isCurrent) {
+      const href = link.getAttribute("href") || "";
+      link.setAttribute("aria-current", href.startsWith("#") ? "location" : "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+const setupNavTracking = () => {
+  if (!navAnchors.length) return;
+
+  const currentPath = normalizePath(window.location.pathname);
+  const directMatch =
+    navAnchors.find((link) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("/")) return false;
+      return normalizePath(href) === currentPath;
+    }) || null;
+
+  if (directMatch) setCurrentNavLink(directMatch);
+
+  const sectionLinks = navAnchors
+    .map((link) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return null;
+      const section = document.querySelector(href);
+      if (!section) return null;
+      return { link, section };
+    })
+    .filter(Boolean);
+
+  if (!sectionLinks.length) return;
+
+  const setSectionLink = (link) => {
+    setCurrentNavLink(link || directMatch || sectionLinks[0].link);
+  };
+
+  setSectionLink(directMatch || sectionLinks[0].link);
+
+  if (reducedMotionQuery.matches || !("IntersectionObserver" in window)) {
+    setSectionLink(sectionLinks[0].link);
+    return;
+  }
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visibleEntries = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visibleEntries.length) return;
+
+      const activeSection = visibleEntries[0].target;
+      const match = sectionLinks.find(({ section }) => section === activeSection);
+      if (match) setSectionLink(match.link);
+    },
+    {
+      threshold: [0.25, 0.5, 0.75],
+      rootMargin: "-22% 0px -52% 0px",
+    }
+  );
+
+  sectionLinks.forEach(({ section }) => sectionObserver.observe(section));
+};
+
+const setupScrollState = () => {
+  const updateScrollState = () => {
+    const scrollTop = window.scrollY || window.pageYOffset || 0;
+    body.classList.toggle("is-scrolled", scrollTop > 16);
+
+    const scrollable = root.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? scrollTop / scrollable : 0;
+    root.style.setProperty("--scroll-progress", progress.toFixed(4));
+  };
+
+  let ticking = false;
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateScrollState();
+      ticking = false;
+    });
+  };
+
+  updateScrollState();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+};
+
+setupRevealAnimations();
+setupNavTracking();
+setupScrollState();
+
 if (navToggle && navLinks) {
   const setNavOpen = (isOpen) => {
     document.body.classList.toggle("nav-open", isOpen);
@@ -54,29 +262,6 @@ if (navToggle && navLinks) {
     if (window.innerWidth > 768) setNavOpen(false);
   });
 }
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-      } else {
-        entry.target.classList.remove("in-view");
-      }
-    });
-  },
-  {
-    threshold: 0.35,
-    rootMargin: "0px 0px -8% 0px",
-  }
-);
-
-if ("IntersectionObserver" in window) {
-  mergeCards.forEach((card) => observer.observe(card));
-} else {
-  mergeCards.forEach((card) => card.classList.add("in-view"));
-}
-
 
 const siteSearchForm = document.querySelector("[data-site-search]");
 if (siteSearchForm) {
@@ -328,6 +513,29 @@ if (websiteBriefForm) {
 
 const collabForm = document.querySelector("#collab-form");
 if (collabForm) {
+  const progressPills = Array.from(collabForm.querySelectorAll(".progress-pill"));
+  const formSteps = Array.from(collabForm.querySelectorAll(".form-step"));
+
+  const setActiveFormStep = (index) => {
+    progressPills.forEach((pill, pillIndex) => {
+      pill.classList.toggle("active", pillIndex === index);
+    });
+
+    formSteps.forEach((step, stepIndex) => {
+      step.classList.toggle("is-active", stepIndex === index);
+    });
+  };
+
+  formSteps.forEach((step, index) => {
+    step.addEventListener("focusin", () => setActiveFormStep(index));
+
+    if (window.matchMedia("(hover: hover)").matches) {
+      step.addEventListener("mouseenter", () => setActiveFormStep(index));
+    }
+  });
+
+  setActiveFormStep(0);
+
   collabForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -376,28 +584,45 @@ if (waWidget) {
   const panel = waWidget.querySelector("[data-wa-panel]");
   const input = waWidget.querySelector("[data-wa-input]");
   const send = waWidget.querySelector("[data-wa-send]");
+  let closeTimer = null;
+
+  const setPanelOpen = (isOpen) => {
+    if (!toggle || !panel) return;
+
+    window.clearTimeout(closeTimer);
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    waWidget.classList.toggle("is-open", isOpen);
+
+    if (isOpen) {
+      panel.hidden = false;
+      panel.setAttribute("aria-hidden", "false");
+      window.requestAnimationFrame(() => {
+        waWidget.classList.add("is-open");
+      });
+      input?.focus();
+      return;
+    }
+
+    panel.setAttribute("aria-hidden", "true");
+    closeTimer = window.setTimeout(() => {
+      if (!waWidget.classList.contains("is-open")) panel.hidden = true;
+    }, 220);
+  };
 
   if (toggle && panel) {
     if (!panel.id) panel.id = "wa-panel";
     toggle.setAttribute("aria-controls", panel.id);
     toggle.setAttribute("aria-expanded", "false");
+    panel.setAttribute("aria-hidden", "true");
 
     toggle.addEventListener("click", () => {
-      const hidden = panel.hasAttribute("hidden");
-      if (hidden) {
-        panel.removeAttribute("hidden");
-        toggle.setAttribute("aria-expanded", "true");
-        input?.focus();
-      } else {
-        panel.setAttribute("hidden", "");
-        toggle.setAttribute("aria-expanded", "false");
-      }
+      setPanelOpen(panel.hidden);
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !panel.hasAttribute("hidden")) {
-        panel.setAttribute("hidden", "");
-        toggle.setAttribute("aria-expanded", "false");
+      if (event.key === "Escape" && !panel.hidden) {
+        waWidget.classList.remove("is-open");
+        setPanelOpen(false);
         toggle.focus();
       }
     });
