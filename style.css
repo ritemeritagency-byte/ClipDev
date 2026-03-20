@@ -3133,6 +3133,46 @@ button:focus-visible {
     border-color: #ffffff;
 }
 
+.page-home .package-card .project-link,
+.page-home .featured-case-card .project-link,
+.page-home .about-card .project-link,
+.page-home .starter-form .btn-primary {
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid #111111;
+}
+
+.page-home .package-card .project-link:hover,
+.page-home .featured-case-card .project-link:hover,
+.page-home .about-card .project-link:hover,
+.page-home .starter-form .btn-primary:hover {
+    background: #ffffff;
+    color: #111111;
+    border-color: #111111;
+}
+
+.page-home .featured-case-card .btn-secondary,
+.page-home .featured-case-card .btn-secondary-dark,
+.page-home .package-card .btn-secondary,
+.page-home .package-card .btn-secondary-dark,
+.page-home .about-card .btn-secondary,
+.page-home .about-card .btn-secondary-dark {
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #111111;
+}
+
+.page-home .featured-case-card .btn-secondary:hover,
+.page-home .featured-case-card .btn-secondary-dark:hover,
+.page-home .package-card .btn-secondary:hover,
+.page-home .package-card .btn-secondary-dark:hover,
+.page-home .about-card .btn-secondary:hover,
+.page-home .about-card .btn-secondary-dark:hover {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+}
+
 .page-home .hero-proof-badges a {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.22);
