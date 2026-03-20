@@ -16,8 +16,8 @@
     --text-main: #172433;
     --text-muted: #5b6d80;
     --card-dark: #0d1b2a;
-    --font-display: "Playfair Display", "Times New Roman", serif;
-    --font-body: "Poppins", "Segoe UI", sans-serif;
+    --font-display: "Manrope", "Segoe UI", sans-serif;
+    --font-body: "Manrope", "Segoe UI", sans-serif;
     --scroll-progress: 0;
     --motion-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     --motion-quick: cubic-bezier(0.2, 0.8, 0.2, 1);
