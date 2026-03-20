@@ -239,6 +239,98 @@ setupRevealAnimations();
 setupNavTracking();
 setupScrollState();
 
+const setupMegaMenu = () => {
+  if (!navLinks) return;
+
+  const servicesLink = navLinks.querySelector('a[href="/services"]');
+  const servicesItem = servicesLink?.closest("li");
+  if (!servicesLink || !servicesItem) return;
+
+  servicesItem.classList.add("has-mega-menu");
+  servicesLink.classList.add("nav-mega-trigger");
+
+  if (!servicesLink.querySelector(".fa-chevron-down")) {
+    const icon = document.createElement("i");
+    icon.className = "fas fa-chevron-down";
+    icon.setAttribute("aria-hidden", "true");
+    servicesLink.appendChild(icon);
+  }
+
+  if (!servicesItem.querySelector(".nav-mega-menu")) {
+    const menu = document.createElement("div");
+    menu.className = "nav-mega-menu";
+    menu.setAttribute("aria-hidden", "true");
+    menu.innerHTML = `
+      <div class="nav-mega-grid">
+        <section class="nav-mega-col">
+          <p class="nav-mega-label"><i class="fas fa-laptop-code"></i> Core Services</p>
+          <div class="nav-mega-links">
+            <a class="nav-mega-card" href="/website-development"><strong>Website Development</strong><span>Business websites, landing pages, and conversion-focused builds.</span></a>
+            <a class="nav-mega-card" href="/seo-services"><strong>SEO Services</strong><span>Search-ready page structure and on-page visibility improvements.</span></a>
+            <a class="nav-mega-card" href="/google-sheets-database"><strong>Google Sheets Database</strong><span>Trackers and workflow-ready dashboards for daily monitoring.</span></a>
+          </div>
+        </section>
+        <section class="nav-mega-col">
+          <p class="nav-mega-label"><i class="fas fa-bullhorn"></i> Marketing & Social</p>
+          <div class="nav-mega-links">
+            <a class="nav-mega-card" href="/facebook-social-media"><strong>Facebook Page & Social Media</strong><span>Page setup, content support, and message flow improvements.</span></a>
+            <a class="nav-mega-card" href="/facebook-social-media"><strong>Social Media Marketing</strong><span>Campaign ideas, posting support, and audience growth direction.</span></a>
+            <a class="nav-mega-card" href="/blog"><strong>Blog</strong><span>Future articles, updates, and practical lessons from our work.</span></a>
+          </div>
+        </section>
+        <section class="nav-mega-col">
+          <p class="nav-mega-label"><i class="fas fa-diagram-project"></i> Agency Systems</p>
+          <div class="nav-mega-links">
+            <a class="nav-mega-card" href="/landbase-agency-process"><strong>A-Z Landbase Agency Process</strong><span>Bahrain, Qatar, and UAE recruitment workflow guidance.</span></a>
+            <a class="nav-mega-card" href="/insights#applicants-framework"><strong>Applicants Framework</strong><span>How stronger positioning and funnel flow produced 100+ daily applicants.</span></a>
+            <a class="nav-mega-card" href="/insights#office-show-system"><strong>Office Show System</strong><span>The follow-up and conversion logic behind 40+ office shows.</span></a>
+          </div>
+        </section>
+      </div>
+      <div class="nav-mega-footer">
+        <a class="nav-mega-cta" href="/services">View All Services</a>
+      </div>
+    `;
+    servicesItem.appendChild(menu);
+  }
+
+  const menu = servicesItem.querySelector(".nav-mega-menu");
+  const setMegaOpen = (isOpen) => {
+    servicesItem.classList.toggle("is-mega-open", isOpen);
+    menu?.setAttribute("aria-hidden", isOpen ? "false" : "true");
+  };
+
+  servicesLink.addEventListener("click", (event) => {
+    const isDesktop = window.innerWidth > 768;
+    event.preventDefault();
+    if (!isDesktop && !document.body.classList.contains("nav-open")) {
+      window.location.href = servicesLink.href;
+      return;
+    }
+    setMegaOpen(!servicesItem.classList.contains("is-mega-open"));
+  });
+
+  servicesItem.querySelectorAll(".nav-mega-menu a").forEach((link) => {
+    link.addEventListener("click", () => setMegaOpen(false));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!servicesItem.contains(event.target)) setMegaOpen(false);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMegaOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      setMegaOpen(false);
+    }
+  });
+};
+
+setupMegaMenu();
+
 if (navToggle && navLinks) {
   const setNavOpen = (isOpen) => {
     document.body.classList.toggle("nav-open", isOpen);
@@ -273,6 +365,12 @@ if (siteSearchForm) {
     { label: "About", url: "/#about", keywords: ["about", "company", "profile"] },
     { label: "Services", url: "/services", keywords: ["service", "offer", "website", "ads", "database"] },
     { label: "Insights", url: "/insights", keywords: ["insight", "strategy", "framework"] },
+    { label: "Blog", url: "/blog", keywords: ["blog", "articles", "guides", "posts"] },
+    { label: "Website Development", url: "/website-development", keywords: ["website development", "landing page", "web design"] },
+    { label: "SEO Services", url: "/seo-services", keywords: ["seo", "search engine optimization", "rankings"] },
+    { label: "Facebook & Social Media", url: "/facebook-social-media", keywords: ["facebook", "social media", "marketing"] },
+    { label: "Google Sheets Database", url: "/google-sheets-database", keywords: ["google sheets", "database", "tracker"] },
+    { label: "A-Z Landbase Agency Process", url: "/landbase-agency-process", keywords: ["landbase", "agency process", "bahrain", "qatar", "uae"] },
     { label: "Portfolio", url: "/portfolio", keywords: ["portfolio", "case", "projects", "results"] },
     { label: "Talent", url: "/collaboration", keywords: ["talent", "join", "collaboration", "apply"] },
     { label: "Contact", url: "/#contact", keywords: ["contact", "whatsapp", "reach"] },
