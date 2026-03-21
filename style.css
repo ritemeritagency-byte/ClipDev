@@ -3157,8 +3157,8 @@ button:focus-visible {
 .page-home .home-hero .hero-content {
     width: min(1240px, 100%);
     display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-    gap: 32px;
+    grid-template-columns: minmax(0, 0.88fr) minmax(400px, 1.12fr);
+    gap: 40px;
     align-items: center;
     justify-items: stretch;
     text-align: left;
@@ -3170,9 +3170,9 @@ button:focus-visible {
 
 .page-home .home-hero-copy h1 {
     max-width: 11ch;
-    line-height: 0.96;
+    line-height: 0.98;
     margin: 0 0 18px;
-    font-size: clamp(3rem, 6vw, 5.4rem);
+    font-size: clamp(2.7rem, 5.3vw, 4.9rem);
     letter-spacing: -0.04em;
     text-wrap: balance;
     color: #162433;
@@ -3256,14 +3256,14 @@ button:focus-visible {
 .page-home .hero-visual-summary {
     top: 22px;
     left: 22px;
-    width: min(420px, calc(100% - 44px));
-    border-radius: 28px;
-    padding: 20px 20px 18px;
+    width: min(360px, calc(100% - 44px));
+    border-radius: 24px;
+    padding: 18px 18px 16px;
 }
 
 .page-home .hero-visual-main {
     position: absolute;
-    inset: 142px 26px 24px 230px;
+    inset: 120px 26px 24px 168px;
     margin: 0;
     border-radius: 30px;
     overflow: hidden;
@@ -3302,11 +3302,11 @@ button:focus-visible {
 .page-home .hero-visual-metrics {
     right: 22px;
     bottom: 22px;
-    width: min(310px, calc(100% - 44px));
-    border-radius: 24px;
-    padding: 18px;
+    width: min(280px, calc(100% - 44px));
+    border-radius: 22px;
+    padding: 16px;
     display: grid;
-    gap: 10px;
+    gap: 8px;
 }
 
 .page-home .hero-visual-metrics span {
@@ -3314,7 +3314,7 @@ button:focus-visible {
     color: var(--secondary-ink);
     border: 1px solid rgba(15, 39, 64, 0.08);
     border-radius: 18px;
-    padding: 10px 12px;
+    padding: 9px 12px;
     background: rgba(249, 252, 255, 0.86);
 }
 
@@ -3325,14 +3325,14 @@ button:focus-visible {
 .home-panel-list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
     margin-top: 6px;
 }
 
 .home-panel-list article {
     display: grid;
     gap: 5px;
-    padding: 12px 14px;
+    padding: 11px 13px;
     border: 1px solid rgba(15, 39, 64, 0.08);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.78);
@@ -3340,13 +3340,13 @@ button:focus-visible {
 
 .home-panel-list strong {
     color: var(--primary-ink);
-    font-size: 1rem;
+    font-size: 0.96rem;
 }
 
 .home-panel-list span {
     color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
+    font-size: 0.88rem;
+    line-height: 1.5;
 }
 
 .home-logo-strip {
@@ -3652,8 +3652,16 @@ button:focus-visible {
         width: min(760px, 100%);
     }
 
+    .page-home .hero-visual-summary {
+        width: min(330px, calc(100% - 40px));
+    }
+
     .page-home .hero-visual-main {
-        inset: 158px 24px 24px 170px;
+        inset: 138px 24px 24px 140px;
+    }
+
+    .page-home .hero-visual-metrics {
+        width: min(250px, calc(100% - 40px));
     }
 
     .home-intro-grid {
