@@ -3269,6 +3269,7 @@ button:focus-visible {
     overflow: hidden;
     box-shadow: 0 24px 50px rgba(100, 132, 163, 0.18);
     z-index: 1;
+    background: linear-gradient(180deg, #f8fbff, #eaf4ff);
 }
 
 .page-home .hero-visual-main img {
@@ -3278,6 +3279,24 @@ button:focus-visible {
     object-fit: cover;
     object-position: center top;
     background: #dcebfb;
+    transform: scale(1.01);
+}
+
+.page-home .hero-visual-caption {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    margin: 0;
+    max-width: 320px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(27, 116, 228, 0.14);
+    color: var(--secondary-ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 12px 28px rgba(123, 152, 180, 0.16);
 }
 
 .page-home .hero-visual-metrics {
@@ -3694,6 +3713,15 @@ button:focus-visible {
 
     .page-home .hero-visual-main img {
         object-position: left top;
+    }
+
+    .page-home .hero-visual-caption {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        max-width: none;
+        border-radius: 18px;
+        font-size: 0.8rem;
     }
 
     .home-logo-strip {
