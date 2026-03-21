@@ -53,6 +53,147 @@ body::before {
     z-index: -1;
 }
 
+.site-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 18px;
+    padding: 32px;
+    text-align: center;
+    background:
+        radial-gradient(480px 260px at 24% 26%, rgba(252, 231, 239, 0.92), transparent 68%),
+        radial-gradient(620px 320px at 76% 28%, rgba(216, 237, 255, 0.95), transparent 70%),
+        linear-gradient(135deg, #fbfdff 0%, #edf5ff 56%, #f4fbf7 100%);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s var(--motion-smooth), visibility 0.8s ease;
+}
+
+.site-intro::before,
+.site-intro::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+}
+
+.site-intro::before {
+    width: min(72vw, 680px);
+    height: min(72vw, 680px);
+    background: radial-gradient(circle at center, rgba(91, 157, 242, 0.12), rgba(91, 157, 242, 0));
+    filter: blur(10px);
+}
+
+.site-intro::after {
+    width: min(54vw, 420px);
+    height: 1px;
+    bottom: 18%;
+    background: linear-gradient(90deg, rgba(91, 157, 242, 0), rgba(91, 157, 242, 0.75), rgba(235, 143, 175, 0));
+}
+
+.site-intro-mark,
+.site-intro-kicker,
+.site-intro-title,
+.site-intro-line {
+    position: relative;
+    z-index: 1;
+}
+
+.site-intro-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.site-intro-badge {
+    width: 66px;
+    height: 66px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1f5faa, #2f80ed);
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    box-shadow: 0 22px 38px rgba(47, 128, 237, 0.24);
+}
+
+.site-intro-wordmark {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: var(--primary-ink);
+}
+
+.site-intro-kicker {
+    color: #5c738b;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.site-intro-title {
+    max-width: 16ch;
+    margin: 0;
+    color: #162433;
+    font-size: clamp(2rem, 5.4vw, 4.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+}
+
+.site-intro-line {
+    width: min(44vw, 260px);
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #5b9df2, #eb8faf, #5ebd98);
+    transform-origin: center;
+    animation: introLinePulse 1.4s var(--motion-smooth) infinite alternate;
+}
+
+body.intro-complete .site-intro,
+body.reduced-motion .site-intro {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.page-home:not(.intro-complete) {
+    overflow: hidden;
+}
+
+body.page-home:not(.intro-complete) .navbar,
+body.page-home:not(.intro-complete) .home-hero,
+body.page-home:not(.intro-complete) main,
+body.page-home:not(.intro-complete) section,
+body.page-home:not(.intro-complete) footer {
+    opacity: 0;
+}
+
+body.page-home.intro-complete .navbar,
+body.page-home.intro-complete .home-hero,
+body.page-home.intro-complete main,
+body.page-home.intro-complete section,
+body.page-home.intro-complete footer {
+    opacity: 1;
+    transition: opacity 0.45s ease;
+}
+
+@keyframes introLinePulse {
+    from {
+        transform: scaleX(0.62);
+        opacity: 0.72;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
 /* 2. NAVIGATION BAR */
 .navbar {
     display: flex;

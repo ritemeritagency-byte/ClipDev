@@ -52,6 +52,27 @@ const normalizePath = (value) => {
   return pathname || "/";
 };
 
+const setupSiteIntro = () => {
+  if (!body.classList.contains("page-home")) return;
+
+  const intro = document.querySelector(".site-intro");
+  if (!intro) {
+    body.classList.add("intro-complete");
+    return;
+  }
+
+  const finishIntro = () => {
+    body.classList.add("intro-complete");
+  };
+
+  if (reducedMotionQuery.matches) {
+    finishIntro();
+    return;
+  }
+
+  window.setTimeout(finishIntro, 1800);
+};
+
 const getGridRevealMeta = (element) => {
   const group = element.closest(
     ".stats-grid, .subpage-grid, .testimonials-grid, .services-grid, .services-highlight-grid, .policy-grid, .package-grid, .tracks-grid, .steps-grid, .updates-grid, .insight-story-grid, .insights-mosaic, .insights-steps, .workflow-grid, .lead-system-stack"
@@ -238,6 +259,7 @@ const setupScrollState = () => {
 setupRevealAnimations();
 setupNavTracking();
 setupScrollState();
+setupSiteIntro();
 
 const setupMegaMenu = () => {
   if (!navLinks) return;
