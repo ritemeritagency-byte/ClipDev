@@ -266,89 +266,152 @@ setupSiteIntro();
 const setupMegaMenu = () => {
   if (!navLinks) return;
 
-  const servicesLink = navLinks.querySelector('a[href="/services"]');
-  const servicesItem = servicesLink?.closest("li");
-  if (!servicesLink || !servicesItem) return;
+  const megaMenus = [
+    {
+      href: "/services",
+      menuClass: "nav-mega-services",
+      ctaHref: "/services",
+      ctaLabel: "View All Services",
+      menuHtml: `
+        <div class="nav-mega-grid">
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-laptop-code"></i> Core Services</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/website-development"><strong>Website Development</strong><span>Business websites, landing pages, and conversion-focused builds.</span></a>
+              <a class="nav-mega-card" href="/seo-services"><strong>SEO Services</strong><span>Search-ready page structure and on-page visibility improvements.</span></a>
+              <a class="nav-mega-card" href="/google-sheets-database"><strong>Google Sheets Database</strong><span>Trackers and workflow-ready dashboards for daily monitoring.</span></a>
+            </div>
+          </section>
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-bullhorn"></i> Marketing & Social</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/facebook-social-media"><strong>Facebook Page & Social Media</strong><span>Page setup, content support, and message flow improvements.</span></a>
+              <a class="nav-mega-card" href="/facebook-social-media"><strong>Social Media Marketing</strong><span>Campaign ideas, posting support, and audience growth direction.</span></a>
+              <a class="nav-mega-card" href="/blog"><strong>Blog</strong><span>Published articles, lessons, and practical updates from our work.</span></a>
+            </div>
+          </section>
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-diagram-project"></i> Agency Systems</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/landbase-agency-process"><strong>A-Z Landbase Agency Process</strong><span>Bahrain, Qatar, and UAE recruitment workflow guidance.</span></a>
+              <a class="nav-mega-card" href="/insights#applicants-framework"><strong>Applicants Framework</strong><span>How stronger positioning and funnel flow produced 100+ daily applicants.</span></a>
+              <a class="nav-mega-card" href="/insights#office-show-system"><strong>Office Show System</strong><span>The follow-up and conversion logic behind 40+ office shows.</span></a>
+            </div>
+          </section>
+        </div>
+        <div class="nav-mega-footer">
+          <a class="nav-mega-cta" href="/services">View All Services</a>
+        </div>
+      `,
+    },
+    {
+      href: "/blog",
+      menuClass: "nav-mega-blog",
+      ctaHref: "/blog",
+      ctaLabel: "Open Blog Hub",
+      menuHtml: `
+        <div class="nav-mega-grid">
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-user-tie"></i> Founder Story</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/10-years-recruitment-tech"><strong>10 Years in Recruitment</strong><span>The founder story behind GCC recruitment experience and the shift into systems-driven agency work.</span></a>
+            </div>
+          </section>
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-robot"></i> Automation</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/chatmaxima-secret-scaling-agency"><strong>ChatMaxima Secret to Scaling</strong><span>How Facebook Page automation can help agencies handle 200 to 300 applicants a day.</span></a>
+            </div>
+          </section>
+          <section class="nav-mega-col">
+            <p class="nav-mega-label"><i class="fas fa-table"></i> Database Systems</p>
+            <div class="nav-mega-links">
+              <a class="nav-mega-card" href="/google-sheets-secret-engine-agency"><strong>Google Sheets Secret Engine</strong><span>Why a structured tracker still works as the real-time engine behind recruitment follow-up.</span></a>
+              <a class="nav-mega-card" href="/google-sheets-database"><strong>Google Sheets Database Service</strong><span>See the service behind the systems and trackers mentioned in the article.</span></a>
+            </div>
+          </section>
+        </div>
+        <div class="nav-mega-footer">
+          <a class="nav-mega-cta" href="/blog">Open Blog Hub</a>
+        </div>
+      `,
+    },
+  ];
 
-  servicesItem.classList.add("has-mega-menu");
-  servicesLink.classList.add("nav-mega-trigger");
+  const configuredItems = megaMenus
+    .map((config) => {
+      const triggerLink = navLinks.querySelector(`a[href="${config.href}"]`);
+      const triggerItem = triggerLink?.closest("li");
+      if (!triggerLink || !triggerItem) return null;
 
-  if (!servicesLink.querySelector(".fa-chevron-down")) {
-    const icon = document.createElement("i");
-    icon.className = "fas fa-chevron-down";
-    icon.setAttribute("aria-hidden", "true");
-    servicesLink.appendChild(icon);
-  }
+      triggerItem.classList.add("has-mega-menu");
+      triggerLink.classList.add("nav-mega-trigger");
 
-  if (!servicesItem.querySelector(".nav-mega-menu")) {
-    const menu = document.createElement("div");
-    menu.className = "nav-mega-menu";
-    menu.setAttribute("aria-hidden", "true");
-    menu.innerHTML = `
-      <div class="nav-mega-grid">
-        <section class="nav-mega-col">
-          <p class="nav-mega-label"><i class="fas fa-laptop-code"></i> Core Services</p>
-          <div class="nav-mega-links">
-            <a class="nav-mega-card" href="/website-development"><strong>Website Development</strong><span>Business websites, landing pages, and conversion-focused builds.</span></a>
-            <a class="nav-mega-card" href="/seo-services"><strong>SEO Services</strong><span>Search-ready page structure and on-page visibility improvements.</span></a>
-            <a class="nav-mega-card" href="/google-sheets-database"><strong>Google Sheets Database</strong><span>Trackers and workflow-ready dashboards for daily monitoring.</span></a>
-          </div>
-        </section>
-        <section class="nav-mega-col">
-          <p class="nav-mega-label"><i class="fas fa-bullhorn"></i> Marketing & Social</p>
-          <div class="nav-mega-links">
-            <a class="nav-mega-card" href="/facebook-social-media"><strong>Facebook Page & Social Media</strong><span>Page setup, content support, and message flow improvements.</span></a>
-            <a class="nav-mega-card" href="/facebook-social-media"><strong>Social Media Marketing</strong><span>Campaign ideas, posting support, and audience growth direction.</span></a>
-            <a class="nav-mega-card" href="/blog"><strong>Blog</strong><span>Future articles, updates, and practical lessons from our work.</span></a>
-          </div>
-        </section>
-        <section class="nav-mega-col">
-          <p class="nav-mega-label"><i class="fas fa-diagram-project"></i> Agency Systems</p>
-          <div class="nav-mega-links">
-            <a class="nav-mega-card" href="/landbase-agency-process"><strong>A-Z Landbase Agency Process</strong><span>Bahrain, Qatar, and UAE recruitment workflow guidance.</span></a>
-            <a class="nav-mega-card" href="/insights#applicants-framework"><strong>Applicants Framework</strong><span>How stronger positioning and funnel flow produced 100+ daily applicants.</span></a>
-            <a class="nav-mega-card" href="/insights#office-show-system"><strong>Office Show System</strong><span>The follow-up and conversion logic behind 40+ office shows.</span></a>
-          </div>
-        </section>
-      </div>
-      <div class="nav-mega-footer">
-        <a class="nav-mega-cta" href="/services">View All Services</a>
-      </div>
-    `;
-    servicesItem.appendChild(menu);
-  }
+      if (!triggerLink.querySelector(".fa-chevron-down")) {
+        const icon = document.createElement("i");
+        icon.className = "fas fa-chevron-down";
+        icon.setAttribute("aria-hidden", "true");
+        triggerLink.appendChild(icon);
+      }
 
-  const menu = servicesItem.querySelector(".nav-mega-menu");
-  const setMegaOpen = (isOpen) => {
-    servicesItem.classList.toggle("is-mega-open", isOpen);
-    menu?.setAttribute("aria-hidden", isOpen ? "false" : "true");
+      if (!triggerItem.querySelector(".nav-mega-menu")) {
+        const menu = document.createElement("div");
+        menu.className = "nav-mega-menu";
+        if (config.menuClass) menu.classList.add(config.menuClass);
+        menu.setAttribute("aria-hidden", "true");
+        menu.innerHTML = config.menuHtml;
+        triggerItem.appendChild(menu);
+      }
+
+      return {
+        ...config,
+        triggerLink,
+        triggerItem,
+        menu: triggerItem.querySelector(".nav-mega-menu"),
+      };
+    })
+    .filter(Boolean);
+
+  if (!configuredItems.length) return;
+
+  const setMegaOpen = (targetItem, isOpen) => {
+    configuredItems.forEach(({ triggerItem, menu }) => {
+      const shouldOpen = triggerItem === targetItem ? isOpen : false;
+      triggerItem.classList.toggle("is-mega-open", shouldOpen);
+      menu?.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+    });
   };
 
-  servicesLink.addEventListener("click", (event) => {
-    const isDesktop = window.innerWidth > 768;
-    event.preventDefault();
-    if (!isDesktop && !document.body.classList.contains("nav-open")) {
-      window.location.href = servicesLink.href;
-      return;
-    }
-    setMegaOpen(!servicesItem.classList.contains("is-mega-open"));
-  });
+  configuredItems.forEach(({ triggerLink, triggerItem }) => {
+    triggerLink.addEventListener("click", (event) => {
+      const isDesktop = window.innerWidth > 768;
+      event.preventDefault();
+      if (!isDesktop && !document.body.classList.contains("nav-open")) {
+        window.location.href = triggerLink.href;
+        return;
+      }
+      setMegaOpen(triggerItem, !triggerItem.classList.contains("is-mega-open"));
+    });
 
-  servicesItem.querySelectorAll(".nav-mega-menu a").forEach((link) => {
-    link.addEventListener("click", () => setMegaOpen(false));
+    triggerItem.querySelectorAll(".nav-mega-menu a").forEach((link) => {
+      link.addEventListener("click", () => setMegaOpen(triggerItem, false));
+    });
   });
 
   document.addEventListener("click", (event) => {
-    if (!servicesItem.contains(event.target)) setMegaOpen(false);
+    configuredItems.forEach(({ triggerItem }) => {
+      if (!triggerItem.contains(event.target)) setMegaOpen(triggerItem, false);
+    });
   });
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setMegaOpen(false);
+    if (event.key !== "Escape") return;
+    configuredItems.forEach(({ triggerItem }) => setMegaOpen(triggerItem, false));
   });
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
-      setMegaOpen(false);
+      configuredItems.forEach(({ triggerItem }) => setMegaOpen(triggerItem, false));
     }
   });
 };
