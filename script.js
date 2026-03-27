@@ -688,7 +688,7 @@ diamondShowcases.forEach((showcase) => {
 const whatsappNumber = "639603780196";
 const buildWhatsAppUrl = (text) =>
   `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(text)}`;
-const messengerPageUrl = "https://www.facebook.com/messages/t/clipdevs";
+const messengerPageUrl = "https://www.facebook.com/clipdevs";
 const buildMessengerUrl = (text) => {
   const message = (text || "").trim();
   return message ? `${messengerPageUrl}?ref=${encodeURIComponent(message)}` : messengerPageUrl;
@@ -903,6 +903,12 @@ if (waWidget) {
         setPanelOpen(false);
         toggle.focus();
       }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (panel.hidden) return;
+      if (waWidget.contains(event.target)) return;
+      setPanelOpen(false);
     });
   }
 
