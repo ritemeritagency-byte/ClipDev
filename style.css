@@ -3177,27 +3177,26 @@ a.is-loading {
 .article-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 22px;
     align-items: start;
-    max-width: 1080px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 34px;
 }
 
 .article-main,
 .article-side-card {
-    background: #ffffff;
-    border: 1px solid rgba(17, 38, 61, 0.1);
-    border-radius: 20px;
-    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    border-radius: 32px;
+    box-shadow: 0 22px 48px rgba(13, 27, 42, 0.08);
 }
 
 .article-main {
-    padding: 34px 40px;
-    background: #ffffff;
-    border: 1px solid rgba(17, 38, 61, 0.1);
-    border-radius: 28px;
-    box-shadow: 0 18px 38px rgba(13, 27, 42, 0.09);
+    padding: 38px 44px 42px;
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .page-article .article-main.reveal-item,
@@ -3209,11 +3208,11 @@ a.is-loading {
 }
 
 .article-feature-photo {
-    margin: 10px 0 22px;
-    border-radius: 22px;
+    margin: 6px 0 30px;
+    border-radius: 24px;
     overflow: hidden;
     border: 1px solid rgba(17, 38, 61, 0.08);
-    box-shadow: 0 16px 34px rgba(13, 27, 42, 0.1);
+    box-shadow: 0 14px 32px rgba(13, 27, 42, 0.08);
     background:
         radial-gradient(280px 180px at 10% 10%, rgba(215, 238, 252, 0.7), transparent 62%),
         linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
@@ -3229,38 +3228,39 @@ a.is-loading {
 
 .article-main > p {
     color: var(--text-muted);
-    font-size: 1.08rem;
-    line-height: 1.8;
-    max-width: 78ch;
+    font-size: 1.16rem;
+    line-height: 1.92;
+    max-width: none;
 }
 
 .article-section + .article-section {
-    margin-top: 24px;
+    margin-top: 38px;
 }
 
 .article-section h2 {
     color: var(--primary-ink);
-    margin-bottom: 10px;
-    font-size: clamp(1.45rem, 2.2vw, 2rem);
+    margin-bottom: 18px;
+    font-size: clamp(1.7rem, 2.6vw, 2.45rem);
+    line-height: 1.2;
 }
 
 .article-section p {
     color: var(--text-muted);
-    font-size: 1.05rem;
-    line-height: 1.85;
-    max-width: 78ch;
+    font-size: 1.12rem;
+    line-height: 1.95;
+    max-width: none;
 }
 
 .article-list {
-    margin: 14px 0 0 18px;
+    margin: 16px 0 0 22px;
     color: var(--secondary-ink);
-    max-width: 76ch;
+    max-width: none;
 }
 
 .article-list li {
-    margin-bottom: 10px;
-    line-height: 1.8;
-    font-size: 1.02rem;
+    margin-bottom: 14px;
+    line-height: 1.9;
+    font-size: 1.08rem;
 }
 
 .article-metrics {
@@ -3282,10 +3282,13 @@ a.is-loading {
 .article-sidebar {
     display: grid;
     gap: 18px;
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .article-side-card {
-    padding: 24px;
+    padding: 26px 30px;
     position: static;
 }
 
@@ -3529,12 +3532,16 @@ button:focus-visible {
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .vod-ready-grid { grid-template-columns: 1fr; }
-    .article-layout { grid-template-columns: 1fr; }
+    .article-layout {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        padding-top: 20px;
+    }
     .article-side-card { position: static; }
     .article-sidebar { grid-template-columns: 1fr; }
     .article-main {
-        padding: 24px 24px;
-        border-radius: 22px;
+        max-width: 100%;
+        padding: 30px 28px 34px;
     }
     .article-main > p,
     .article-section p,
@@ -3750,7 +3757,12 @@ button:focus-visible {
     .featured-case-content { padding: 18px; }
     .insights-feature-media img { height: 260px; }
     .insights-steps { grid-template-columns: 1fr; }
-    .article-layout { padding-top: 20px; }
+    .article-feature-photo {
+        margin: 8px 0 22px;
+    }
+    .article-side-card {
+        padding: 22px 22px 24px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3789,9 +3801,11 @@ button:focus-visible {
     .track-content {
         padding: 16px;
     }
-    .article-main,
+    .article-main {
+        padding: 24px 18px 28px;
+    }
     .article-side-card {
-        padding: 18px;
+        padding: 18px 16px 20px;
     }
     .article-main > p,
     .article-section p,
