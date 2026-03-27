@@ -1610,6 +1610,19 @@ a.is-loading {
     object-fit: cover;
 }
 
+.founder-story-card .insight-card-image {
+    background:
+        radial-gradient(240px 160px at 12% 12%, rgba(215, 238, 252, 0.72), transparent 62%),
+        linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
+}
+
+.founder-story-card .insight-card-image img {
+    height: 240px;
+    object-fit: contain;
+    object-position: center top;
+    padding: 14px 18px 0;
+}
+
 .insight-card-content {
     padding: 25px;
 }
@@ -3113,6 +3126,27 @@ a.is-loading {
     gap: 18px;
 }
 
+.blog-listing {
+    grid-template-columns: 1fr;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.blog-listing .insight-card {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+    align-items: stretch;
+}
+
+.blog-listing .insight-card-image {
+    min-height: 100%;
+}
+
+.blog-listing .insight-card-image img {
+    height: 100%;
+    min-height: 280px;
+}
+
 .blog-cta {
     margin-top: 8px;
 }
@@ -3135,6 +3169,7 @@ a.is-loading {
     grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.52fr);
     gap: 22px;
     align-items: start;
+    padding-top: 42px;
 }
 
 .article-main,
@@ -3455,6 +3490,8 @@ button:focus-visible {
     .vod-ready-grid { grid-template-columns: 1fr; }
     .article-layout { grid-template-columns: 1fr; }
     .article-side-card { position: static; }
+    .blog-listing .insight-card { grid-template-columns: 1fr; }
+    .blog-listing .insight-card-image img { min-height: 220px; }
     .starter-wrap { grid-template-columns: 1fr; }
     .workflow-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
