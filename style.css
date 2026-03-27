@@ -3117,6 +3117,106 @@ a.is-loading {
     margin-top: 8px;
 }
 
+.article-hero .hero-proof-badges {
+    margin-top: 18px;
+}
+
+.article-hero .hero-proof-badges span {
+    border: 1px solid rgba(27, 116, 228, 0.14);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--secondary-ink);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+}
+
+.article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.52fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.article-main,
+.article-side-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.article-main {
+    padding: 28px;
+}
+
+.article-main > p {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+}
+
+.article-section + .article-section {
+    margin-top: 24px;
+}
+
+.article-section h2 {
+    color: var(--primary-ink);
+    margin-bottom: 10px;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+}
+
+.article-section p {
+    color: var(--text-muted);
+}
+
+.article-list {
+    margin: 14px 0 0 18px;
+    color: var(--secondary-ink);
+}
+
+.article-list li {
+    margin-bottom: 10px;
+}
+
+.article-metrics {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+}
+
+.article-metrics span {
+    border: 1px solid rgba(17, 38, 61, 0.12);
+    background: #f7fbfb;
+    border-radius: 999px;
+    padding: 9px 13px;
+    font-size: 0.9rem;
+    color: var(--secondary-ink);
+}
+
+.article-sidebar {
+    display: grid;
+    gap: 18px;
+}
+
+.article-side-card {
+    padding: 24px;
+    position: sticky;
+    top: 96px;
+}
+
+.article-side-card + .article-side-card {
+    position: static;
+}
+
+.article-side-card h3 {
+    color: var(--primary-ink);
+    margin: 8px 0 10px;
+}
+
+.article-side-card p {
+    color: var(--text-muted);
+}
+
 .wa-send {
     width: 100%;
     border: 0;
@@ -3334,6 +3434,8 @@ button:focus-visible {
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .vod-ready-grid { grid-template-columns: 1fr; }
+    .article-layout { grid-template-columns: 1fr; }
+    .article-side-card { position: static; }
     .starter-wrap { grid-template-columns: 1fr; }
     .workflow-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
