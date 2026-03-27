@@ -122,7 +122,7 @@ const revealTargets = Array.from(
   new Set(
     Array.from(
       document.querySelectorAll(
-        ".section-title, .stat-card, .featured-case-card, .about-card, .doc-media, .subpage-card, .starter-form, .workflow-step, .testimonial-card, .track-card, .step-card, .policy-item, .package-card, .update-card, .service-card, .service-showcase-card, .lead-system-feature, .insights-feature-media, .insights-feature-copy, .insight-story-card, .insight-panel, .insights-step-card, .cta-banner, .footer-grid, .footer-bottom, .collab-media-stack, .diamond-showcase, .showcase-card, .insight-link-card, .timeline-card"
+        ".section-title, .stat-card, .featured-case-card, .about-card, .doc-media, .subpage-card, .starter-form, .workflow-step, .testimonial-card, .track-card, .step-card, .policy-item, .package-card, .update-card, .service-card, .service-showcase-card, .lead-system-feature, .insights-feature-media, .insights-feature-copy, .insight-story-card, .insight-panel, .insights-step-card, .cta-banner, .footer-grid, .footer-bottom, .collab-media-stack, .diamond-showcase, .showcase-card, .insight-link-card, .timeline-card, .scroll-merge"
       )
     )
   )
