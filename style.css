@@ -848,6 +848,126 @@ body.nav-open .nav-toggle span:nth-child(3) {
     display: block;
 }
 
+.course-section {
+    padding-top: 18px;
+}
+
+.course-membership-card {
+    display: grid;
+    grid-template-columns: 1.25fr 0.9fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.course-membership-copy,
+.course-plan-card,
+.course-point-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(13, 27, 42, 0.08);
+}
+
+.course-membership-copy {
+    padding: 26px;
+}
+
+.course-membership-copy h3 {
+    color: var(--primary-ink);
+    margin: 8px 0 12px;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.2;
+}
+
+.course-membership-copy > p:last-of-type {
+    color: var(--text-muted);
+    max-width: 62ch;
+}
+
+.course-membership-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.course-point-card {
+    padding: 16px;
+}
+
+.course-point-card h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-ink);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.course-point-card h4 i {
+    color: var(--accent);
+}
+
+.course-point-card p,
+.course-plan-note,
+.course-plan-label {
+    color: var(--text-muted);
+}
+
+.course-point-card p {
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+.course-plan-card {
+    padding: 24px;
+    position: sticky;
+    top: 96px;
+}
+
+.course-plan-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.course-plan-card h4 {
+    color: var(--primary-ink);
+    font-size: 1.5rem;
+    margin: 8px 0 6px;
+}
+
+.course-plan-price {
+    color: var(--accent-deep);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.course-plan-price span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.course-plan-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.course-plan-actions .btn-primary,
+.course-plan-actions .btn-secondary {
+    width: 100%;
+}
+
+.course-plan-note {
+    margin-top: 14px;
+    font-size: 0.9rem;
+}
+
 .starter-section {
     padding-top: 30px;
 }
@@ -2950,6 +3070,9 @@ button:focus-visible {
     .insight-grid { grid-template-columns: repeat(2, 1fr); }
     .stats-grid { grid-template-columns: 1fr; }
     .featured-case-card { grid-template-columns: 1fr; }
+    .course-membership-card { grid-template-columns: 1fr; }
+    .course-membership-points { grid-template-columns: 1fr; }
+    .course-plan-card { position: static; }
     .starter-wrap { grid-template-columns: 1fr; }
     .workflow-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
@@ -3683,7 +3806,10 @@ button:focus-visible {
 .page-home .testimonial-card,
 .page-home .doc-media,
 .page-home .featured-case-card,
-.page-home .starter-form {
+ .page-home .starter-form,
+ .page-home .course-membership-copy,
+ .page-home .course-plan-card,
+ .page-home .course-point-card {
     background: #ffffff;
     border-color: rgba(15, 39, 64, 0.09);
     box-shadow: 0 10px 24px rgba(12, 41, 68, 0.07);
@@ -3796,6 +3922,12 @@ button:focus-visible {
     }
 
     .home-intro-caption {
+        padding: 16px;
+    }
+
+    .course-membership-copy,
+    .course-plan-card,
+    .course-point-card {
         padding: 16px;
     }
 }
