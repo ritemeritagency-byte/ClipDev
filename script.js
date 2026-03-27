@@ -392,6 +392,7 @@ if (siteSearchForm) {
     { label: "Insights", url: "/insights", keywords: ["insight", "strategy", "framework"] },
     { label: "Blog", url: "/blog", keywords: ["blog", "articles", "guides", "posts"] },
     { label: "10 Years in Recruitment: How I Finally Cracked the Code with Tech", url: "/10-years-recruitment-tech", keywords: ["10 years recruitment", "landbase", "agency automation", "digital recruitment process"] },
+    { label: "200 to 300 Applicants a Day: The ChatMaxima Secret to Scaling Your Agency", url: "/chatmaxima-secret-scaling-agency", keywords: ["chatmaxima", "facebook page automation", "200 applicants", "300 applicants", "agency scaling"] },
     { label: "Website Development", url: "/website-development", keywords: ["website development", "landing page", "web design"] },
     { label: "SEO Services", url: "/seo-services", keywords: ["seo", "search engine optimization", "rankings"] },
     { label: "Facebook & Social Media", url: "/facebook-social-media", keywords: ["facebook", "social media", "marketing"] },
