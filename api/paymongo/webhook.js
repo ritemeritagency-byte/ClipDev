@@ -1,10 +1,6 @@
 const crypto = require("crypto");
-
-const json = (res, statusCode, payload) => {
-  res.statusCode = statusCode;
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify(payload));
-};
+const { sendJson } = require("../_lib/http");
+const { forwardToRailway, getRailwayBaseUrl } = require("../_lib/railway");
 
 const readRawBody = async (req) => {
   const chunks = [];
@@ -36,7 +32,7 @@ const verifyWebhookSignature = (rawBody, signatureHeader, secret) => {
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
-    return json(res, 405, { error: "Method not allowed." });
+    return sendJson(res, 405, { error: "Method not allowed." });
   }
 
   const rawBody = await readRawBody(req);
@@ -44,18 +40,30 @@ module.exports = async (req, res) => {
   const signatureHeader = req.headers["paymongo-signature"] || "";
 
   if (!verifyWebhookSignature(rawBody, signatureHeader, secret)) {
-    return json(res, 400, { error: "Invalid PayMongo signature." });
+    return sendJson(res, 400, { error: "Invalid PayMongo signature." });
   }
 
   let event;
   try {
     event = JSON.parse(rawBody.toString("utf8"));
   } catch (error) {
-    return json(res, 400, { error: "Invalid JSON payload." });
+    return sendJson(res, 400, { error: "Invalid JSON payload." });
   }
 
   const eventType = event?.data?.attributes?.type || "unknown";
   const resource = event?.data?.attributes?.data || null;
+  const normalizedEvent = {
+    provider: "paymongo",
+    eventType,
+    resourceId: resource?.id || null,
+    resourceType: resource?.type || null,
+    metadata: resource?.attributes?.metadata || null,
+    amount: resource?.attributes?.amount || null,
+    currency: resource?.attributes?.currency || null,
+    status: resource?.attributes?.status || null,
+    paidAt: resource?.attributes?.paid_at || null,
+    raw: event,
+  };
 
   console.log("PayMongo webhook received:", {
     eventType,
@@ -64,8 +72,26 @@ module.exports = async (req, res) => {
     metadata: resource?.attributes?.metadata || null,
   });
 
-  return json(res, 200, {
+  let railway = null;
+  if (getRailwayBaseUrl()) {
+    try {
+      railway = await forwardToRailway("/api/paymongo/webhook", normalizedEvent);
+    } catch (error) {
+      railway = {
+        ok: false,
+        status: 502,
+        payload: {
+          error: "Unable to reach Railway webhook endpoint.",
+          details: error.message,
+        },
+      };
+    }
+  }
+
+  return sendJson(res, 200, {
     received: true,
     eventType,
+    forwardedToRailway: Boolean(railway),
+    railwayStatus: railway?.status || null,
   });
 };

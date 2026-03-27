@@ -3059,7 +3059,7 @@ a.is-loading {
     outline-offset: 2px;
 }
 
-/* 8.8 WHATSAPP WIDGET */
+/* 8.8 MESSENGER WIDGET */
 .wa-widget {
     position: fixed;
     right: 18px;
@@ -3072,7 +3072,7 @@ a.is-loading {
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: #25d366;
+    background: linear-gradient(145deg, #0a7cff, #42a4ff);
     color: #ffffff;
     font-family: var(--font-body);
     font-weight: 800;
@@ -3080,7 +3080,7 @@ a.is-loading {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0.08), 0 16px 32px rgba(15, 110, 55, 0.32);
+    box-shadow: 0 0 0 10px rgba(10, 124, 255, 0.08), 0 16px 32px rgba(11, 69, 145, 0.32);
     transition: transform 0.24s var(--motion-quick), box-shadow 0.24s var(--motion-quick);
 }
 
@@ -3094,7 +3094,7 @@ a.is-loading {
 
 .wa-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0.1), 0 18px 36px rgba(15, 110, 55, 0.36);
+    box-shadow: 0 0 0 12px rgba(10, 124, 255, 0.12), 0 18px 36px rgba(11, 69, 145, 0.36);
 }
 
 .wa-panel {

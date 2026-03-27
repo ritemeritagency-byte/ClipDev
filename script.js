@@ -688,6 +688,11 @@ diamondShowcases.forEach((showcase) => {
 const whatsappNumber = "639603780196";
 const buildWhatsAppUrl = (text) =>
   `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(text)}`;
+const messengerPageUrl = "https://m.me/clipdevs";
+const buildMessengerUrl = (text) => {
+  const message = (text || "").trim();
+  return message ? `${messengerPageUrl}?ref=${encodeURIComponent(message)}` : messengerPageUrl;
+};
 
 const buildSubmissionMeta = () => ({
   submitted_at: new Date().toISOString(),
@@ -904,7 +909,7 @@ if (waWidget) {
   if (send && input) {
     send.addEventListener("click", () => {
       const raw = input.value.trim() || "Hi, I want help with my website or recruitment project.";
-      window.open(buildWhatsAppUrl(raw), "_blank", "noopener");
+      window.open(buildMessengerUrl(raw), "_blank", "noopener");
     });
   }
 }
