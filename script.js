@@ -3,10 +3,6 @@ const root = document.documentElement;
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const GA4_MEASUREMENT_ID = "";
-const COURSE_PAYMENT_LINKS = {
-  courseClubMonthly: "",
-  flagshipCourseOneTime: "",
-};
 const COURSE_PAYMENT_FALLBACK =
   "https://api.whatsapp.com/send?phone=639603780196&text=Hi%2C%20I%20want%20help%20buying%20a%20course%20from%20ClipDevs.";
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -459,23 +455,80 @@ const setupCoursePaymentLinks = () => {
   const paymentButtons = document.querySelectorAll("[data-payment-link]");
   if (!paymentButtons.length) return;
 
+  const showPaymentStatus = () => {
+    if (!body.classList.contains("page-courses")) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("payment");
+    if (!status || !["success", "cancelled"].includes(status)) return;
+
+    const hero = document.querySelector(".course-hero");
+    if (!hero || document.querySelector("[data-payment-status]")) return;
+
+    const banner = document.createElement("div");
+    banner.className = `payment-status-banner payment-status-${status}`;
+    banner.setAttribute("data-payment-status", "true");
+    banner.innerHTML =
+      status === "success"
+        ? "<strong>Payment received by PayMongo.</strong> We can now confirm access and next steps."
+        : "<strong>Checkout was cancelled.</strong> You can try again anytime or message us for help.";
+
+    hero.insertAdjacentElement("afterend", banner);
+  };
+
+  showPaymentStatus();
+
   paymentButtons.forEach((button) => {
     const paymentKey = button.getAttribute("data-payment-link");
-    const checkoutUrl = paymentKey ? COURSE_PAYMENT_LINKS[paymentKey] : "";
-    const destination = checkoutUrl || COURSE_PAYMENT_FALLBACK;
+    const defaultLabel = (button.textContent || "").trim();
 
     if (button.tagName === "A") {
-      button.setAttribute("href", destination);
-      button.setAttribute("target", "_blank");
-      button.setAttribute("rel", "noopener noreferrer");
+      button.setAttribute("href", "#");
     }
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+
       trackAnalyticsEvent("course_checkout_click", {
         payment_key: paymentKey || "unknown",
-        payment_ready: checkoutUrl ? "yes" : "no",
+        payment_ready: "server_attempt",
         page_path: window.location.pathname || "/",
       });
+
+      if (!paymentKey) {
+        window.location.href = COURSE_PAYMENT_FALLBACK;
+        return;
+      }
+
+      button.classList.add("is-loading");
+      button.setAttribute("aria-busy", "true");
+      button.textContent = "Opening checkout...";
+
+      try {
+        const response = await fetch("/api/paymongo/create-checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ courseId: paymentKey }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        const checkoutUrl = payload?.checkoutUrl;
+
+        if (!response.ok || !checkoutUrl) {
+          throw new Error(payload?.error || "Unable to create PayMongo checkout session.");
+        }
+
+        window.location.href = checkoutUrl;
+      } catch (error) {
+        console.error("PayMongo checkout failed:", error);
+        window.location.href = COURSE_PAYMENT_FALLBACK;
+      } finally {
+        button.classList.remove("is-loading");
+        button.removeAttribute("aria-busy");
+        button.textContent = defaultLabel;
+      }
     });
   });
 };

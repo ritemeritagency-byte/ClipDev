@@ -1118,8 +1118,121 @@ body.nav-open .nav-toggle span:nth-child(3) {
     font-size: 0.92rem;
 }
 
+.payment-status-banner {
+    width: min(1080px, calc(100% - 40px));
+    margin: 20px auto 0;
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    box-shadow: 0 12px 24px rgba(13, 27, 42, 0.08);
+    font-size: 0.95rem;
+}
+
+.payment-status-success {
+    background: #edf9f2;
+    color: #1d5a36;
+}
+
+.payment-status-cancelled {
+    background: #fff7eb;
+    color: #8a5a10;
+}
+
+a.is-loading {
+    opacity: 0.78;
+    pointer-events: none;
+}
+
 .course-builder-section {
     padding-top: 18px;
+}
+
+.vod-ready-section {
+    padding-top: 18px;
+}
+
+.vod-ready-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.vod-panel,
+.vod-module-card,
+.vod-embed-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.vod-panel {
+    padding: 24px;
+}
+
+.vod-panel h3,
+.vod-embed-card h4,
+.vod-module-card h4 {
+    color: var(--primary-ink);
+}
+
+.vod-module-list,
+.vod-embed-stack {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.vod-module-card,
+.vod-embed-card {
+    padding: 18px;
+}
+
+.vod-module-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.vod-module-head span {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.vod-panel-accent {
+    background:
+        radial-gradient(240px 140px at 100% 0%, rgba(252, 231, 239, 0.64), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #fffaf7 100%);
+}
+
+.vod-video-placeholder {
+    min-height: 220px;
+    border-radius: 18px;
+    border: 1px dashed rgba(27, 116, 228, 0.28);
+    background: linear-gradient(180deg, #eef6ff 0%, #f9fbff 100%);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 22px;
+    margin-bottom: 14px;
+}
+
+.vod-video-placeholder i {
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.vod-video-placeholder span,
+.vod-embed-card p,
+.vod-panel > p:last-of-type {
+    color: var(--text-muted);
 }
 
 .starter-section {
@@ -3230,6 +3343,7 @@ button:focus-visible {
     .course-catalog-grid { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
+    .vod-ready-grid { grid-template-columns: 1fr; }
     .starter-wrap { grid-template-columns: 1fr; }
     .workflow-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }

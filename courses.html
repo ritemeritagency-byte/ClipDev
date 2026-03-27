@@ -173,39 +173,111 @@
 
                 <aside class="payment-action-card scroll-merge merge-right">
                     <p class="course-plan-label">Recommended setup</p>
-                    <h3>Hosted checkout links</h3>
-                    <p class="payment-action-copy">Plug in your live payment URLs in <code>script.js</code> and these buttons will take buyers straight to checkout.</p>
+                    <h3>PayMongo checkout backend</h3>
+                    <p class="payment-action-copy">These buttons now support a backend-created PayMongo checkout session, which keeps your secret key off the frontend and redirects buyers to PayMongo securely.</p>
                     <ul class="doc-expertise-list">
-                        <li>Supports fast launch without custom backend code</li>
-                        <li>Good fit for PayMongo, Stripe Payment Links, or PayPal checkout pages</li>
-                        <li>Keeps sensitive payment handling outside the website codebase</li>
+                        <li>Uses a server-side endpoint to create each checkout session</li>
+                        <li>Good fit for GCash, Maya, and card payments through PayMongo</li>
+                        <li>Includes a webhook endpoint for paid-event handling later</li>
                     </ul>
                     <div class="course-plan-actions">
                         <a href="#" class="btn-primary" data-payment-link="flagshipCourseOneTime">Test Course Checkout</a>
                         <a href="#" class="btn-secondary" data-payment-link="courseClubMonthly">Test Membership Checkout</a>
                     </div>
-                    <p class="course-plan-note">If a live payment URL has not been added yet, the button will fall back to WhatsApp so you do not lose the inquiry.</p>
+                    <p class="course-plan-note">If PayMongo is not configured yet, the button will fall back to WhatsApp so you do not lose the inquiry.</p>
+                </aside>
+            </div>
+        </section>
+
+        <section class="container vod-ready-section">
+            <div class="section-title">
+                <h2>VOD Content Shell</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="vod-ready-grid">
+                <article class="vod-panel scroll-merge merge-left">
+                    <p class="meta-pill">Ready for Tomorrow</p>
+                    <h3>Replace these with your actual course modules and lesson embeds</h3>
+                    <div class="vod-module-list">
+                        <section class="vod-module-card">
+                            <div class="vod-module-head">
+                                <h4>Module 1: Introduction</h4>
+                                <span>3 lessons</span>
+                            </div>
+                            <ul class="doc-expertise-list">
+                                <li>Lesson 1: Welcome and overview</li>
+                                <li>Lesson 2: What students will achieve</li>
+                                <li>Lesson 3: Tools or setup before starting</li>
+                            </ul>
+                        </section>
+                        <section class="vod-module-card">
+                            <div class="vod-module-head">
+                                <h4>Module 2: Core Training</h4>
+                                <span>4 lessons</span>
+                            </div>
+                            <ul class="doc-expertise-list">
+                                <li>Lesson 1: Main strategy or framework</li>
+                                <li>Lesson 2: Practical walkthrough</li>
+                                <li>Lesson 3: Common mistakes to avoid</li>
+                                <li>Lesson 4: Assignment or action step</li>
+                            </ul>
+                        </section>
+                        <section class="vod-module-card">
+                            <div class="vod-module-head">
+                                <h4>Module 3: Implementation</h4>
+                                <span>2 lessons</span>
+                            </div>
+                            <ul class="doc-expertise-list">
+                                <li>Lesson 1: Real example or case study</li>
+                                <li>Lesson 2: Final checklist and next steps</li>
+                            </ul>
+                        </section>
+                    </div>
+                </article>
+
+                <aside class="vod-panel vod-panel-accent scroll-merge merge-right">
+                    <p class="course-plan-label">Embed-ready area</p>
+                    <h3>Video lesson placeholders</h3>
+                    <div class="vod-embed-stack">
+                        <div class="vod-embed-card">
+                            <div class="vod-video-placeholder">
+                                <i class="fas fa-play-circle" aria-hidden="true"></i>
+                                <span>Paste your first video embed here tomorrow</span>
+                            </div>
+                            <h4>Featured Lesson Placeholder</h4>
+                            <p>Swap this block with a Vimeo, YouTube unlisted, Bunny Stream, or private course platform embed.</p>
+                        </div>
+                        <div class="vod-embed-card">
+                            <h4>Suggested workflow</h4>
+                            <ul class="doc-expertise-list">
+                                <li>Upload videos to your preferred platform</li>
+                                <li>Replace these placeholders with embeds or lesson links</li>
+                                <li>Add thumbnails, durations, and short lesson descriptions</li>
+                                <li>Keep payment button above the lesson library for conversion</li>
+                            </ul>
+                        </div>
+                    </div>
                 </aside>
             </div>
         </section>
 
         <section class="container course-builder-section">
             <div class="section-title">
-                <h2>What You Can Add Next</h2>
+                <h2>Launch Checklist</h2>
                 <div class="underline"></div>
             </div>
             <div class="subpage-grid">
                 <article class="subpage-card scroll-merge merge-left">
                     <h3><i class="fas fa-list-check"></i> Full Curriculum</h3>
-                    <p>Add module lists, lesson counts, and outcomes for each course card.</p>
+                    <p>Finalize the real module names, lesson counts, and outcome-based copy for each course.</p>
                 </article>
                 <article class="subpage-card scroll-merge merge-center">
-                    <h3><i class="fas fa-quote-left"></i> Student Proof</h3>
-                    <p>Insert testimonials, screenshots, or before-and-after results to strengthen trust.</p>
+                    <h3><i class="fas fa-video"></i> Video Delivery</h3>
+                    <p>Add your hosted VOD embeds, thumbnails, and lesson descriptions once the recordings are ready.</p>
                 </article>
                 <article class="subpage-card scroll-merge merge-right">
-                    <h3><i class="fas fa-lock"></i> Members Area</h3>
-                    <p>Connect checkout to a private course platform when you are ready for gated delivery.</p>
+                    <h3><i class="fas fa-lock"></i> Access Control</h3>
+                    <p>Decide whether buyers go to a members area, a private link page, or manual enrollment after payment.</p>
                 </article>
             </div>
         </section>
