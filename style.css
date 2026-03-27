@@ -968,6 +968,160 @@ body.nav-open .nav-toggle span:nth-child(3) {
     font-size: 0.9rem;
 }
 
+.course-hero .subtitle {
+    max-width: 760px;
+}
+
+.course-overview {
+    padding-top: 34px;
+    padding-bottom: 26px;
+}
+
+.course-overview-card h2,
+.payment-gateway-panel h3,
+.payment-action-card h3 {
+    color: var(--primary-ink);
+    margin: 8px 0 12px;
+}
+
+.course-overview-card p:last-child {
+    margin-bottom: 0;
+}
+
+.course-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.course-offer-card,
+.payment-gateway-panel,
+.payment-action-card,
+.payment-method-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.course-offer-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.course-offer-featured {
+    background:
+        radial-gradient(220px 120px at 0% 0%, rgba(215, 238, 252, 0.7), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.course-offer-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.course-offer-type {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.course-offer-card h3 {
+    color: var(--primary-ink);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.course-offer-summary,
+.payment-action-copy,
+.payment-method-card p,
+.payment-gateway-panel > p:last-of-type {
+    color: var(--text-muted);
+}
+
+.course-offer-summary {
+    margin: 0;
+}
+
+.course-offer-price {
+    color: var(--accent-deep);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 2px 0 0;
+}
+
+.course-offer-price span {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.course-offer-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.course-offer-actions .btn-primary,
+.course-offer-actions .btn-secondary {
+    width: 100%;
+}
+
+.payment-section {
+    padding-top: 18px;
+}
+
+.payment-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.payment-gateway-panel,
+.payment-action-card {
+    padding: 24px;
+}
+
+.payment-gateway-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.payment-method-card {
+    padding: 18px;
+}
+
+.payment-method-card h4 {
+    color: var(--primary-ink);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-method-card h4 i {
+    color: var(--accent);
+}
+
+.payment-method-card p {
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+.course-builder-section {
+    padding-top: 18px;
+}
+
 .starter-section {
     padding-top: 30px;
 }
@@ -3073,6 +3227,9 @@ button:focus-visible {
     .course-membership-card { grid-template-columns: 1fr; }
     .course-membership-points { grid-template-columns: 1fr; }
     .course-plan-card { position: static; }
+    .course-catalog-grid { grid-template-columns: 1fr; }
+    .payment-layout { grid-template-columns: 1fr; }
+    .payment-gateway-list { grid-template-columns: 1fr; }
     .starter-wrap { grid-template-columns: 1fr; }
     .workflow-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
@@ -3927,7 +4084,11 @@ button:focus-visible {
 
     .course-membership-copy,
     .course-plan-card,
-    .course-point-card {
+    .course-point-card,
+    .course-offer-card,
+    .payment-gateway-panel,
+    .payment-action-card,
+    .payment-method-card {
         padding: 16px;
     }
 }

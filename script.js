@@ -3,6 +3,12 @@ const root = document.documentElement;
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const GA4_MEASUREMENT_ID = "";
+const COURSE_PAYMENT_LINKS = {
+  courseClubMonthly: "",
+  flagshipCourseOneTime: "",
+};
+const COURSE_PAYMENT_FALLBACK =
+  "https://api.whatsapp.com/send?phone=639603780196&text=Hi%2C%20I%20want%20help%20buying%20a%20course%20from%20ClipDevs.";
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 body.classList.add("has-motion-js");
@@ -385,6 +391,7 @@ if (siteSearchForm) {
   const searchEntries = [
     { label: "Home", url: "/", keywords: ["home", "landing", "clipdevs"] },
     { label: "About", url: "/#about", keywords: ["about", "company", "profile"] },
+    { label: "Courses", url: "/courses", keywords: ["courses", "training", "membership", "checkout", "payment"] },
     { label: "Services", url: "/services", keywords: ["service", "offer", "website", "ads", "database"] },
     { label: "Insights", url: "/insights", keywords: ["insight", "strategy", "framework"] },
     { label: "Blog", url: "/blog", keywords: ["blog", "articles", "guides", "posts"] },
@@ -447,6 +454,33 @@ if (siteSearchForm) {
     });
   }
 }
+
+const setupCoursePaymentLinks = () => {
+  const paymentButtons = document.querySelectorAll("[data-payment-link]");
+  if (!paymentButtons.length) return;
+
+  paymentButtons.forEach((button) => {
+    const paymentKey = button.getAttribute("data-payment-link");
+    const checkoutUrl = paymentKey ? COURSE_PAYMENT_LINKS[paymentKey] : "";
+    const destination = checkoutUrl || COURSE_PAYMENT_FALLBACK;
+
+    if (button.tagName === "A") {
+      button.setAttribute("href", destination);
+      button.setAttribute("target", "_blank");
+      button.setAttribute("rel", "noopener noreferrer");
+    }
+
+    button.addEventListener("click", () => {
+      trackAnalyticsEvent("course_checkout_click", {
+        payment_key: paymentKey || "unknown",
+        payment_ready: checkoutUrl ? "yes" : "no",
+        page_path: window.location.pathname || "/",
+      });
+    });
+  });
+};
+
+setupCoursePaymentLinks();
 
 document.querySelectorAll(".btn-primary, .project-link, .contact-button").forEach((element) => {
   element.addEventListener("click", () => {
