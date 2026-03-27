@@ -2,15 +2,15 @@ const COURSE_CATALOG = {
   courseClubMonthly: {
     id: "courseClubMonthly",
     name: "Course Club",
-    description: "Monthly access to the ClipDevs course library and bonus resources.",
+    description: "Monthly subscriber access to the private ClipDevs VOD course library.",
     amount: 99900,
     currency: "PHP",
     paymentMethodTypes: ["gcash", "paymaya", "card"],
   },
   flagshipCourseOneTime: {
     id: "flagshipCourseOneTime",
-    name: "Flagship Course",
-    description: "One-time purchase for the main ClipDevs course offer.",
+    name: "Legacy One-Time Course",
+    description: "Optional one-time course product if ClipDevs later adds a non-subscription offer.",
     amount: 299900,
     currency: "PHP",
     paymentMethodTypes: ["gcash", "paymaya", "card"],

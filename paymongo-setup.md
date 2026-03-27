@@ -72,4 +72,6 @@ Use this for completed payment events so you can later:
 - The backend currently creates checkout sessions but does not yet store orders in a database.
 - The webhook currently verifies the request and logs the event.
 - If PayMongo is not configured yet, the frontend falls back to WhatsApp.
-- Recurring subscription logic may need a separate PayMongo subscription flow if you want true auto-renew billing instead of a one-time monthly payment.
+- The current implementation creates a checkout session for the monthly access product, but subscriber access control still needs a members area or protected content layer.
+- If you want true auto-renew billing with unsubscribe handling, confirm PayMongo's current recurring/subscription product support and wire that flow specifically before promising automatic monthly billing on the live site.
+- Preventing downloads or screen recording fully usually requires protected hosting or DRM-capable delivery, not just website copy.
