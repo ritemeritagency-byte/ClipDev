@@ -8,14 +8,23 @@ It provides the endpoints already expected by the Vercel functions:
 - `GET /api/memberships/status`
 - `POST /api/memberships/unsubscribe`
 - `POST /api/paymongo/webhook`
+- `GET /api/admin/members`
+- `POST /api/admin/revoke`
 - `GET /health`
 
 ## Environment variables
 
 - `DATABASE_URL`
 - `RAILWAY_INTERNAL_SECRET`
+- `ADMIN_EMAILS`
 - `PORT`
 - `PGSSLMODE`
+
+`ADMIN_EMAILS` should be a comma-separated list of admin account emails, for example:
+
+```text
+owner@clipdevs.com,team@clipdevs.com
+```
 
 ## Local run
 

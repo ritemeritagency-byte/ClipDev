@@ -22,6 +22,13 @@ const normalizeAccountType = (value) => {
   if (!normalized) return null;
   return normalized === "recruitment_agency" || normalized === "individual" ? normalized : null;
 };
+const getAdminEmails = () =>
+  String(process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean);
+const isAdminEmail = (email) => getAdminEmails().includes(String(email || "").trim().toLowerCase());
+const getUserRole = (email) => (isAdminEmail(email) ? "admin" : "member");
 
 const requireInternalSecret = (req, res, next) => {
   const expected = process.env.RAILWAY_INTERNAL_SECRET || "";
@@ -114,6 +121,8 @@ const getMemberProfileByEmail = async (client, email) => {
     id: row.user_id,
     email: row.email,
     fullName: row.full_name,
+    role: getUserRole(row.email),
+    isAdmin: isAdminEmail(row.email),
     accountType: row.account_type,
     agencyName: row.agency_name,
     goals: row.goals,
@@ -158,6 +167,134 @@ const getAuthenticatedUser = async (client, req) => {
   );
 
   return result.rows[0];
+};
+
+const getAdminDashboardMembers = async (client) => {
+  const result = await client.query(
+    `
+      with latest_subscription as (
+        select distinct on (s.user_id)
+          s.user_id,
+          s.id,
+          s.status,
+          s.current_period_end,
+          s.created_at,
+          p.plan_code,
+          p.display_name
+        from subscriptions s
+        join subscription_plans p on p.id = s.plan_id
+        order by s.user_id, s.created_at desc
+      ),
+      latest_payment as (
+        select
+          p.user_id,
+          max(coalesce(p.paid_at, p.created_at)) as last_payment_at
+        from payments p
+        group by p.user_id
+      ),
+      latest_session as (
+        select
+          s.user_id,
+          max(s.last_used_at) as last_seen_at
+        from user_sessions s
+        where s.revoked_at is null
+        group by s.user_id
+      )
+      select
+        u.id,
+        u.email,
+        u.full_name,
+        u.account_type,
+        u.agency_name,
+        u.goals,
+        u.avatar_url,
+        u.status as account_status,
+        u.created_at,
+        ls.id as subscription_id,
+        ls.status as subscription_status,
+        ls.current_period_end,
+        ls.plan_code,
+        ls.display_name as plan_name,
+        lp.last_payment_at,
+        lse.last_seen_at,
+        coalesce(
+          json_agg(
+            json_build_object(
+              'courseSlug', ca.course_slug,
+              'accessStatus', ca.access_status,
+              'grantedAt', ca.granted_at,
+              'revokedAt', ca.revoked_at
+            )
+          ) filter (where ca.id is not null),
+          '[]'::json
+        ) as access
+      from users u
+      left join latest_subscription ls on ls.user_id = u.id
+      left join latest_payment lp on lp.user_id = u.id
+      left join latest_session lse on lse.user_id = u.id
+      left join course_access ca on ca.user_id = u.id
+      group by
+        u.id,
+        ls.id,
+        ls.status,
+        ls.current_period_end,
+        ls.plan_code,
+        ls.display_name,
+        lp.last_payment_at,
+        lse.last_seen_at
+      order by u.created_at desc
+    `
+  );
+
+  const members = result.rows.map((row) => ({
+    id: row.id,
+    email: row.email,
+    fullName: row.full_name,
+    role: getUserRole(row.email),
+    isAdmin: isAdminEmail(row.email),
+    accountType: row.account_type,
+    agencyName: row.agency_name,
+    goals: row.goals,
+    avatarUrl: row.avatar_url,
+    accountStatus: row.account_status,
+    createdAt: row.created_at,
+    subscriptionId: row.subscription_id,
+    subscriptionStatus: row.subscription_status,
+    currentPeriodEnd: row.current_period_end,
+    planCode: row.plan_code,
+    planName: row.plan_name,
+    lastPaymentAt: row.last_payment_at,
+    lastSeenAt: row.last_seen_at,
+    access: row.access,
+  }));
+
+  const now = Date.now();
+  const recentSignupThreshold = now - 1000 * 60 * 60 * 24 * 7;
+  const activeMembers = members.filter((member) => member.subscriptionStatus === "active").length;
+  const activeViewers = members.filter((member) =>
+    Array.isArray(member.access) ? member.access.some((item) => item?.accessStatus === "active") : false
+  ).length;
+  const recentSignups = members.filter((member) => {
+    const createdAt = member.createdAt ? new Date(member.createdAt).getTime() : 0;
+    return createdAt >= recentSignupThreshold;
+  }).length;
+
+  return {
+    summary: {
+      totalMembers: members.length,
+      activeMembers,
+      activeViewers,
+      recentSignups,
+    },
+    members,
+  };
+};
+
+const getAuthenticatedAdmin = async (client, req) => {
+  const authUser = await getAuthenticatedUser(client, req);
+  if (!authUser) return { error: "Not authenticated.", status: 401 };
+  if (!isAdminEmail(authUser.email)) return { error: "Admin access required.", status: 403 };
+  return { authUser };
 };
 
 app.use(express.json({ limit: "1mb" }));
@@ -402,6 +539,93 @@ app.get("/api/auth/me", requireInternalSecret, async (req, res) => {
     });
   } catch (error) {
     return json(res, 500, { error: "Unable to fetch account.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.get("/api/admin/members", requireInternalSecret, async (req, res) => {
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    const { authUser, error, status } = await getAuthenticatedAdmin(client, req);
+    if (!authUser) {
+      return json(res, status || 403, { error: error || "Admin access required." });
+    }
+
+    const dashboard = await getAdminDashboardMembers(client);
+    return json(res, 200, {
+      ok: true,
+      summary: dashboard.summary,
+      members: dashboard.members,
+    });
+  } catch (error) {
+    return json(res, 500, { error: "Unable to load admin members.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.post("/api/admin/revoke", requireInternalSecret, async (req, res) => {
+  const userId = String(req.body?.userId || "").trim();
+  if (!userId) {
+    return json(res, 400, { error: "userId is required." });
+  }
+
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    await client.query("begin");
+
+    const { authUser, error, status } = await getAuthenticatedAdmin(client, req);
+    if (!authUser) {
+      await client.query("rollback");
+      return json(res, status || 403, { error: error || "Admin access required." });
+    }
+
+    const subscriptionResult = await client.query(
+      `
+        select id
+        from subscriptions
+        where user_id = $1 and status in ('pending', 'active', 'past_due')
+        order by created_at desc
+        limit 1
+      `,
+      [userId]
+    );
+
+    const subscriptionId = subscriptionResult.rows[0]?.id || null;
+
+    if (subscriptionId) {
+      await client.query(
+        `
+          update subscriptions
+          set status = 'cancelled',
+              cancelled_at = now(),
+              updated_at = now()
+          where id = $1
+        `,
+        [subscriptionId]
+      );
+    }
+
+    await client.query(
+      `
+        update course_access
+        set access_status = 'revoked',
+            revoked_at = now()
+        where user_id = $1 and access_status <> 'revoked'
+      `,
+      [userId]
+    );
+
+    await client.query("commit");
+    return json(res, 200, { ok: true, userId, subscriptionId, status: "revoked" });
+  } catch (error) {
+    await client.query("rollback");
+    return json(res, 500, { error: "Unable to revoke access.", details: error.message });
   } finally {
     client.release();
   }

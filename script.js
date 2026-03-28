@@ -54,6 +54,25 @@ const normalizePath = (value) => {
   return pathname || "/";
 };
 
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const formatDateLabel = (value, fallback = "No recent activity") => {
+  if (!value) return fallback;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return fallback;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+};
+
 const setupSiteIntro = () => {
   if (!body.classList.contains("page-home")) return;
 
@@ -1034,6 +1053,7 @@ const setupAccountPage = () => {
   const saveButton = document.querySelector("[data-account-save]");
   const coursesNode = document.querySelector("[data-account-courses]");
   const avatarPreview = document.querySelector("[data-account-avatar-preview]");
+  const adminCta = document.querySelector("[data-account-admin-cta]");
 
   const setStatus = (message, tone = "") => {
     if (!statusNode) return;
@@ -1117,6 +1137,7 @@ const setupAccountPage = () => {
       }
       if (logoutButton) logoutButton.hidden = false;
       if (saveButton) saveButton.hidden = false;
+      if (adminCta) adminCta.hidden = !user?.isAdmin;
       setStatus("You are logged in.", "is-success");
     } catch (error) {
       if (card) card.hidden = true;
@@ -1126,6 +1147,7 @@ const setupAccountPage = () => {
       }
       if (logoutButton) logoutButton.hidden = true;
       if (saveButton) saveButton.hidden = true;
+      if (adminCta) adminCta.hidden = true;
       setStatus("You are not logged in yet. Log in to view your member profile.", "is-error");
     }
   };
@@ -1208,6 +1230,256 @@ const setupAccountPage = () => {
 };
 
 setupAccountPage();
+
+const setupAdminPage = () => {
+  if (!body.classList.contains("page-admin")) return;
+
+  const statusNode = document.querySelector("[data-admin-status]");
+  const loginCta = document.querySelector("[data-admin-login-cta]");
+  const refreshButton = document.querySelector("[data-admin-refresh]");
+  const shell = document.querySelector("[data-admin-shell]");
+  const searchInput = document.querySelector("[data-admin-search]");
+  const memberList = document.querySelector("[data-admin-member-list]");
+  const emptyState = document.querySelector("[data-admin-empty]");
+  const totalNode = document.querySelector("[data-admin-total]");
+  const activeNode = document.querySelector("[data-admin-active]");
+  const viewersNode = document.querySelector("[data-admin-viewers]");
+  const recentNode = document.querySelector("[data-admin-recent]");
+
+  let members = [];
+  let activeQuery = "";
+
+  const setStatus = (message, tone = "") => {
+    if (!statusNode) return;
+    statusNode.textContent = message;
+    statusNode.classList.remove("is-error", "is-success");
+    if (tone) statusNode.classList.add(tone);
+  };
+
+  const setSummary = (summary = {}) => {
+    if (totalNode) totalNode.textContent = String(summary.totalMembers || 0);
+    if (activeNode) activeNode.textContent = String(summary.activeMembers || 0);
+    if (viewersNode) viewersNode.textContent = String(summary.activeViewers || 0);
+    if (recentNode) recentNode.textContent = String(summary.recentSignups || 0);
+  };
+
+  const getFilteredMembers = () => {
+    const query = activeQuery.trim().toLowerCase();
+    if (!query) return members;
+
+    return members.filter((member) => {
+      const haystack = [
+        member?.fullName,
+        member?.email,
+        member?.agencyName,
+        member?.planName,
+        member?.planCode,
+        member?.subscriptionStatus,
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(query);
+    });
+  };
+
+  const renderMembers = () => {
+    if (!memberList) return;
+
+    const filteredMembers = getFilteredMembers();
+    emptyState.hidden = filteredMembers.length !== 0;
+
+    memberList.innerHTML = filteredMembers
+      .map((member) => {
+        const accessItems = Array.isArray(member?.access) ? member.access : [];
+        const accessMarkup = accessItems.length
+          ? accessItems
+              .map(
+                (item) => `
+                  <span class="admin-access-chip ${item?.accessStatus === "active" ? "is-active" : ""}">
+                    ${escapeHtml(item?.courseSlug || "course")} · ${escapeHtml(item?.accessStatus || "unknown")}
+                  </span>
+                `
+              )
+              .join("")
+          : '<span class="admin-access-chip">No course access</span>';
+
+        const fullName = member?.fullName || "Unnamed member";
+        const initials = escapeHtml(fullName.slice(0, 2).toUpperCase());
+        const agencyLine = member?.agencyName ? `<span>${escapeHtml(member.agencyName)}</span>` : "";
+        const planLabel = member?.planName || member?.planCode || "No plan";
+        const subscriptionStatus = member?.subscriptionStatus || "no subscription";
+        const showRevoke = !member?.isAdmin && (subscriptionStatus === "active" || accessItems.some((item) => item?.accessStatus === "active"));
+
+        return `
+          <article class="admin-member-card">
+            <div class="admin-member-head">
+              <div class="admin-member-avatar" aria-hidden="true">${initials}</div>
+              <div class="admin-member-heading">
+                <div class="admin-member-title-row">
+                  <h3>${escapeHtml(fullName)}</h3>
+                  <div class="admin-member-badges">
+                    <span class="meta-pill">${escapeHtml(member?.role || "member")}</span>
+                    <span class="admin-status-badge ${subscriptionStatus === "active" ? "is-active" : ""}">${escapeHtml(subscriptionStatus)}</span>
+                  </div>
+                </div>
+                <p>${escapeHtml(member?.email || "No email on file")}</p>
+                <div class="admin-member-subline">
+                  <span>${escapeHtml(planLabel)}</span>
+                  ${agencyLine}
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-member-grid">
+              <div class="admin-member-panel">
+                <h4>Account</h4>
+                <p><strong>Type:</strong> ${escapeHtml(member?.accountType || "individual")}</p>
+                <p><strong>Status:</strong> ${escapeHtml(member?.accountStatus || "active")}</p>
+                <p><strong>Joined:</strong> ${escapeHtml(formatDateLabel(member?.createdAt, "Unknown"))}</p>
+                <p><strong>Last seen:</strong> ${escapeHtml(formatDateLabel(member?.lastSeenAt))}</p>
+              </div>
+              <div class="admin-member-panel">
+                <h4>Billing</h4>
+                <p><strong>Plan:</strong> ${escapeHtml(planLabel)}</p>
+                <p><strong>Subscription:</strong> ${escapeHtml(subscriptionStatus)}</p>
+                <p><strong>Current period end:</strong> ${escapeHtml(formatDateLabel(member?.currentPeriodEnd, "Not set"))}</p>
+                <p><strong>Last payment:</strong> ${escapeHtml(formatDateLabel(member?.lastPaymentAt, "No payment yet"))}</p>
+              </div>
+            </div>
+
+            <div class="admin-access-row">
+              ${accessMarkup}
+            </div>
+
+            <div class="admin-member-actions">
+              <a href="mailto:${encodeURIComponent(member?.email || "")}" class="btn-secondary">Email Member</a>
+              ${
+                showRevoke
+                  ? `<button type="button" class="btn-primary admin-revoke-button" data-admin-revoke="${escapeHtml(member?.id || "")}">Revoke Access</button>`
+                  : ""
+              }
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+
+    memberList.querySelectorAll("[data-admin-revoke]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const userId = button.getAttribute("data-admin-revoke") || "";
+        if (!userId) return;
+
+        const confirmed = window.confirm(
+          "Revoke this member's active access and cancel their current subscription?"
+        );
+        if (!confirmed) return;
+
+        const defaultLabel = button.textContent.trim();
+        button.classList.add("is-loading");
+        button.setAttribute("aria-busy", "true");
+        button.textContent = "Revoking...";
+
+        try {
+          const response = await fetch("/api/admin/revoke", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId }),
+          });
+
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(payload?.error || "Unable to revoke access right now.");
+          }
+
+          setStatus("Member access updated successfully.", "is-success");
+          await loadDashboard(true);
+        } catch (error) {
+          setStatus(error.message || "Unable to revoke access right now.", "is-error");
+        } finally {
+          button.classList.remove("is-loading");
+          button.removeAttribute("aria-busy");
+          button.textContent = defaultLabel;
+        }
+      });
+    });
+  };
+
+  const loadDashboard = async (silent = false) => {
+    try {
+      if (!silent) setStatus("Checking admin session...");
+
+      const user = await fetchCurrentUser();
+      if (!user?.isAdmin) {
+        const error = new Error("Admin access required.");
+        error.status = 403;
+        throw error;
+      }
+
+      const response = await fetch("/api/admin/members");
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const error = new Error(payload?.error || "Unable to load the admin dashboard.");
+        error.status = response.status;
+        throw error;
+      }
+
+      members = Array.isArray(payload?.members) ? payload.members : [];
+      setSummary(payload?.summary || {});
+      renderMembers();
+
+      if (loginCta) loginCta.hidden = true;
+      if (refreshButton) refreshButton.hidden = false;
+      if (shell) shell.hidden = false;
+      setStatus(`Admin session confirmed for ${user.fullName || user.email}.`, "is-success");
+    } catch (error) {
+      setSummary();
+      members = [];
+      renderMembers();
+      if (shell) shell.hidden = true;
+
+      if (error.status === 401) {
+        if (loginCta) {
+          loginCta.hidden = false;
+          loginCta.textContent = "Log In";
+        }
+        if (refreshButton) refreshButton.hidden = true;
+        setStatus("Log in with an admin account to open this dashboard.", "is-error");
+        return;
+      }
+
+      if (loginCta) loginCta.hidden = true;
+      if (refreshButton) refreshButton.hidden = false;
+      setStatus(error.message || "Unable to load the admin dashboard.", "is-error");
+    }
+  };
+
+  searchInput?.addEventListener("input", () => {
+    activeQuery = searchInput.value || "";
+    renderMembers();
+  });
+
+  refreshButton?.addEventListener("click", async () => {
+    const defaultLabel = refreshButton.textContent.trim();
+    refreshButton.classList.add("is-loading");
+    refreshButton.setAttribute("aria-busy", "true");
+    refreshButton.textContent = "Refreshing...";
+
+    try {
+      await loadDashboard(true);
+    } finally {
+      refreshButton.classList.remove("is-loading");
+      refreshButton.removeAttribute("aria-busy");
+      refreshButton.textContent = defaultLabel;
+    }
+  });
+
+  loadDashboard();
+};
+
+setupAdminPage();
 
 const setupMemberLibrary = () => {
   if (!body.classList.contains("page-library")) return;

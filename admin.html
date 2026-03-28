@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | ClipDevs</title>
+    <meta name="description" content="ClipDevs admin dashboard for member activity, access, and subscription review.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="canonical" href="https://www.clipdevs.com/admin">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon-cd.svg?v=20260329">
+    <link rel="icon" type="image/png" href="/favicon-48.png?v=20260329" sizes="48x48">
+    <link rel="icon" href="/favicon.ico?v=20260329" sizes="any">
+    <link rel="shortcut icon" href="/favicon.ico?v=20260329">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260329" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#1b74e4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="page-admin">
+    <nav class="navbar">
+        <a href="/" class="logo" aria-label="ClipDevs home"><span class="logo-badge" aria-hidden="true">CD</span><span class="logo-wordmark">ClipDevs</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="site-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/library">Library</a></li>
+            <li><a href="/account">Account</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="nav-search-item">
+                <form class="nav-search" data-site-search role="search" action="/">
+                    <label class="sr-only" for="site-search-input">Search site</label>
+                    <input id="site-search-input" name="q" type="search" placeholder="Search site..." list="site-search-list" autocomplete="off">
+                    <datalist id="site-search-list"></datalist>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="hero-section subpage-hero">
+        <div class="hero-content">
+            <p class="eyebrow">Admin Dashboard</p>
+            <h1>Review member accounts, active access, and recent session activity</h1>
+            <p class="subtitle">This dashboard is for ClipDevs admins only. It gives you one place to review who created accounts, who has active course access, and when members last showed activity.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="container account-section">
+            <div class="payment-layout">
+                <article class="payment-gateway-panel scroll-merge merge-left">
+                    <p class="meta-pill">Admin Session</p>
+                    <h3>Access status</h3>
+                    <p class="course-payment-status" data-admin-status aria-live="polite">Checking admin session...</p>
+                    <div class="course-plan-actions">
+                        <a href="/login" class="btn-primary" data-admin-login-cta>Log In</a>
+                        <button type="button" class="btn-secondary" data-admin-refresh hidden>Refresh Dashboard</button>
+                    </div>
+                </article>
+
+                <aside class="payment-action-card scroll-merge merge-right">
+                    <p class="course-plan-label">Dashboard Summary</p>
+                    <h3>Member overview</h3>
+                    <div class="stats-grid admin-stats-grid">
+                        <article class="stat-card">
+                            <h3 data-admin-total>0</h3>
+                            <p>Total accounts</p>
+                        </article>
+                        <article class="stat-card">
+                            <h3 data-admin-active>0</h3>
+                            <p>Active subscriptions</p>
+                        </article>
+                        <article class="stat-card">
+                            <h3 data-admin-viewers>0</h3>
+                            <p>Active course access</p>
+                        </article>
+                        <article class="stat-card">
+                            <h3 data-admin-recent>0</h3>
+                            <p>New in 7 days</p>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="container admin-directory-section" data-admin-shell hidden>
+            <div class="section-title">
+                <h2>Member Directory</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="admin-toolbar">
+                <label class="course-payment-field admin-search-field">
+                    <span>Search members</span>
+                    <input type="search" placeholder="Search by name, email, or agency" data-admin-search>
+                </label>
+            </div>
+            <div class="admin-member-list" data-admin-member-list></div>
+            <p class="course-payment-status" data-admin-empty hidden>No matching members found.</p>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo" aria-label="ClipDevs home"><span class="logo-badge" aria-hidden="true">CD</span><span class="logo-wordmark">ClipDevs</span></a>
+                <p>Internal ClipDevs administration for member review, subscription monitoring, and access control.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Admin Links</h4>
+                <ul>
+                    <li><a href="/account">Account</a></li>
+                    <li><a href="/library">Library</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com/clipdevs" target="_blank" rel="noopener noreferrer">Messenger</a></li>
+                    <li><a href="mailto:ritemeritagency@gmail.com">ritemeritagency@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ClipDevs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1259,6 +1259,78 @@ body.nav-open .nav-toggle span:nth-child(3) {
     box-shadow: 0 16px 32px rgba(13, 27, 42, 0.06);
 }
 
+.course-offer-rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    color: #8c4c09;
+}
+
+.course-offer-rating-score {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #7b3f00;
+}
+
+.course-offer-rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d97706;
+    font-size: 0.96rem;
+}
+
+.course-offer-rating-note {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    font-weight: 600;
+}
+
+.course-offer-price-stack {
+    display: grid;
+    gap: 6px;
+}
+
+.course-offer-compare {
+    margin: 0;
+    color: #6c7390;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(108, 115, 144, 0.78);
+}
+
+.course-offer-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.course-offer-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.course-offer-badge.is-premium {
+    background: linear-gradient(135deg, #4f2bd5 0%, #6728c7 100%);
+    color: #f8f6ff;
+    box-shadow: 0 14px 24px rgba(88, 53, 201, 0.24);
+}
+
+.course-offer-badge.is-featured {
+    background: linear-gradient(135deg, #c4eef3 0%, #b6e7ef 100%);
+    color: #0f5368;
+}
+
 .course-showcase-side-copy {
     color: var(--text-muted);
 }
@@ -1621,6 +1693,10 @@ body.modal-open {
 
 .payment-price-block .course-plan-price {
     margin: 0;
+}
+
+.payment-offer-rating {
+    margin-bottom: 12px;
 }
 
 .payment-price-note {
@@ -5655,6 +5731,23 @@ button:focus-visible {
         font-size: 1.7rem;
     }
 
+    .course-offer-rating {
+        gap: 8px;
+    }
+
+    .course-offer-rating-score {
+        font-size: 1rem;
+    }
+
+    .course-offer-rating-note,
+    .course-offer-compare {
+        font-size: 0.9rem;
+    }
+
+    .course-offer-badge {
+        width: 100%;
+    }
+
     .course-plan-actions .btn-primary,
     .course-plan-actions .btn-secondary,
     .course-plan-actions button.btn-primary,
@@ -5690,5 +5783,178 @@ button:focus-visible {
     .payment-action-card,
     .payment-method-card {
         padding: 16px;
+    }
+}
+
+.admin-directory-section {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 72px;
+}
+
+.admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+}
+
+.admin-search-field {
+    max-width: 420px;
+    width: 100%;
+}
+
+.admin-member-list {
+    display: grid;
+    gap: 18px;
+}
+
+.admin-member-card {
+    padding: 26px;
+    border-radius: 28px;
+    border: 1px solid rgba(27, 116, 228, 0.12);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(242, 247, 255, 0.96) 100%);
+    box-shadow: 0 22px 55px rgba(15, 23, 42, 0.08);
+    display: grid;
+    gap: 18px;
+}
+
+.admin-member-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.admin-member-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1b74e4, #6fa3ff);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.admin-member-heading {
+    display: grid;
+    gap: 8px;
+}
+
+.admin-member-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-member-title-row h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admin-member-heading p,
+.admin-member-panel p {
+    margin: 0;
+    color: #60708f;
+}
+
+.admin-member-badges,
+.admin-member-subline,
+.admin-access-row,
+.admin-member-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.admin-member-subline {
+    color: #7c8aa5;
+    font-size: 0.95rem;
+}
+
+.admin-status-badge,
+.admin-access-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    background: rgba(20, 29, 49, 0.06);
+    color: #24324d;
+}
+
+.admin-status-badge.is-active,
+.admin-access-chip.is-active {
+    background: rgba(27, 116, 228, 0.12);
+    color: #1b74e4;
+}
+
+.admin-member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.admin-member-panel {
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(20, 29, 49, 0.06);
+    display: grid;
+    gap: 10px;
+}
+
+.admin-member-panel h4 {
+    margin: 0;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #60708f;
+}
+
+.admin-revoke-button {
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .admin-stats-grid,
+    .admin-member-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-member-card {
+        padding: 20px;
+        border-radius: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-toolbar,
+    .admin-member-head {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    .admin-member-actions .btn-primary,
+    .admin-member-actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .admin-member-panel {
+        padding: 14px 16px;
     }
 }

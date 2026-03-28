@@ -10,6 +10,7 @@
     { "source": "/library.html", "destination": "/library", "permanent": true },
     { "source": "/login.html", "destination": "/login", "permanent": true },
     { "source": "/account.html", "destination": "/account", "permanent": true },
+    { "source": "/admin.html", "destination": "/admin", "permanent": true },
     { "source": "/privacy.html", "destination": "/privacy", "permanent": true },
     { "source": "/terms.html", "destination": "/terms", "permanent": true },
     { "source": "/talent-terms.html", "destination": "/talent-terms", "permanent": true },
