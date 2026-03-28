@@ -1381,7 +1381,7 @@ const setupAdminPage = () => {
         button.textContent = "Revoking...";
 
         try {
-          const response = await fetch("/api/admin/revoke", {
+      const response = await fetch("/api/admin", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -1418,7 +1418,7 @@ const setupAdminPage = () => {
         throw error;
       }
 
-      const response = await fetch("/api/admin/members");
+      const response = await fetch("/api/admin");
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         const error = new Error(payload?.error || "Unable to load the admin dashboard.");
