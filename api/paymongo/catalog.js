@@ -5,7 +5,7 @@ const COURSE_CATALOG = {
     description: "Monthly subscriber access to the private ClipDevs VOD course library.",
     amount: 99900,
     currency: "PHP",
-    paymentMethodTypes: ["gcash", "paymaya", "card"],
+    paymentMethodTypes: ["qrph"],
   },
   flagshipCourseOneTime: {
     id: "flagshipCourseOneTime",
@@ -13,7 +13,7 @@ const COURSE_CATALOG = {
     description: "Optional one-time course product if ClipDevs later adds a non-subscription offer.",
     amount: 299900,
     currency: "PHP",
-    paymentMethodTypes: ["gcash", "paymaya", "card"],
+    paymentMethodTypes: ["qrph"],
   },
 };
 
