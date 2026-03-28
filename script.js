@@ -547,6 +547,8 @@ const setupCoursePaymentLinks = () => {
   paymentButtons.forEach((button) => {
     const paymentKey = button.getAttribute("data-payment-link");
     const defaultLabel = (button.textContent || "").trim();
+    const form = button.closest("[data-course-payment-form]");
+    const statusNode = form?.querySelector("[data-course-payment-status]") || null;
 
     if (button.tagName === "A") {
       button.setAttribute("href", "#");
@@ -561,8 +563,24 @@ const setupCoursePaymentLinks = () => {
         page_path: window.location.pathname || "/",
       });
 
+      if (statusNode) {
+        statusNode.textContent = "";
+        statusNode.classList.remove("is-error", "is-success");
+      }
+
       if (!paymentKey) {
         window.location.href = COURSE_PAYMENT_FALLBACK;
+        return;
+      }
+
+      const fullName = (form?.querySelector('input[name="fullName"]')?.value || "").trim();
+      const email = (form?.querySelector('input[name="email"]')?.value || "").trim().toLowerCase();
+
+      if (!fullName || !email || !email.includes("@")) {
+        if (statusNode) {
+          statusNode.textContent = "Enter your full name and a valid email before checkout.";
+          statusNode.classList.add("is-error");
+        }
         return;
       }
 
@@ -571,12 +589,33 @@ const setupCoursePaymentLinks = () => {
       button.textContent = "Opening checkout...";
 
       try {
+        const memberResponse = await fetch("/api/memberships/start", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            fullName,
+            planCode: paymentKey,
+          }),
+        });
+
+        const memberPayload = await memberResponse.json().catch(() => ({}));
+        if (!memberResponse.ok) {
+          throw new Error(memberPayload?.error || "Unable to prepare your course access.");
+        }
+
         const response = await fetch("/api/paymongo/create-checkout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ courseId: paymentKey }),
+          body: JSON.stringify({
+            courseId: paymentKey,
+            email,
+            fullName,
+          }),
         });
 
         const payload = await response.json().catch(() => ({}));
@@ -589,7 +628,12 @@ const setupCoursePaymentLinks = () => {
         window.location.href = checkoutUrl;
       } catch (error) {
         console.error("PayMongo checkout failed:", error);
-        window.location.href = COURSE_PAYMENT_FALLBACK;
+        if (statusNode) {
+          statusNode.textContent = error.message || "Unable to open checkout right now.";
+          statusNode.classList.add("is-error");
+        } else {
+          window.location.href = COURSE_PAYMENT_FALLBACK;
+        }
       } finally {
         button.classList.remove("is-loading");
         button.removeAttribute("aria-busy");

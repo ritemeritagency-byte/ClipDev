@@ -179,20 +179,33 @@
                 </div>
 
                 <aside class="payment-action-card scroll-merge merge-right">
-                    <p class="course-plan-label">Recommended setup</p>
-                    <h3>PayMongo plus gated access</h3>
-                    <p class="payment-action-copy">The backend can create checkout sessions securely, but checkout should go live only when your VOD course library and subscriber access flow are ready.</p>
+                    <p class="course-plan-label">Open for early access</p>
+                    <h3>Start your Course Club access now</h3>
+                    <p class="payment-action-copy">Use this checkout form to open PayMongo with your buyer details already attached, so we can match payment to course access cleanly once the webhook confirms the payment.</p>
                     <ul class="doc-expertise-list">
-                        <li>Uses a server-side endpoint to create each checkout session</li>
+                        <li>PHP 999 monthly access for the private VOD library</li>
                         <li>Good fit for GCash, Maya, and card payments through PayMongo</li>
-                        <li>Includes a webhook endpoint for paid-event handling later</li>
-                        <li>Still needs protected video delivery for stricter viewing control</li>
+                        <li>Buyer name and email are passed into the checkout flow</li>
+                        <li>Access can be activated after the paid webhook is confirmed</li>
                     </ul>
+                    <form class="course-payment-form" data-course-payment-form>
+                        <label class="course-payment-field">
+                            <span>Full name</span>
+                            <input type="text" name="fullName" placeholder="Your full name" autocomplete="name" required>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Email address</span>
+                            <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                        </label>
+                        <p class="course-payment-status" data-course-payment-status aria-live="polite"></p>
+                        <div class="course-plan-actions">
+                            <button type="submit" class="btn-primary" data-payment-link="courseClubMonthly">Pay with PayMongo</button>
+                        </div>
+                    </form>
                     <div class="course-plan-actions">
-                        <a href="https://api.whatsapp.com/send?phone=639603780196&text=Hi%2C%20I%20want%20to%20get%20notified%20when%20the%20ClipDevs%20courses%20go%20live." target="_blank" rel="noopener noreferrer" class="btn-primary">Join Launch Waitlist</a>
                         <a href="#course-catalog" class="btn-secondary">Review Courses</a>
                     </div>
-                    <p class="course-plan-note">PayMongo can stay in place behind the scenes now, then go live when the VOD training is ready for subscribers.</p>
+                    <p class="course-plan-note">You will be redirected to PayMongo to complete the payment with GCash, Maya, or card. Course access should only be unlocked after the paid webhook is received.</p>
                 </aside>
             </div>
         </section>

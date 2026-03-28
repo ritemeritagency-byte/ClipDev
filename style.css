@@ -1027,7 +1027,8 @@ body.nav-open .nav-toggle span:nth-child(3) {
 }
 
 .course-plan-actions .btn-primary,
-.course-plan-actions .btn-secondary {
+.course-plan-actions .btn-secondary,
+.course-plan-actions button.btn-primary {
     width: 100%;
 }
 
@@ -1146,6 +1147,55 @@ body.nav-open .nav-toggle span:nth-child(3) {
 .payment-gateway-panel,
 .payment-action-card {
     padding: 24px;
+}
+
+.course-payment-form {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.course-payment-field {
+    display: grid;
+    gap: 8px;
+}
+
+.course-payment-field span {
+    color: var(--primary-ink);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.course-payment-field input {
+    width: 100%;
+    border: 1px solid rgba(17, 38, 61, 0.16);
+    border-radius: 14px;
+    padding: 13px 14px;
+    font: inherit;
+    color: var(--primary-ink);
+    background: #f9fbfd;
+}
+
+.course-payment-field input:focus {
+    outline: none;
+    border-color: rgba(22, 121, 171, 0.45);
+    box-shadow: 0 0 0 4px rgba(22, 121, 171, 0.12);
+    background: #ffffff;
+}
+
+.course-payment-status {
+    min-height: 1.25rem;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.course-payment-status.is-error {
+    color: #aa3a2a;
+}
+
+.course-payment-status.is-success {
+    color: #1d5a36;
 }
 
 .payment-gateway-list {

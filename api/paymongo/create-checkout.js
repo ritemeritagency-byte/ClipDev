@@ -29,6 +29,14 @@ module.exports = async (req, res) => {
     return sendJson(res, 400, { error: "Unknown course selection." });
   }
 
+  if (!customerEmail || !customerEmail.includes("@")) {
+    return sendJson(res, 400, { error: "Valid customer email is required." });
+  }
+
+  if (!customerName) {
+    return sendJson(res, 400, { error: "Customer full name is required." });
+  }
+
   const baseUrl = getBaseUrl(req);
   const successUrl = `${baseUrl}/courses?payment=success&course=${encodeURIComponent(course.id)}`;
   const cancelUrl = `${baseUrl}/courses?payment=cancelled&course=${encodeURIComponent(course.id)}`;
@@ -60,6 +68,8 @@ module.exports = async (req, res) => {
             metadata: {
               course_id: course.id,
               course_name: course.name,
+              customer_email: customerEmail,
+              full_name: customerName,
             },
             show_description: true,
             show_line_items: true,
