@@ -1193,7 +1193,27 @@ body.nav-open .nav-toggle span:nth-child(3) {
     background: #f9fbfd;
 }
 
+.course-payment-field select,
+.course-payment-field textarea {
+    width: 100%;
+    border: 1px solid rgba(17, 38, 61, 0.16);
+    border-radius: 14px;
+    padding: 13px 14px;
+    font: inherit;
+    color: var(--primary-ink);
+    background: #f9fbfd;
+    resize: vertical;
+}
+
 .course-payment-field input:focus {
+    outline: none;
+    border-color: rgba(22, 121, 171, 0.45);
+    box-shadow: 0 0 0 4px rgba(22, 121, 171, 0.12);
+    background: #ffffff;
+}
+
+.course-payment-field select:focus,
+.course-payment-field textarea:focus {
     outline: none;
     border-color: rgba(22, 121, 171, 0.45);
     box-shadow: 0 0 0 4px rgba(22, 121, 171, 0.12);
@@ -1251,6 +1271,77 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin: 0;
     color: var(--primary-ink);
     font-weight: 600;
+}
+
+.profile-photo-uploader {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+}
+
+.profile-photo-preview {
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #dbeeff, #b9d8ff);
+    color: var(--primary-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+}
+
+.profile-photo-preview-large {
+    width: 96px;
+    height: 96px;
+    border-radius: 28px;
+    font-size: 1.55rem;
+}
+
+.profile-photo-preview.has-image {
+    color: transparent;
+}
+
+.profile-photo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profile-photo-button {
+    cursor: pointer;
+}
+
+.account-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.account-profile-copy {
+    display: grid;
+    gap: 6px;
+}
+
+.account-profile-copy h4 {
+    margin: 0;
+    color: var(--primary-ink);
+}
+
+.account-profile-copy p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.account-courses-list {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
 .library-shell-grid {

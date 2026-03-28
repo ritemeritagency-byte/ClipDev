@@ -5,10 +5,19 @@ create table if not exists users (
     email text not null unique,
     full_name text not null,
     password_hash text,
+    account_type text check (account_type in ('recruitment_agency', 'individual')),
+    agency_name text,
+    goals text,
+    avatar_url text,
     status text not null default 'active' check (status in ('active', 'disabled')),
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );
+
+alter table users add column if not exists account_type text check (account_type in ('recruitment_agency', 'individual'));
+alter table users add column if not exists agency_name text;
+alter table users add column if not exists goals text;
+alter table users add column if not exists avatar_url text;
 
 create table if not exists subscription_plans (
     id uuid primary key default gen_random_uuid(),

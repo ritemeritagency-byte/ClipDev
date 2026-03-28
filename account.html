@@ -53,25 +53,60 @@
                     <h3>Member profile</h3>
                     <p class="course-payment-status" data-account-status aria-live="polite">Checking your account...</p>
                     <div class="membership-result-card" data-account-card hidden>
-                        <h4>Profile Summary</h4>
-                        <dl class="membership-result-list">
-                            <div>
-                                <dt>Name</dt>
-                                <dd data-account-name>Unknown</dd>
+                        <div class="account-profile-header">
+                            <div class="profile-photo-preview profile-photo-preview-large" data-account-avatar-preview aria-hidden="true">CD</div>
+                            <div class="account-profile-copy">
+                                <h4 data-account-name>Unknown</h4>
+                                <p data-account-email>Unknown</p>
+                                <span class="meta-pill" data-account-plan-badge>Status unknown</span>
                             </div>
-                            <div>
-                                <dt>Email</dt>
-                                <dd data-account-email>Unknown</dd>
+                        </div>
+                        <form class="course-payment-form" data-account-profile-form>
+                            <div class="profile-photo-actions">
+                                <label class="btn-secondary profile-photo-button">
+                                    <input type="file" name="avatarFile" accept="image/*" data-avatar-input hidden>
+                                    Change photo
+                                </label>
                             </div>
-                            <div>
-                                <dt>Plan</dt>
-                                <dd data-account-plan>Status unknown</dd>
+                            <input type="hidden" name="avatarUrl">
+                            <label class="course-payment-field">
+                                <span>Full name</span>
+                                <input type="text" name="fullName" placeholder="Your full name" required>
+                            </label>
+                            <label class="course-payment-field">
+                                <span>Email</span>
+                                <input type="email" name="email" readonly>
+                            </label>
+                            <label class="course-payment-field">
+                                <span>Account type</span>
+                                <select name="accountType" required>
+                                    <option value="individual">Individual</option>
+                                    <option value="recruitment_agency">Recruitment Agency</option>
+                                </select>
+                            </label>
+                            <label class="course-payment-field" data-agency-field hidden>
+                                <span>Agency name</span>
+                                <input type="text" name="agencyName" placeholder="Your agency name">
+                            </label>
+                            <label class="course-payment-field">
+                                <span>What do you want from ClipDevs?</span>
+                                <textarea name="goals" rows="4" placeholder="Tell us what you want to learn, build, or improve."></textarea>
+                            </label>
+                            <dl class="membership-result-list">
+                                <div>
+                                    <dt>Membership</dt>
+                                    <dd data-account-plan>Status unknown</dd>
+                                </div>
+                                <div>
+                                    <dt>Access</dt>
+                                    <dd data-account-access>Locked</dd>
+                                </div>
+                            </dl>
+                            <p class="course-payment-status" data-account-profile-status aria-live="polite"></p>
+                            <div class="course-plan-actions">
+                                <button type="submit" class="btn-primary" data-account-save hidden>Save Profile</button>
                             </div>
-                            <div>
-                                <dt>Access</dt>
-                                <dd data-account-access>Locked</dd>
-                            </div>
-                        </dl>
+                        </form>
                     </div>
                     <div class="course-plan-actions">
                         <a href="/login" class="btn-primary" data-account-login-cta>Log In</a>
@@ -80,19 +115,22 @@
                 </article>
 
                 <article class="payment-action-card scroll-merge merge-right">
-                    <p class="course-plan-label">Next steps</p>
-                    <h3>Move into the library or manage membership</h3>
-                    <ul class="doc-expertise-list">
-                        <li>Open the member library if your subscription is active</li>
-                        <li>Use the same checkout email for the cleanest membership match</li>
-                        <li>Check or cancel subscription from the courses page</li>
-                        <li>Future profile tools can live here later</li>
-                    </ul>
+                    <p class="course-plan-label">My Courses</p>
+                    <h3>Courses and library access</h3>
+                    <div class="account-courses-list" data-account-courses>
+                        <article class="library-course-card">
+                            <div class="library-course-meta">
+                                <h4>Course Club Library</h4>
+                                <span>Waiting</span>
+                            </div>
+                            <p>Your active membership will unlock the current and future training tracks here.</p>
+                        </article>
+                    </div>
                     <div class="course-plan-actions">
                         <a href="/library" class="btn-primary">Open Library</a>
                         <a href="/courses#payment-options" class="btn-secondary">Manage Membership</a>
                     </div>
-                    <p class="course-plan-note">This is the first profile page for Course Club. Progress tracking, lesson history, and richer account controls can be added later.</p>
+                    <p class="course-plan-note">This profile now supports account type, agency details, goals, and a profile photo. Progress tracking and lesson history can be added next.</p>
                 </article>
             </div>
         </section>

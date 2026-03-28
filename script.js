@@ -783,6 +783,58 @@ const fetchCurrentUser = async () => {
   return payload.user || null;
 };
 
+const updateAvatarPreview = (previewNode, value, fallbackText = "CD") => {
+  if (!previewNode) return;
+  const trimmed = String(value || "").trim();
+  if (trimmed) {
+    previewNode.style.backgroundImage = `url("${trimmed}")`;
+    previewNode.textContent = "";
+    previewNode.classList.add("has-image");
+  } else {
+    previewNode.style.backgroundImage = "";
+    previewNode.textContent = fallbackText;
+    previewNode.classList.remove("has-image");
+  }
+};
+
+const bindAvatarUploader = (form, options = {}) => {
+  if (!form) return;
+  const fileInput = form.querySelector("[data-avatar-input]");
+  const hiddenInput = form.querySelector('input[name="avatarUrl"]');
+  const previewNode = form.querySelector(options.previewSelector || "[data-avatar-preview]");
+  const fallbackText = options.fallbackText || "CD";
+
+  if (hiddenInput) updateAvatarPreview(previewNode, hiddenInput.value, fallbackText);
+
+  fileInput?.addEventListener("change", () => {
+    const file = fileInput.files?.[0];
+    if (!file || !hiddenInput) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      hiddenInput.value = String(reader.result || "");
+      updateAvatarPreview(previewNode, hiddenInput.value, fallbackText);
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+const bindAccountTypeVisibility = (form) => {
+  if (!form) return;
+  const select = form.querySelector('select[name="accountType"]');
+  const agencyField = form.querySelector("[data-agency-field]");
+  const agencyInput = agencyField?.querySelector('input[name="agencyName"]') || null;
+
+  const sync = () => {
+    const isAgency = (select?.value || "") === "recruitment_agency";
+    if (agencyField) agencyField.hidden = !isAgency;
+    if (!isAgency && agencyInput) agencyInput.value = "";
+  };
+
+  select?.addEventListener("change", sync);
+  sync();
+};
+
 const formatMembershipAccess = (member) => {
   const accessItems = Array.isArray(member?.access) ? member.access : [];
   const activeAccess = accessItems.filter((item) => item?.accessStatus === "active");
@@ -860,6 +912,10 @@ const setupAuthForms = () => {
       fullName: (form.querySelector('input[name="fullName"]')?.value || "").trim(),
       email: (form.querySelector('input[name="email"]')?.value || "").trim().toLowerCase(),
       password: String(form.querySelector('input[name="password"]')?.value || ""),
+      accountType: String(form.querySelector('select[name="accountType"]')?.value || ""),
+      agencyName: (form.querySelector('input[name="agencyName"]')?.value || "").trim(),
+      goals: String(form.querySelector('select[name="goals"]')?.value || "").trim(),
+      avatarUrl: String(form.querySelector('input[name="avatarUrl"]')?.value || "").trim(),
     }),
   });
 
@@ -875,6 +931,9 @@ const setupAuthForms = () => {
       password: String(form.querySelector('input[name="password"]')?.value || ""),
     }),
   });
+
+  bindAvatarUploader(signupForm, { previewSelector: "[data-signup-avatar-preview]" });
+  bindAccountTypeVisibility(signupForm);
 };
 
 setupAuthForms();
@@ -888,8 +947,14 @@ const setupAccountPage = () => {
   const logoutButton = document.querySelector("[data-account-logout]");
   const nameNode = document.querySelector("[data-account-name]");
   const emailNode = document.querySelector("[data-account-email]");
+  const planBadgeNode = document.querySelector("[data-account-plan-badge]");
   const planNode = document.querySelector("[data-account-plan]");
   const accessNode = document.querySelector("[data-account-access]");
+  const profileForm = document.querySelector("[data-account-profile-form]");
+  const profileStatusNode = document.querySelector("[data-account-profile-status]");
+  const saveButton = document.querySelector("[data-account-save]");
+  const coursesNode = document.querySelector("[data-account-courses]");
+  const avatarPreview = document.querySelector("[data-account-avatar-preview]");
 
   const setStatus = (message, tone = "") => {
     if (!statusNode) return;
@@ -903,18 +968,76 @@ const setupAccountPage = () => {
       const user = await fetchCurrentUser();
       if (nameNode) nameNode.textContent = user?.fullName || "Unknown";
       if (emailNode) emailNode.textContent = user?.email || "Unknown";
+      if (planBadgeNode) planBadgeNode.textContent = user?.planName || user?.planCode || "Member";
       if (planNode) {
         planNode.textContent = user?.subscriptionStatus
           ? `${user.subscriptionStatus} (${user.planName || user.planCode || "Course Club"})`
           : "No subscription found";
       }
       if (accessNode) accessNode.textContent = formatMembershipAccess(user);
+      updateAvatarPreview(avatarPreview, user?.avatarUrl, (user?.fullName || "CD").slice(0, 2).toUpperCase());
+
+      if (profileForm) {
+        const fullNameInput = profileForm.querySelector('input[name="fullName"]');
+        const emailInput = profileForm.querySelector('input[name="email"]');
+        const accountTypeInput = profileForm.querySelector('select[name="accountType"]');
+        const agencyNameInput = profileForm.querySelector('input[name="agencyName"]');
+        const goalsInput = profileForm.querySelector('textarea[name="goals"]');
+        const avatarUrlInput = profileForm.querySelector('input[name="avatarUrl"]');
+
+        if (fullNameInput) fullNameInput.value = user?.fullName || "";
+        if (emailInput) emailInput.value = user?.email || "";
+        if (accountTypeInput) accountTypeInput.value = user?.accountType || "individual";
+        if (agencyNameInput) agencyNameInput.value = user?.agencyName || "";
+        if (goalsInput) goalsInput.value = user?.goals || "";
+        if (avatarUrlInput) avatarUrlInput.value = user?.avatarUrl || "";
+        bindAccountTypeVisibility(profileForm);
+      }
+
+      if (coursesNode) {
+        const courses = [];
+        const accessItems = Array.isArray(user?.access) ? user.access : [];
+        if (accessItems.length) {
+          accessItems.forEach((item) => {
+            courses.push({
+              title: item.courseSlug === "course-club" ? "Course Club Library" : item.courseSlug,
+              status: item.accessStatus || "unknown",
+              copy:
+                item.accessStatus === "active"
+                  ? "Your membership currently unlocks this library."
+                  : "This course access is not active yet.",
+            });
+          });
+        } else {
+          courses.push({
+            title: "Course Club Library",
+            status: user?.subscriptionStatus || "waiting",
+            copy: "Your active membership will unlock the current and future training tracks here.",
+          });
+        }
+
+        coursesNode.innerHTML = courses
+          .map(
+            (course) => `
+              <article class="library-course-card">
+                <div class="library-course-meta">
+                  <h4>${course.title}</h4>
+                  <span>${course.status}</span>
+                </div>
+                <p>${course.copy}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
       if (card) card.hidden = false;
       if (loginCta) {
         loginCta.hidden = true;
         loginCta.textContent = "Log In";
       }
       if (logoutButton) logoutButton.hidden = false;
+      if (saveButton) saveButton.hidden = false;
       setStatus("You are logged in.", "is-success");
     } catch (error) {
       if (card) card.hidden = true;
@@ -923,9 +1046,68 @@ const setupAccountPage = () => {
         loginCta.textContent = "Log In";
       }
       if (logoutButton) logoutButton.hidden = true;
+      if (saveButton) saveButton.hidden = true;
       setStatus("You are not logged in yet. Log in to view your member profile.", "is-error");
     }
   };
+
+  bindAvatarUploader(profileForm, { previewSelector: "[data-account-avatar-preview]" });
+  bindAccountTypeVisibility(profileForm);
+
+  profileForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (profileStatusNode) {
+      profileStatusNode.textContent = "";
+      profileStatusNode.classList.remove("is-error", "is-success");
+    }
+
+    const defaultLabel = saveButton?.textContent || "Save Profile";
+    if (saveButton) {
+      saveButton.classList.add("is-loading");
+      saveButton.setAttribute("aria-busy", "true");
+      saveButton.textContent = "Saving...";
+    }
+
+    try {
+      const response = await fetch("/api/auth/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: (profileForm.querySelector('input[name="fullName"]')?.value || "").trim(),
+          accountType: String(profileForm.querySelector('select[name="accountType"]')?.value || ""),
+          agencyName: (profileForm.querySelector('input[name="agencyName"]')?.value || "").trim(),
+          goals: (profileForm.querySelector('textarea[name="goals"]')?.value || "").trim(),
+          avatarUrl: String(profileForm.querySelector('input[name="avatarUrl"]')?.value || "").trim(),
+        }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload?.error || "Unable to save profile right now.");
+      }
+
+      if (profileStatusNode) {
+        profileStatusNode.textContent = "Profile updated successfully.";
+        profileStatusNode.classList.add("is-success");
+      }
+
+      await loadAccount();
+    } catch (error) {
+      if (profileStatusNode) {
+        profileStatusNode.textContent = error.message || "Unable to save profile right now.";
+        profileStatusNode.classList.add("is-error");
+      }
+    } finally {
+      if (saveButton) {
+        saveButton.classList.remove("is-loading");
+        saveButton.removeAttribute("aria-busy");
+        saveButton.textContent = defaultLabel;
+      }
+    }
+  });
 
   logoutButton?.addEventListener("click", async () => {
     logoutButton.classList.add("is-loading");

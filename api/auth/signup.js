@@ -11,12 +11,20 @@ module.exports = async (req, res) => {
   const email = (req.body?.email || "").trim().toLowerCase();
   const fullName = (req.body?.fullName || "").trim();
   const password = String(req.body?.password || "");
+  const accountType = String(req.body?.accountType || "").trim();
+  const agencyName = (req.body?.agencyName || "").trim();
+  const goals = (req.body?.goals || "").trim();
+  const avatarUrl = String(req.body?.avatarUrl || "").trim();
 
   try {
     const railwayResponse = await forwardToRailway("/api/auth/signup", {
       email,
       fullName,
       password,
+      accountType,
+      agencyName,
+      goals,
+      avatarUrl,
     });
 
     const sessionToken = railwayResponse.payload?.sessionToken;

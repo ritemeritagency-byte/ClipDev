@@ -17,6 +17,11 @@ const PLAN_TO_COURSE = {
 };
 
 const json = (res, status, payload) => res.status(status).json(payload);
+const normalizeAccountType = (value) => {
+  const normalized = String(value || "").trim().toLowerCase();
+  if (!normalized) return null;
+  return normalized === "recruitment_agency" || normalized === "individual" ? normalized : null;
+};
 
 const requireInternalSecret = (req, res, next) => {
   const expected = process.env.RAILWAY_INTERNAL_SECRET || "";
@@ -70,6 +75,10 @@ const getMemberProfileByEmail = async (client, email) => {
         u.id as user_id,
         u.email,
         u.full_name,
+        u.account_type,
+        u.agency_name,
+        u.goals,
+        u.avatar_url,
         u.status as account_status,
         s.id as subscription_id,
         s.status as subscription_status,
@@ -105,6 +114,10 @@ const getMemberProfileByEmail = async (client, email) => {
     id: row.user_id,
     email: row.email,
     fullName: row.full_name,
+    accountType: row.account_type,
+    agencyName: row.agency_name,
+    goals: row.goals,
+    avatarUrl: row.avatar_url,
     accountStatus: row.account_status,
     subscriptionId: row.subscription_id,
     subscriptionStatus: row.subscription_status,
@@ -163,6 +176,10 @@ app.post("/api/auth/signup", requireInternalSecret, async (req, res) => {
   const email = String(req.body?.email || "").trim().toLowerCase();
   const fullName = String(req.body?.fullName || "").trim();
   const password = String(req.body?.password || "");
+  const accountType = normalizeAccountType(req.body?.accountType);
+  const agencyName = String(req.body?.agencyName || "").trim();
+  const goals = String(req.body?.goals || "").trim();
+  const avatarUrl = String(req.body?.avatarUrl || "").trim();
 
   if (!email || !email.includes("@")) {
     return json(res, 400, { error: "Valid email is required." });
@@ -203,6 +220,18 @@ app.post("/api/auth/signup", requireInternalSecret, async (req, res) => {
         [email, fullName, hashPassword(password)]
       );
       userId = createdUser.rows[0].id;
+      await client.query(
+        `
+          update users
+          set account_type = $2,
+              agency_name = $3,
+              goals = $4,
+              avatar_url = $5,
+              updated_at = now()
+          where id = $1
+        `,
+        [userId, accountType, agencyName || null, goals || null, avatarUrl || null]
+      );
     } else {
       const user = existingUser.rows[0];
       if (user.password_hash) {
@@ -215,10 +244,14 @@ app.post("/api/auth/signup", requireInternalSecret, async (req, res) => {
           update users
           set full_name = $2,
               password_hash = $3,
+              account_type = coalesce($4, account_type),
+              agency_name = $5,
+              goals = $6,
+              avatar_url = $7,
               updated_at = now()
           where id = $1
         `,
-        [user.id, fullName, hashPassword(password)]
+        [user.id, fullName, hashPassword(password), accountType, agencyName || null, goals || null, avatarUrl || null]
       );
       userId = user.id;
     }
@@ -236,6 +269,55 @@ app.post("/api/auth/signup", requireInternalSecret, async (req, res) => {
   } catch (error) {
     await client.query("rollback");
     return json(res, 500, { error: "Unable to create account.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.post("/api/auth/profile", requireInternalSecret, async (req, res) => {
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    await client.query("begin");
+
+    const authUser = await getAuthenticatedUser(client, req);
+    if (!authUser) {
+      await client.query("rollback");
+      return json(res, 401, { error: "Not authenticated." });
+    }
+
+    const fullName = String(req.body?.fullName || "").trim();
+    const accountType = normalizeAccountType(req.body?.accountType);
+    const agencyName = String(req.body?.agencyName || "").trim();
+    const goals = String(req.body?.goals || "").trim();
+    const avatarUrl = String(req.body?.avatarUrl || "").trim();
+
+    if (!fullName) {
+      await client.query("rollback");
+      return json(res, 400, { error: "Full name is required." });
+    }
+
+    await client.query(
+      `
+        update users
+        set full_name = $2,
+            account_type = $3,
+            agency_name = $4,
+            goals = $5,
+            avatar_url = $6,
+            updated_at = now()
+        where id = $1
+      `,
+      [authUser.id, fullName, accountType, agencyName || null, goals || null, avatarUrl || null]
+    );
+
+    const user = await getMemberProfileByEmail(client, authUser.email);
+    await client.query("commit");
+    return json(res, 200, { ok: true, user });
+  } catch (error) {
+    await client.query("rollback");
+    return json(res, 500, { error: "Unable to update profile.", details: error.message });
   } finally {
     client.release();
   }

@@ -52,6 +52,16 @@
                     <p class="meta-pill">New member</p>
                     <h3>Create your account</h3>
                     <form class="course-payment-form" data-signup-form>
+                        <div class="profile-photo-uploader">
+                            <div class="profile-photo-preview" data-signup-avatar-preview aria-hidden="true">CD</div>
+                            <div class="profile-photo-actions">
+                                <label class="btn-secondary profile-photo-button">
+                                    <input type="file" name="avatarFile" accept="image/*" data-avatar-input hidden>
+                                    Add photo
+                                </label>
+                            </div>
+                            <input type="hidden" name="avatarUrl">
+                        </div>
                         <label class="course-payment-field">
                             <span>Full name</span>
                             <input type="text" name="fullName" placeholder="Your full name" autocomplete="name" required>
@@ -63,6 +73,28 @@
                         <label class="course-payment-field">
                             <span>Password</span>
                             <input type="password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Account type</span>
+                            <select name="accountType" required>
+                                <option value="individual">Individual</option>
+                                <option value="recruitment_agency">Recruitment Agency</option>
+                            </select>
+                        </label>
+                        <label class="course-payment-field" data-agency-field hidden>
+                            <span>Agency name</span>
+                            <input type="text" name="agencyName" placeholder="Your agency name" autocomplete="organization">
+                        </label>
+                        <label class="course-payment-field">
+                            <span>What do you want from ClipDevs?</span>
+                            <select name="goals">
+                                <option value="">Select your main goal</option>
+                                <option value="Learn systems and workflows">Learn systems and workflows</option>
+                                <option value="Improve recruitment operations">Improve recruitment operations</option>
+                                <option value="Build automation for my agency">Build automation for my agency</option>
+                                <option value="Access training videos">Access training videos</option>
+                                <option value="Get future services or implementation help">Get future services or implementation help</option>
+                            </select>
                         </label>
                         <p class="course-payment-status" data-signup-status aria-live="polite"></p>
                         <div class="course-plan-actions">
