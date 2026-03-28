@@ -124,10 +124,10 @@
                 <aside class="course-showcase-side">
                     <p class="course-highlight-label">Included in Course Club</p>
                     <p class="course-highlight-duration">PHP 999<span> / month</span></p>
-                    <p class="course-showcase-side-copy">This VOD follows the full SOP flow from account creation to chatbot building, Google Sheets mapping, Facebook connection, and final testing.</p>
+                    <p class="course-showcase-side-copy">This is a monthly subscription, not a one-time course purchase. Your active subscription unlocks this VOD plus future Course Club releases.</p>
                     <div class="course-showcase-includes">
-                        <p class="course-showcase-includes-label">Membership includes</p>
-                        <p class="course-showcase-includes-copy">One subscription unlocks the current featured course, future VOD releases, and the member-only lesson library.</p>
+                        <p class="course-showcase-includes-label">Monthly membership includes</p>
+                        <p class="course-showcase-includes-copy">One monthly subscription unlocks the current featured course, future VOD releases, and the member-only lesson library while your subscription stays active.</p>
                     </div>
                     <ul class="doc-expertise-list">
                         <li>Watch the current featured VOD immediately after subscribing</li>
@@ -183,8 +183,8 @@
                     <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
                 <p class="course-plan-label">Subscribe To Unlock</p>
-                <h3 id="paywall-title">Open the course by subscribing to Course Club</h3>
-                <p class="paywall-copy">Create or access your member account, then complete the payment below to unlock the course and tutorial inside the library.</p>
+                <h3 id="paywall-title">Start a monthly Course Club subscription to unlock this course</h3>
+                <p class="paywall-copy">Create or access your member account, then complete the monthly payment below. This is a recurring monthly subscription that unlocks the course and tutorial inside the library while your subscription remains active.</p>
                 <div class="paywall-account-actions">
                     <a href="/login" class="btn-secondary">Create Account / Log In</a>
                     <a href="/library" class="btn-secondary">Open Member Library</a>
@@ -221,9 +221,9 @@
                     <h3>Start your monthly membership</h3>
                     <div class="payment-price-block">
                         <p class="course-plan-price">PHP 999<span> / month</span></p>
-                        <p class="payment-price-note">One recurring membership for the full Course Club library.</p>
+                        <p class="payment-price-note">One recurring monthly membership for the full Course Club library.</p>
                     </div>
-                    <p class="payment-action-copy">Use this checkout form to subscribe to Course Club Monthly and unlock the current training library plus the future course videos you will keep adding to the site.</p>
+                    <p class="payment-action-copy">Use this checkout form to start a recurring monthly subscription to Course Club and unlock the current training library plus the future course videos you will keep adding to the site.</p>
                     <ul class="doc-expertise-list">
                         <li>PHP 999 monthly access to the full private VOD library</li>
                         <li>Current and future course videos are part of the same membership</li>
@@ -248,85 +248,11 @@
                     <div class="course-plan-actions">
                         <a href="/login" class="btn-secondary">Library Login</a>
                     </div>
-                    <p class="course-plan-note">Pricing shown is for monthly billing. You will be redirected to PayMongo to complete the payment. Existing subscribers should use Library Login instead of buying again, and access should only be unlocked after the paid webhook is received.</p>
+                    <p class="course-plan-note">Pricing shown is for recurring monthly billing. You will be redirected to PayMongo to complete the payment. Existing subscribers should use Library Login instead of buying again, and access should only be unlocked after the paid webhook is received.</p>
                 </aside>
             </div>
         </section>
 
-        <section class="container membership-management-section">
-            <div class="section-title">
-                <h2>Manage Monthly Access</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="payment-layout">
-                <article class="payment-gateway-panel scroll-merge merge-left">
-                    <p class="meta-pill">Member tools</p>
-                    <h3>Check status or cancel your subscription</h3>
-                    <p>Until the full student dashboard is ready, members can use their purchase email here to verify whether their Course Club monthly access is active and to request cancellation.</p>
-                    <ul class="doc-expertise-list">
-                        <li>Check whether the email already has active monthly access</li>
-                        <li>See the current subscription status before contacting support</li>
-                        <li>Request cancellation from the same page</li>
-                        <li>Best used with the same email entered during checkout</li>
-                    </ul>
-                </article>
-
-                <aside class="payment-action-card scroll-merge merge-right">
-                    <p class="course-plan-label">Self-serve membership</p>
-                    <h3>Membership status lookup</h3>
-                    <form class="course-payment-form" data-membership-form>
-                        <label class="course-payment-field">
-                            <span>Email address</span>
-                            <input type="email" name="membershipEmail" placeholder="you@example.com" autocomplete="email" required>
-                        </label>
-                        <p class="course-payment-status" data-membership-status aria-live="polite"></p>
-                        <div class="course-plan-actions">
-                            <button type="button" class="btn-primary" data-membership-check>Check Membership</button>
-                            <button type="button" class="btn-secondary" data-membership-unsubscribe>Unsubscribe</button>
-                        </div>
-                    </form>
-                    <div class="membership-result-card" data-membership-result hidden>
-                        <h4>Current Membership</h4>
-                        <dl class="membership-result-list">
-                            <div>
-                                <dt>Email</dt>
-                                <dd data-membership-email>Not checked yet</dd>
-                            </div>
-                            <div>
-                                <dt>Status</dt>
-                                <dd data-membership-plan>Status unknown</dd>
-                            </div>
-                            <div>
-                                <dt>Access</dt>
-                                <dd data-membership-access>Access unknown</dd>
-                            </div>
-                        </dl>
-                    </div>
-                    <p class="course-plan-note">If you cancel, access should move out of the active state in the membership backend. You can still message support if you need help matching your payment email.</p>
-                </aside>
-            </div>
-        </section>
-
-        <section class="container course-builder-section">
-            <div class="section-title">
-                <h2>Launch Checklist</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="subpage-grid">
-                <article class="subpage-card scroll-merge merge-left">
-                    <h3><i class="fas fa-list-check"></i> Full Curriculum</h3>
-                    <p>Finalize the real module names, lesson counts, and subscriber-facing course copy.</p>
-                </article>
-                <article class="subpage-card scroll-merge merge-center">
-                    <h3><i class="fas fa-video"></i> Video Delivery</h3>
-                    <p>Add your hosted VOD embeds, thumbnails, and lesson descriptions once the recordings are ready.</p>
-                </article>
-                <article class="subpage-card scroll-merge merge-right">
-                    <h3><i class="fas fa-lock"></i> Access Control</h3>
-                    <p>Decide how subscribers lose access after cancelling, because that part needs protected delivery and membership control.</p>
-                </article>
-            </div>
-        </section>
     </main>
 
     <footer id="contact" class="footer">
