@@ -98,9 +98,15 @@ const setupHomeHeroMedia = () => {
     return;
   }
 
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.playsInline = true;
+
   heroVideo.addEventListener("loadeddata", showVideo, { once: true });
   heroVideo.addEventListener("playing", showVideo, { once: true });
   heroVideo.addEventListener("error", showFallback, { once: true });
+
+  heroVideo.load();
 
   if (heroVideo.readyState >= 2) {
     showVideo();
