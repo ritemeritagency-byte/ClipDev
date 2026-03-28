@@ -1,17 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="ClipDevs CD monogram">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="ClipDevs CD favicon">
   <defs>
-    <linearGradient id="bg" x1="12" y1="10" x2="84" y2="86" gradientUnits="userSpaceOnUse">
+    <linearGradient id="cd-bg" x1="12" y1="10" x2="84" y2="86" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#2f80ed"/>
-      <stop offset="1" stop-color="#1f5faa"/>
-    </linearGradient>
-    <linearGradient id="shine" x1="20" y1="18" x2="70" y2="74" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.42"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#174a86"/>
     </linearGradient>
   </defs>
-  <rect x="8" y="8" width="80" height="80" rx="24" fill="url(#bg)"/>
-  <rect x="8" y="8" width="80" height="80" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.22"/>
-  <path d="M65 18c-18 0-32 13.4-32 30s14 30 32 30c8.8 0 16.3-2.6 21.3-7.1l-8.1-8.8c-3.1 2.6-7.2 4.2-12.5 4.2-11 0-19.2-8-19.2-18.3 0-10.5 8.2-18.4 19.2-18.4 5.2 0 9.4 1.7 12.6 4.4l8.1-8.9C81.3 20.6 73.8 18 65 18z" fill="#ffffff"/>
-  <path d="M30 24h16.4C60.7 24 71 33.9 71 48S60.7 72 46.4 72H30zM43 35.8v24.4h3.1c7.8 0 12-4.5 12-12.2S53.9 35.8 46.1 35.8z" fill="url(#shine)"/>
-  <path d="M26 24h18.6C58.5 24 68 33.4 68 48S58.5 72 44.6 72H26zm13.1 12v24h4.2c7.5 0 11.4-4.1 11.4-12s-3.9-12-11.4-12z" fill="#dff0ff"/>
+  <rect x="8" y="8" width="80" height="80" rx="22" fill="url(#cd-bg)"/>
+  <rect x="8" y="8" width="80" height="80" rx="22" fill="none" stroke="#ffffff" stroke-opacity="0.24"/>
+  <path d="M39 29.5c-8.9 0-15.8 6.8-15.8 18.5 0 11.8 6.9 18.5 15.8 18.5 5.3 0 9.3-1.7 12.7-4.8l5.6 6.4C52.8 72.3 46.6 75 39.1 75 24.7 75 14 64.4 14 48s10.7-27 25.1-27c7.4 0 13.6 2.5 18.2 6.8l-5.6 6.5c-3.4-3.1-7.4-4.8-12.7-4.8z" fill="#ffffff"/>
+  <path d="M44 22h17c13 0 21 9.6 21 26s-8 26-21 26H44zm10.2 9.4v33.2h5.9c7.8 0 12.3-5.4 12.3-16.6S67.9 31.4 60.1 31.4z" fill="#dff0ff"/>
 </svg>
