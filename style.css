@@ -1153,6 +1153,19 @@ body.nav-open .nav-toggle span:nth-child(3) {
     padding-top: 18px;
 }
 
+.auth-section,
+.account-section,
+.library-shell-section {
+    padding-top: 18px;
+}
+
+.auth-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
 .course-payment-form {
     display: grid;
     gap: 14px;
@@ -1238,6 +1251,81 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin: 0;
     color: var(--primary-ink);
     font-weight: 600;
+}
+
+.library-shell-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.library-course-panel,
+.library-video-panel,
+.library-course-card,
+.library-video-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.library-course-panel,
+.library-video-panel {
+    padding: 24px;
+}
+
+.library-panel-head h3,
+.library-video-panel h3,
+.library-video-card h4,
+.library-course-card h4 {
+    color: var(--primary-ink);
+}
+
+.library-course-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.library-course-card,
+.library-video-card {
+    padding: 20px;
+}
+
+.library-course-card p,
+.library-video-card p {
+    color: var(--text-muted);
+    margin: 10px 0 0;
+}
+
+.library-course-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.library-course-meta span {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.page-login .hero-content,
+.page-account .hero-content,
+.page-library .hero-content {
+    text-align: center;
+}
+
+.page-login .subtitle,
+.page-account .subtitle,
+.page-library .subtitle {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .payment-gateway-list {
@@ -3754,6 +3842,8 @@ button:focus-visible {
     .course-catalog-grid { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
+    .auth-grid { grid-template-columns: 1fr; }
+    .library-shell-grid { grid-template-columns: 1fr; }
     .vod-ready-grid { grid-template-columns: 1fr; }
     .article-layout {
         grid-template-columns: 1fr;

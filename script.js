@@ -451,6 +451,9 @@ if (siteSearchForm) {
     { label: "Home", url: "/", keywords: ["home", "landing", "clipdevs"] },
     { label: "About", url: "/#about", keywords: ["about", "company", "profile"] },
     { label: "Courses", url: "/courses", keywords: ["courses", "training", "membership", "checkout", "payment"] },
+    { label: "Member Library", url: "/library", keywords: ["library", "member area", "course club", "videos", "vod"] },
+    { label: "Login", url: "/login", keywords: ["login", "sign in", "sign up", "account"] },
+    { label: "Account", url: "/account", keywords: ["account", "profile", "membership status", "member profile"] },
     { label: "Services", url: "/services", keywords: ["service", "offer", "website", "ads", "database"] },
     { label: "Insights", url: "/insights", keywords: ["insight", "strategy", "framework"] },
     { label: "Blog", url: "/blog", keywords: ["blog", "articles", "guides", "posts"] },
@@ -766,6 +769,257 @@ const setupMembershipManagement = () => {
 };
 
 setupMembershipManagement();
+
+const fetchCurrentUser = async () => {
+  const response = await fetch("/api/auth/me");
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const error = new Error(payload?.error || "Unable to fetch account.");
+    error.status = response.status;
+    throw error;
+  }
+
+  return payload.user || null;
+};
+
+const formatMembershipAccess = (member) => {
+  const accessItems = Array.isArray(member?.access) ? member.access : [];
+  const activeAccess = accessItems.filter((item) => item?.accessStatus === "active");
+  if (!activeAccess.length) return "No active course access";
+  return activeAccess.map((item) => `${item.courseSlug}: ${item.accessStatus}`).join(", ");
+};
+
+const setupAuthForms = () => {
+  const signupForm = document.querySelector("[data-signup-form]");
+  const loginForm = document.querySelector("[data-login-form]");
+
+  const bindForm = (form, options) => {
+    if (!form) return;
+
+    const statusNode = form.querySelector(options.statusSelector);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const defaultLabel = submitButton ? submitButton.textContent.trim() : "";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = options.getPayload(form);
+      if (statusNode) {
+        statusNode.textContent = "";
+        statusNode.classList.remove("is-error", "is-success");
+      }
+
+      submitButton?.classList.add("is-loading");
+      submitButton?.setAttribute("aria-busy", "true");
+      if (submitButton) submitButton.textContent = options.loadingLabel;
+
+      try {
+        const response = await fetch(options.endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result?.error || options.errorMessage);
+        }
+
+        if (statusNode) {
+          statusNode.textContent = options.successMessage;
+          statusNode.classList.add("is-success");
+        }
+
+        window.setTimeout(() => {
+          window.location.href = options.redirectTo;
+        }, 250);
+      } catch (error) {
+        if (statusNode) {
+          statusNode.textContent = error.message || options.errorMessage;
+          statusNode.classList.add("is-error");
+        }
+      } finally {
+        submitButton?.classList.remove("is-loading");
+        submitButton?.removeAttribute("aria-busy");
+        if (submitButton) submitButton.textContent = defaultLabel;
+      }
+    });
+  };
+
+  bindForm(signupForm, {
+    endpoint: "/api/auth/signup",
+    statusSelector: "[data-signup-status]",
+    loadingLabel: "Creating Account...",
+    successMessage: "Account created. Redirecting to your profile...",
+    errorMessage: "Unable to create account right now.",
+    redirectTo: "/account",
+    getPayload: (form) => ({
+      fullName: (form.querySelector('input[name="fullName"]')?.value || "").trim(),
+      email: (form.querySelector('input[name="email"]')?.value || "").trim().toLowerCase(),
+      password: String(form.querySelector('input[name="password"]')?.value || ""),
+    }),
+  });
+
+  bindForm(loginForm, {
+    endpoint: "/api/auth/login",
+    statusSelector: "[data-login-status]",
+    loadingLabel: "Logging In...",
+    successMessage: "Login successful. Redirecting to your profile...",
+    errorMessage: "Unable to log in right now.",
+    redirectTo: "/account",
+    getPayload: (form) => ({
+      email: (form.querySelector('input[name="email"]')?.value || "").trim().toLowerCase(),
+      password: String(form.querySelector('input[name="password"]')?.value || ""),
+    }),
+  });
+};
+
+setupAuthForms();
+
+const setupAccountPage = () => {
+  if (!body.classList.contains("page-account")) return;
+
+  const statusNode = document.querySelector("[data-account-status]");
+  const card = document.querySelector("[data-account-card]");
+  const loginCta = document.querySelector("[data-account-login-cta]");
+  const logoutButton = document.querySelector("[data-account-logout]");
+  const nameNode = document.querySelector("[data-account-name]");
+  const emailNode = document.querySelector("[data-account-email]");
+  const planNode = document.querySelector("[data-account-plan]");
+  const accessNode = document.querySelector("[data-account-access]");
+
+  const setStatus = (message, tone = "") => {
+    if (!statusNode) return;
+    statusNode.textContent = message;
+    statusNode.classList.remove("is-error", "is-success");
+    if (tone) statusNode.classList.add(tone);
+  };
+
+  const loadAccount = async () => {
+    try {
+      const user = await fetchCurrentUser();
+      if (nameNode) nameNode.textContent = user?.fullName || "Unknown";
+      if (emailNode) emailNode.textContent = user?.email || "Unknown";
+      if (planNode) {
+        planNode.textContent = user?.subscriptionStatus
+          ? `${user.subscriptionStatus} (${user.planName || user.planCode || "Course Club"})`
+          : "No subscription found";
+      }
+      if (accessNode) accessNode.textContent = formatMembershipAccess(user);
+      if (card) card.hidden = false;
+      if (loginCta) {
+        loginCta.hidden = true;
+        loginCta.textContent = "Log In";
+      }
+      if (logoutButton) logoutButton.hidden = false;
+      setStatus("You are logged in.", "is-success");
+    } catch (error) {
+      if (card) card.hidden = true;
+      if (loginCta) {
+        loginCta.hidden = false;
+        loginCta.textContent = "Log In";
+      }
+      if (logoutButton) logoutButton.hidden = true;
+      setStatus("You are not logged in yet. Log in to view your member profile.", "is-error");
+    }
+  };
+
+  logoutButton?.addEventListener("click", async () => {
+    logoutButton.classList.add("is-loading");
+    logoutButton.setAttribute("aria-busy", "true");
+    const defaultLabel = logoutButton.textContent.trim();
+    logoutButton.textContent = "Logging Out...";
+
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      window.location.href = "/login";
+    } finally {
+      logoutButton.classList.remove("is-loading");
+      logoutButton.removeAttribute("aria-busy");
+      logoutButton.textContent = defaultLabel;
+    }
+  });
+
+  loadAccount();
+};
+
+setupAccountPage();
+
+const setupMemberLibrary = () => {
+  if (!body.classList.contains("page-library")) return;
+
+  const statusNode = document.querySelector("[data-library-session-status]");
+  const resultCard = document.querySelector("[data-library-session-result]");
+  const emailNode = document.querySelector("[data-library-session-email]");
+  const planNode = document.querySelector("[data-library-session-plan]");
+  const accessNode = document.querySelector("[data-library-session-access]");
+  const libraryShell = document.querySelector("[data-library-shell]");
+  const loginCta = document.querySelector("[data-library-login-cta]");
+  const accountCta = document.querySelector("[data-library-account-cta]");
+
+  const setStatus = (message, tone = "") => {
+    if (!statusNode) return;
+    statusNode.textContent = message;
+    statusNode.classList.remove("is-error", "is-success");
+    if (tone) statusNode.classList.add(tone);
+  };
+
+  const renderMember = (user) => {
+    if (!resultCard || !emailNode || !planNode || !accessNode) return;
+    emailNode.textContent = user?.email || "Unknown";
+    planNode.textContent = user?.subscriptionStatus
+      ? `${user.subscriptionStatus} (${user.planName || user.planCode || "Course Club"})`
+      : "No subscription found";
+    accessNode.textContent = formatMembershipAccess(user);
+    resultCard.hidden = false;
+  };
+
+  const loadLibrary = async () => {
+    try {
+      const user = await fetchCurrentUser();
+      renderMember(user);
+
+      const hasActiveAccess = Array.isArray(user?.access)
+        ? user.access.some((item) => item?.accessStatus === "active")
+        : false;
+      const isActive = hasActiveAccess || user?.subscriptionStatus === "active";
+
+      if (!isActive) {
+        if (libraryShell) libraryShell.hidden = true;
+        if (loginCta) {
+          loginCta.hidden = false;
+          loginCta.textContent = "Membership Needed";
+          loginCta.setAttribute("href", "/courses#payment-options");
+        }
+        if (accountCta) accountCta.hidden = false;
+        setStatus("You are logged in, but the membership is not active yet.", "is-error");
+        return;
+      }
+
+      if (libraryShell) libraryShell.hidden = false;
+      if (loginCta) loginCta.hidden = true;
+      if (accountCta) accountCta.hidden = false;
+      setStatus("Active membership confirmed. Your library is unlocked below.", "is-success");
+    } catch (error) {
+      if (libraryShell) libraryShell.hidden = true;
+      if (resultCard) resultCard.hidden = true;
+      if (loginCta) {
+        loginCta.hidden = false;
+        loginCta.textContent = "Log In to Continue";
+        loginCta.setAttribute("href", "/login");
+      }
+      if (accountCta) accountCta.hidden = true;
+      setStatus("Log in with your member account to unlock the library.", "is-error");
+    }
+  };
+
+  loadLibrary();
+};
+
+setupMemberLibrary();
 
 document.querySelectorAll(".btn-primary, .project-link, .contact-button").forEach((element) => {
   element.addEventListener("click", () => {

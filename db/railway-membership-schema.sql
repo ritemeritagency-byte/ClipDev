@@ -75,12 +75,24 @@ create table if not exists webhook_events (
     created_at timestamptz not null default now()
 );
 
+create table if not exists user_sessions (
+    id uuid primary key default gen_random_uuid(),
+    user_id uuid not null references users(id) on delete cascade,
+    token_hash text not null unique,
+    expires_at timestamptz not null,
+    revoked_at timestamptz,
+    created_at timestamptz not null default now(),
+    last_used_at timestamptz not null default now()
+);
+
 create index if not exists idx_users_email on users(email);
 create index if not exists idx_subscriptions_user_id on subscriptions(user_id);
 create index if not exists idx_subscriptions_status on subscriptions(status);
 create index if not exists idx_payments_subscription_id on payments(subscription_id);
 create index if not exists idx_payments_provider_checkout_id on payments(provider_checkout_id);
 create index if not exists idx_course_access_user_id on course_access(user_id);
+create index if not exists idx_user_sessions_user_id on user_sessions(user_id);
+create index if not exists idx_user_sessions_expires_at on user_sessions(expires_at);
 
 insert into subscription_plans (plan_code, display_name, billing_interval, amount_cents, currency)
 values ('courseClubMonthly', 'Course Club Monthly', 'month', 99900, 'PHP')

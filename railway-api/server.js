@@ -1,8 +1,15 @@
 const express = require("express");
 const { getPool } = require("./db");
+const {
+  createSessionToken,
+  hashPassword,
+  hashSessionToken,
+  verifyPassword,
+} = require("./auth");
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
+const SESSION_DURATION_DAYS = 30;
 
 const PLAN_TO_COURSE = {
   courseClubMonthly: "course-club",
@@ -24,6 +31,122 @@ const requireInternalSecret = (req, res, next) => {
   return next();
 };
 
+const getSessionTokenFromHeaders = (req) =>
+  String(
+    req.headers["x-session-token"] ||
+      req.headers["x-clipdevs-session"] ||
+      String(req.headers.cookie || "")
+        .split(";")
+        .map((part) => part.trim())
+        .find((part) => part.startsWith("clipdevs_session="))
+        ?.split("=")
+        .slice(1)
+        .join("=") ||
+      ""
+  ).trim();
+
+const createSessionForUser = async (client, userId) => {
+  const sessionToken = createSessionToken();
+  const tokenHash = hashSessionToken(sessionToken);
+
+  await client.query(
+    `
+      insert into user_sessions (user_id, token_hash, expires_at)
+      values ($1, $2, now() + interval '30 days')
+    `,
+    [userId, tokenHash]
+  );
+
+  return {
+    sessionToken,
+    expiresInDays: SESSION_DURATION_DAYS,
+  };
+};
+
+const getMemberProfileByEmail = async (client, email) => {
+  const result = await client.query(
+    `
+      select
+        u.id as user_id,
+        u.email,
+        u.full_name,
+        u.status as account_status,
+        s.id as subscription_id,
+        s.status as subscription_status,
+        s.current_period_end,
+        p.plan_code,
+        p.display_name,
+        coalesce(
+          json_agg(
+            json_build_object(
+              'courseSlug', ca.course_slug,
+              'accessStatus', ca.access_status,
+              'grantedAt', ca.granted_at,
+              'revokedAt', ca.revoked_at
+            )
+          ) filter (where ca.id is not null),
+          '[]'::json
+        ) as access
+      from users u
+      left join subscriptions s on s.user_id = u.id and s.status in ('pending', 'active', 'past_due')
+      left join subscription_plans p on p.id = s.plan_id
+      left join course_access ca on ca.user_id = u.id
+      where u.email = $1
+      group by u.id, s.id, p.plan_code, p.display_name
+      order by s.created_at desc nulls last
+      limit 1
+    `,
+    [email]
+  );
+
+  if (!result.rows.length) return null;
+  const row = result.rows[0];
+  return {
+    id: row.user_id,
+    email: row.email,
+    fullName: row.full_name,
+    accountStatus: row.account_status,
+    subscriptionId: row.subscription_id,
+    subscriptionStatus: row.subscription_status,
+    currentPeriodEnd: row.current_period_end,
+    planCode: row.plan_code,
+    planName: row.display_name,
+    access: row.access,
+  };
+};
+
+const getAuthenticatedUser = async (client, req) => {
+  const sessionToken = getSessionTokenFromHeaders(req);
+  if (!sessionToken) return null;
+
+  const tokenHash = hashSessionToken(sessionToken);
+  const result = await client.query(
+    `
+      select u.id, u.email, u.full_name, u.status, s.id as session_id
+      from user_sessions s
+      join users u on u.id = s.user_id
+      where s.token_hash = $1
+        and s.revoked_at is null
+        and s.expires_at > now()
+      limit 1
+    `,
+    [tokenHash]
+  );
+
+  if (!result.rows.length) return null;
+
+  await client.query(
+    `
+      update user_sessions
+      set last_used_at = now()
+      where id = $1
+    `,
+    [result.rows[0].session_id]
+  );
+
+  return result.rows[0];
+};
+
 app.use(express.json({ limit: "1mb" }));
 
 app.get("/health", async (_req, res) => {
@@ -33,6 +156,195 @@ app.get("/health", async (_req, res) => {
     return json(res, 200, { ok: true });
   } catch (error) {
     return json(res, 500, { ok: false, error: error.message });
+  }
+});
+
+app.post("/api/auth/signup", requireInternalSecret, async (req, res) => {
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const fullName = String(req.body?.fullName || "").trim();
+  const password = String(req.body?.password || "");
+
+  if (!email || !email.includes("@")) {
+    return json(res, 400, { error: "Valid email is required." });
+  }
+
+  if (!fullName) {
+    return json(res, 400, { error: "Full name is required." });
+  }
+
+  if (password.length < 8) {
+    return json(res, 400, { error: "Password must be at least 8 characters." });
+  }
+
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    await client.query("begin");
+
+    const existingUser = await client.query(
+      `
+        select id, password_hash
+        from users
+        where email = $1
+        limit 1
+      `,
+      [email]
+    );
+
+    let userId;
+    if (!existingUser.rows.length) {
+      const createdUser = await client.query(
+        `
+          insert into users (email, full_name, password_hash)
+          values ($1, $2, $3)
+          returning id
+        `,
+        [email, fullName, hashPassword(password)]
+      );
+      userId = createdUser.rows[0].id;
+    } else {
+      const user = existingUser.rows[0];
+      if (user.password_hash) {
+        await client.query("rollback");
+        return json(res, 409, { error: "An account already exists for this email. Please log in instead." });
+      }
+
+      await client.query(
+        `
+          update users
+          set full_name = $2,
+              password_hash = $3,
+              updated_at = now()
+          where id = $1
+        `,
+        [user.id, fullName, hashPassword(password)]
+      );
+      userId = user.id;
+    }
+
+    const session = await createSessionForUser(client, userId);
+    const member = await getMemberProfileByEmail(client, email);
+
+    await client.query("commit");
+    return json(res, 200, {
+      ok: true,
+      sessionToken: session.sessionToken,
+      expiresInDays: session.expiresInDays,
+      user: member,
+    });
+  } catch (error) {
+    await client.query("rollback");
+    return json(res, 500, { error: "Unable to create account.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.post("/api/auth/login", requireInternalSecret, async (req, res) => {
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const password = String(req.body?.password || "");
+
+  if (!email || !email.includes("@")) {
+    return json(res, 400, { error: "Valid email is required." });
+  }
+
+  if (!password) {
+    return json(res, 400, { error: "Password is required." });
+  }
+
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    await client.query("begin");
+
+    const userResult = await client.query(
+      `
+        select id, email, password_hash, status
+        from users
+        where email = $1
+        limit 1
+      `,
+      [email]
+    );
+
+    if (!userResult.rows.length) {
+      await client.query("rollback");
+      return json(res, 401, { error: "Invalid email or password." });
+    }
+
+    const user = userResult.rows[0];
+    if (user.status !== "active") {
+      await client.query("rollback");
+      return json(res, 403, { error: "This account is not active." });
+    }
+
+    if (!user.password_hash || !verifyPassword(password, user.password_hash)) {
+      await client.query("rollback");
+      return json(res, 401, { error: "Invalid email or password." });
+    }
+
+    const session = await createSessionForUser(client, user.id);
+    const member = await getMemberProfileByEmail(client, email);
+
+    await client.query("commit");
+    return json(res, 200, {
+      ok: true,
+      sessionToken: session.sessionToken,
+      expiresInDays: session.expiresInDays,
+      user: member,
+    });
+  } catch (error) {
+    await client.query("rollback");
+    return json(res, 500, { error: "Unable to log in.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.get("/api/auth/me", requireInternalSecret, async (req, res) => {
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    const authUser = await getAuthenticatedUser(client, req);
+    if (!authUser) {
+      return json(res, 401, { error: "Not authenticated." });
+    }
+
+    const member = await getMemberProfileByEmail(client, authUser.email);
+    return json(res, 200, {
+      ok: true,
+      user: member,
+    });
+  } catch (error) {
+    return json(res, 500, { error: "Unable to fetch account.", details: error.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.post("/api/auth/logout", requireInternalSecret, async (req, res) => {
+  const sessionToken = getSessionTokenFromHeaders(req);
+  if (!sessionToken) {
+    return json(res, 200, { ok: true });
+  }
+
+  try {
+    const pool = getPool();
+    await pool.query(
+      `
+        update user_sessions
+        set revoked_at = now()
+        where token_hash = $1 and revoked_at is null
+      `,
+      [hashSessionToken(sessionToken)]
+    );
+
+    return json(res, 200, { ok: true });
+  } catch (error) {
+    return json(res, 500, { error: "Unable to log out.", details: error.message });
   }
 });
 
@@ -148,56 +460,14 @@ app.get("/api/memberships/status", requireInternalSecret, async (req, res) => {
 
   try {
     const pool = getPool();
-    const result = await pool.query(
-      `
-        select
-          u.email,
-          u.full_name,
-          s.id as subscription_id,
-          s.status as subscription_status,
-          s.current_period_end,
-          p.plan_code,
-          p.display_name,
-          coalesce(
-            json_agg(
-              json_build_object(
-                'courseSlug', ca.course_slug,
-                'accessStatus', ca.access_status,
-                'grantedAt', ca.granted_at,
-                'revokedAt', ca.revoked_at
-              )
-            ) filter (where ca.id is not null),
-            '[]'::json
-          ) as access
-        from users u
-        left join subscriptions s on s.user_id = u.id and s.status in ('pending', 'active', 'past_due')
-        left join subscription_plans p on p.id = s.plan_id
-        left join course_access ca on ca.user_id = u.id
-        where u.email = $1
-        group by u.id, s.id, p.plan_code, p.display_name
-        order by s.created_at desc nulls last
-        limit 1
-      `,
-      [email]
-    );
-
-    if (!result.rows.length) {
+    const member = await getMemberProfileByEmail(pool, email);
+    if (!member) {
       return json(res, 404, { error: "Member not found." });
     }
 
-    const row = result.rows[0];
     return json(res, 200, {
       ok: true,
-      member: {
-        email: row.email,
-        fullName: row.full_name,
-        subscriptionId: row.subscription_id,
-        subscriptionStatus: row.subscription_status,
-        currentPeriodEnd: row.current_period_end,
-        planCode: row.plan_code,
-        planName: row.display_name,
-        access: row.access,
-      },
+      member,
     });
   } catch (error) {
     return json(res, 500, { error: "Unable to fetch membership status.", details: error.message });
