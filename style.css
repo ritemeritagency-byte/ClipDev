@@ -1149,6 +1149,10 @@ body.nav-open .nav-toggle span:nth-child(3) {
     padding: 24px;
 }
 
+.membership-management-section {
+    padding-top: 18px;
+}
+
 .course-payment-form {
     display: grid;
     gap: 14px;
@@ -1196,6 +1200,44 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .course-payment-status.is-success {
     color: #1d5a36;
+}
+
+.membership-result-card {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+}
+
+.membership-result-card h4 {
+    margin: 0 0 12px;
+    color: var(--primary-ink);
+}
+
+.membership-result-list {
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.membership-result-list div {
+    display: grid;
+    gap: 4px;
+}
+
+.membership-result-list dt {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.membership-result-list dd {
+    margin: 0;
+    color: var(--primary-ink);
+    font-weight: 600;
 }
 
 .payment-gateway-list {

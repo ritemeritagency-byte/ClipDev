@@ -645,6 +645,128 @@ const setupCoursePaymentLinks = () => {
 
 setupCoursePaymentLinks();
 
+const setupMembershipManagement = () => {
+  const form = document.querySelector("[data-membership-form]");
+  if (!form) return;
+
+  const emailInput = form.querySelector('input[name="membershipEmail"]');
+  const statusNode = form.querySelector("[data-membership-status]");
+  const checkButton = form.querySelector("[data-membership-check]");
+  const unsubscribeButton = form.querySelector("[data-membership-unsubscribe]");
+  const resultCard = document.querySelector("[data-membership-result]");
+  const resultEmail = document.querySelector("[data-membership-email]");
+  const resultPlan = document.querySelector("[data-membership-plan]");
+  const resultAccess = document.querySelector("[data-membership-access]");
+
+  const setStatus = (message, tone = "") => {
+    if (!statusNode) return;
+    statusNode.textContent = message;
+    statusNode.classList.remove("is-error", "is-success");
+    if (tone) statusNode.classList.add(tone);
+  };
+
+  const readEmail = () => (emailInput?.value || "").trim().toLowerCase();
+
+  const renderMembership = (member) => {
+    if (!resultCard || !resultEmail || !resultPlan || !resultAccess) return;
+
+    const accessItems = Array.isArray(member?.access) ? member.access : [];
+    const activeAccess = accessItems
+      .filter((item) => item?.accessStatus)
+      .map((item) => `${item.courseSlug}: ${item.accessStatus}`)
+      .join(", ");
+
+    resultEmail.textContent = member?.email || "Unknown email";
+    resultPlan.textContent = member?.subscriptionStatus
+      ? `${member.subscriptionStatus} (${member.planName || member.planCode || "Course Club"})`
+      : "No membership record found";
+    resultAccess.textContent = activeAccess || "No course access attached yet";
+    resultCard.hidden = false;
+  };
+
+  const setLoading = (button, isLoading, label) => {
+    if (!button) return;
+    button.classList.toggle("is-loading", isLoading);
+    button.setAttribute("aria-busy", isLoading ? "true" : "false");
+    button.textContent = isLoading ? label : button.getAttribute("data-default-label") || button.textContent;
+  };
+
+  [checkButton, unsubscribeButton].forEach((button) => {
+    if (button) button.setAttribute("data-default-label", button.textContent.trim());
+  });
+
+  checkButton?.addEventListener("click", async () => {
+    const email = readEmail();
+    if (!email || !email.includes("@")) {
+      setStatus("Enter the same email used during checkout first.", "is-error");
+      return;
+    }
+
+    setStatus("");
+    setLoading(checkButton, true, "Checking...");
+
+    try {
+      const response = await fetch(`/api/memberships/status?email=${encodeURIComponent(email)}`);
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(payload?.error || "Unable to check membership right now.");
+      }
+
+      renderMembership(payload.member);
+      setStatus("Membership record found.", "is-success");
+    } catch (error) {
+      if (resultCard) resultCard.hidden = true;
+      setStatus(error.message || "Unable to check membership right now.", "is-error");
+    } finally {
+      setLoading(checkButton, false, "Checking...");
+      if (checkButton) checkButton.textContent = checkButton.getAttribute("data-default-label") || "Check Membership";
+    }
+  });
+
+  unsubscribeButton?.addEventListener("click", async () => {
+    const email = readEmail();
+    if (!email || !email.includes("@")) {
+      setStatus("Enter the membership email before requesting unsubscribe.", "is-error");
+      return;
+    }
+
+    setStatus("");
+    setLoading(unsubscribeButton, true, "Cancelling...");
+
+    try {
+      const response = await fetch("/api/memberships/unsubscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          reason: "cancelled_by_member",
+        }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload?.error || "Unable to cancel membership right now.");
+      }
+
+      if (resultCard) resultCard.hidden = true;
+      setStatus("Membership cancellation requested. Access should be removed from the active state.", "is-success");
+    } catch (error) {
+      setStatus(error.message || "Unable to cancel membership right now.", "is-error");
+    } finally {
+      setLoading(unsubscribeButton, false, "Cancelling...");
+      if (unsubscribeButton) {
+        unsubscribeButton.textContent =
+          unsubscribeButton.getAttribute("data-default-label") || "Unsubscribe";
+      }
+    }
+  });
+};
+
+setupMembershipManagement();
+
 document.querySelectorAll(".btn-primary, .project-link, .contact-button").forEach((element) => {
   element.addEventListener("click", () => {
     const label = (element.textContent || "").trim();

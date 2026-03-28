@@ -1,8 +1,8 @@
 const COURSE_CATALOG = {
   courseClubMonthly: {
     id: "courseClubMonthly",
-    name: "Course Club",
-    description: "Monthly subscriber access to the private ClipDevs VOD course library.",
+    name: "Course Club Monthly",
+    description: "Monthly membership access to the full private ClipDevs VOD course library, including future course videos.",
     amount: 99900,
     currency: "PHP",
     paymentMethodTypes: ["qrph"],
