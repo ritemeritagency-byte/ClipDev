@@ -833,6 +833,43 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin: 0;
 }
 
+.proof-note {
+    margin: 18px auto 0;
+    max-width: 64ch;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.trust-section {
+    padding-top: 24px;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.trust-card {
+    padding: 22px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    box-shadow: 0 14px 28px rgba(13, 27, 42, 0.07);
+}
+
+.trust-card h3 {
+    color: var(--primary-ink);
+    margin: 10px 0 8px;
+    font-size: 1.15rem;
+}
+
+.trust-card p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
 .featured-case {
     padding-top: 26px;
 }
@@ -2486,6 +2523,10 @@ a.is-loading {
     margin-bottom: 18px;
 }
 
+.service-framework-section {
+    margin-bottom: 26px;
+}
+
 .lead-system-showcase {
     margin-bottom: 20px;
 }
@@ -2735,6 +2776,33 @@ a.is-loading {
 .showcase-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 18px 38px rgba(13, 27, 42, 0.12);
+}
+
+.showcase-summary {
+    color: var(--text-muted);
+}
+
+.showcase-kpis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 14px;
+}
+
+.showcase-kpis span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #edf5ff;
+    border: 1px solid rgba(27, 116, 228, 0.12);
+    color: var(--secondary-ink);
+    font-size: 0.84rem;
+}
+
+.showcase-kpis strong {
+    color: var(--primary-ink);
 }
 
 /* Unified Professional Card Highlights */
@@ -4169,6 +4237,31 @@ body.is-scrolled .wa-widget:not(.is-open) {
     line-height: 1.8;
 }
 
+.footer-meta-list,
+.footer-contact-list {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.footer-meta-list li,
+.footer-contact-list li {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-contact-list {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.footer-contact-list strong {
+    color: var(--primary-ink);
+}
+
 .footer-col h4 {
     margin-bottom: 16px;
     font-size: 0.85rem;
@@ -4251,6 +4344,13 @@ body.is-scrolled .wa-widget:not(.is-open) {
     color: #125fbc;
     background: #edf5ff;
     transform: translateY(-1px);
+}
+
+.cta-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
 }
 
 .footer-bottom {
@@ -4380,12 +4480,15 @@ button:focus-visible {
 @media (max-width: 1024px) {
     .insight-grid { grid-template-columns: repeat(2, 1fr); }
     .stats-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
     .featured-case-card { grid-template-columns: 1fr; }
     .course-membership-card { grid-template-columns: 1fr; }
     .course-membership-points { grid-template-columns: 1fr; }
     .course-plan-card { position: static; }
     .course-catalog-grid { grid-template-columns: 1fr; }
     .course-showcase { grid-template-columns: 1fr; }
+    .course-showcase-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .coming-soon-grid { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .auth-grid { grid-template-columns: 1fr; }
@@ -4650,6 +4753,58 @@ button:focus-visible {
     .logo { font-size: 1.3rem; }
     .hero-proof-badges { justify-content: flex-start; }
     .featured-case-content { padding: 18px; }
+    .trust-card { padding: 18px; }
+    .showcase-kpis { gap: 8px; }
+    .cta-banner-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .cta-banner-actions > * { width: 100%; }
+    .course-showcase {
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .course-showcase-copy h3 {
+        font-size: clamp(1.55rem, 7vw, 2rem);
+        line-height: 1.12;
+    }
+    .course-catalog-intro,
+    .course-showcase-summary,
+    .course-showcase-side-copy,
+    .course-showcase-includes-copy,
+    .coming-soon-copy {
+        font-size: 0.96rem;
+    }
+    .course-showcase-stats { grid-template-columns: 1fr; }
+    .course-showcase-stats article,
+    .course-showcase-outline,
+    .course-showcase-side,
+    .coming-soon-card {
+        padding: 16px;
+    }
+    .course-showcase-overlay {
+        padding: 16px;
+        gap: 10px;
+    }
+    .course-showcase-lock {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .course-showcase-overlay-copy {
+        max-width: none;
+        text-align: center;
+        font-size: 0.88rem;
+    }
+    .paywall-dialog {
+        width: min(100vw - 24px, 560px);
+        max-height: calc(100vh - 24px);
+        margin: 12px auto;
+        padding: 22px 18px 18px;
+        overflow-y: auto;
+    }
+    .paywall-account-actions { grid-template-columns: 1fr; }
     .insights-feature-media img { height: 260px; }
     .insights-steps { grid-template-columns: 1fr; }
     .article-feature-photo {
@@ -5439,6 +5594,92 @@ button:focus-visible {
 
     .home-intro-caption {
         padding: 16px;
+    }
+
+    .course-catalog-intro {
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+    }
+
+    .course-showcase {
+        padding: 16px;
+        gap: 16px;
+        border-radius: 18px;
+    }
+
+    .course-showcase-kicker,
+    .course-highlight-label,
+    .course-showcase-includes-label,
+    .course-review-label {
+        font-size: 0.74rem;
+    }
+
+    .course-showcase-copy h3 {
+        font-size: clamp(1.4rem, 8.6vw, 1.8rem);
+    }
+
+    .course-offer-meta span {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .course-showcase-video,
+    .course-showcase-locked,
+    .coming-soon-card-media {
+        border-radius: 16px;
+    }
+
+    .course-showcase-overlay {
+        align-content: center;
+        text-align: center;
+    }
+
+    .course-showcase-lock {
+        padding: 9px 12px;
+        font-size: 0.84rem;
+    }
+
+    .course-showcase-overlay-copy {
+        font-size: 0.84rem;
+    }
+
+    .course-showcase-side,
+    .coming-soon-shell {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .course-highlight-duration,
+    .course-plan-price,
+    .course-offer-price {
+        font-size: 1.7rem;
+    }
+
+    .course-plan-actions .btn-primary,
+    .course-plan-actions .btn-secondary,
+    .course-plan-actions button.btn-primary,
+    .paywall-account-actions .btn-secondary {
+        width: 100%;
+    }
+
+    .paywall-dialog {
+        width: calc(100vw - 16px);
+        max-height: calc(100vh - 16px);
+        margin: 8px auto;
+        padding: 18px 14px 14px;
+        border-radius: 20px;
+    }
+
+    .paywall-close {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .footer-meta-list li,
+    .footer-contact-list li {
+        font-size: 0.92rem;
     }
 
     .course-membership-copy,
