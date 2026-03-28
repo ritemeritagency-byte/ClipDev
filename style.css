@@ -4961,6 +4961,7 @@ button:focus-visible {
     transform-style: preserve-3d;
 }
 
+.page-home .hero-video-fallback,
 .page-home .hero-video {
     width: 100%;
     height: 100%;
@@ -4968,6 +4969,49 @@ button:focus-visible {
     object-fit: cover;
     object-position: center center;
     background: #dcebfb;
+}
+
+.page-home .hero-video-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.page-home .hero-video {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.page-home .hero-video-frame.is-video-ready .hero-video {
+    opacity: 1;
+}
+
+.page-home .hero-video-frame.is-video-ready .hero-video-fallback,
+.page-home .hero-video-frame.is-video-ready .hero-video-caption {
+    opacity: 0;
+}
+
+.page-home .hero-video-frame.is-video-fallback .hero-video {
+    display: none;
+}
+
+.page-home .hero-video-caption {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 3;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(12, 26, 43, 0.72);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
 }
 
 .home-logo-strip {
@@ -5326,14 +5370,23 @@ button:focus-visible {
         position: relative;
         inset: auto;
         width: 100%;
+        max-width: 100%;
         margin: 14px 0 0;
         border-radius: 22px;
-        aspect-ratio: 4 / 5;
+        aspect-ratio: 5 / 6;
         transform: none;
     }
 
     .page-home .hero-video {
         object-position: center center;
+    }
+
+    .page-home .hero-video-caption {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        text-align: center;
+        font-size: 0.72rem;
     }
 
     .home-logo-strip {
@@ -5347,6 +5400,38 @@ button:focus-visible {
 }
 
 @media (max-width: 480px) {
+    .page-home .hero-section.home-hero {
+        padding-top: 88px;
+        padding-bottom: 38px;
+    }
+
+    .page-home .home-hero .hero-content {
+        gap: 20px;
+    }
+
+    .page-home .hero-video-frame {
+        border-radius: 18px;
+        aspect-ratio: 9 / 11;
+    }
+
+    .page-home .home-hero .hero-actions {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .page-home .home-hero .hero-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .page-home .home-hero .hero-proof-badges {
+        gap: 8px;
+    }
+
+    .page-home .hero-proof-badges a {
+        width: 100%;
+    }
+
     .home-logo-chip {
         width: 100%;
         text-align: center;

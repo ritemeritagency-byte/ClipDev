@@ -119,9 +119,26 @@
             <aside class="home-hero-visual" aria-label="ClipDevs featured hero video">
                 <div class="hero-visual-stage hero-video-stage">
                     <figure class="hero-visual-main hero-video-frame">
-                        <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-label="ClipDevs hero showcase video">
+                        <img
+                            class="hero-video-fallback"
+                            src="./clipdevphoto/khalid-international-hero.png"
+                            alt="ClipDevs featured website showcase"
+                            width="1920"
+                            height="1320"
+                        >
+                        <video
+                            class="hero-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="auto"
+                            poster="./clipdevphoto/khalid-international-hero.png"
+                            aria-label="ClipDevs hero showcase video"
+                        >
                             <source src="./herovod/Site 101 Devs hero.mp4" type="video/mp4">
                         </video>
+                        <figcaption class="hero-video-caption">Featured project preview</figcaption>
                     </figure>
                 </div>
             </aside>

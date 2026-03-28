@@ -75,6 +75,43 @@ const setupSiteIntro = () => {
   window.setTimeout(finishIntro, 1800);
 };
 
+const setupHomeHeroMedia = () => {
+  if (!body.classList.contains("page-home")) return;
+
+  const heroFrame = document.querySelector(".hero-video-frame");
+  const heroVideo = heroFrame?.querySelector(".hero-video");
+  if (!heroFrame || !heroVideo) return;
+
+  const showFallback = () => {
+    heroFrame.classList.add("is-video-fallback");
+    heroFrame.classList.remove("is-video-ready");
+  };
+
+  const showVideo = () => {
+    heroFrame.classList.add("is-video-ready");
+    heroFrame.classList.remove("is-video-fallback");
+  };
+
+  const firstSource = heroVideo.querySelector("source")?.getAttribute("src") || "";
+  if (!firstSource) {
+    showFallback();
+    return;
+  }
+
+  heroVideo.addEventListener("loadeddata", showVideo, { once: true });
+  heroVideo.addEventListener("playing", showVideo, { once: true });
+  heroVideo.addEventListener("error", showFallback, { once: true });
+
+  if (heroVideo.readyState >= 2) {
+    showVideo();
+    return;
+  }
+
+  window.setTimeout(() => {
+    if (heroVideo.readyState < 2) showFallback();
+  }, 1200);
+};
+
 const getGridRevealMeta = (element) => {
   const group = element.closest(
     ".stats-grid, .subpage-grid, .testimonials-grid, .services-grid, .services-highlight-grid, .policy-grid, .package-grid, .tracks-grid, .steps-grid, .updates-grid, .insight-story-grid, .insights-mosaic, .insights-steps, .workflow-grid, .lead-system-stack"
@@ -262,6 +299,7 @@ setupRevealAnimations();
 setupNavTracking();
 setupScrollState();
 setupSiteIntro();
+setupHomeHeroMedia();
 
 const setupMegaMenu = () => {
   if (!navLinks) return;
