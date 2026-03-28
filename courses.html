@@ -135,7 +135,7 @@
                         <li>Use the member library to access the full lesson player</li>
                     </ul>
                     <div class="course-plan-actions">
-                        <a href="#payment-options" class="btn-primary">Unlock This Course</a>
+                        <button type="button" class="btn-primary" data-open-paywall>Unlock This Course</button>
                         <a href="https://youtu.be/ines-tbuErQ" class="btn-secondary" target="_blank" rel="noopener noreferrer">Watch Preview on YouTube</a>
                     </div>
                 </aside>
@@ -175,6 +175,40 @@
                 </div>
             </section>
         </section>
+
+        <div class="paywall-modal" data-paywall-modal hidden>
+            <div class="paywall-backdrop" data-close-paywall></div>
+            <div class="paywall-dialog" role="dialog" aria-modal="true" aria-labelledby="paywall-title">
+                <button type="button" class="paywall-close" aria-label="Close subscribe card" data-close-paywall>
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <p class="course-plan-label">Subscribe To Unlock</p>
+                <h3 id="paywall-title">Open the course by subscribing to Course Club</h3>
+                <p class="paywall-copy">Create or access your member account, then complete the payment below to unlock the course and tutorial inside the library.</p>
+                <div class="paywall-account-actions">
+                    <a href="/login" class="btn-secondary">Create Account / Log In</a>
+                    <a href="/library" class="btn-secondary">Open Member Library</a>
+                </div>
+                <div class="payment-price-block">
+                    <p class="course-plan-price">PHP 999<span> / month</span></p>
+                    <p class="payment-price-note">One recurring membership for the full Course Club library.</p>
+                </div>
+                <form class="course-payment-form" data-course-payment-form>
+                    <label class="course-payment-field">
+                        <span>Full name</span>
+                        <input type="text" name="fullName" placeholder="Your full name" autocomplete="name" required>
+                    </label>
+                    <label class="course-payment-field">
+                        <span>Email address</span>
+                        <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                    </label>
+                    <p class="course-payment-status" data-course-payment-status aria-live="polite"></p>
+                    <div class="course-plan-actions">
+                        <button type="submit" class="btn-primary" data-payment-link="courseClubMonthly">Subscribe Monthly</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <section id="payment-options" class="container payment-section">
             <div class="section-title">

@@ -648,6 +648,41 @@ const setupCoursePaymentLinks = () => {
 
 setupCoursePaymentLinks();
 
+const setupPaywallModal = () => {
+  const modal = document.querySelector("[data-paywall-modal]");
+  const openButtons = document.querySelectorAll("[data-open-paywall]");
+  const closeButtons = document.querySelectorAll("[data-close-paywall]");
+  if (!modal || !openButtons.length) return;
+
+  const openModal = () => {
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", openModal);
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) closeModal();
+  });
+};
+
+setupPaywallModal();
+
 const setupMembershipManagement = () => {
   const form = document.querySelector("[data-membership-form]");
   if (!form) return;
