@@ -1,6 +1,6 @@
-const { sendJson } = require("../_lib/http");
-const { forwardToRailway } = require("../_lib/railway");
-const { SESSION_COOKIE_NAME, parseCookieHeader, serializeCookie } = require("../_lib/cookies");
+const { sendJson } = require("../../lib/http");
+const { forwardToRailway } = require("../../lib/railway");
+const { SESSION_COOKIE_NAME, parseCookieHeader, serializeCookie } = require("../../lib/cookies");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {

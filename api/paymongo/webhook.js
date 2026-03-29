@@ -1,6 +1,6 @@
 const crypto = require("crypto");
-const { sendJson } = require("../_lib/http");
-const { forwardToRailway, getRailwayBaseUrl } = require("../_lib/railway");
+const { sendJson } = require("../../lib/http");
+const { forwardToRailway, getRailwayBaseUrl } = require("../../lib/railway");
 
 const readRawBody = async (req) => {
   const chunks = [];

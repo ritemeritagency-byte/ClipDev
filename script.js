@@ -726,7 +726,7 @@ const setupCourseLaunchOffer = () => {
     });
   };
 
-  fetch("/api/offers/course-club-launch")
+  fetch("/api/memberships/status?offer=course-club-launch")
     .then((response) => response.json().then((payload) => ({ ok: response.ok, payload })))
     .then(({ ok, payload }) => {
       if (!ok || !payload) return;

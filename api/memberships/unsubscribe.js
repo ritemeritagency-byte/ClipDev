@@ -1,5 +1,5 @@
-const { sendJson } = require("../_lib/http");
-const { forwardToRailway } = require("../_lib/railway");
+const { sendJson } = require("../../lib/http");
+const { forwardToRailway } = require("../../lib/railway");
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {

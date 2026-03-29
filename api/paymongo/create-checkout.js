@@ -1,6 +1,6 @@
-const { COURSE_CATALOG } = require("./catalog");
-const { sendJson } = require("../_lib/http");
-const { forwardToRailway } = require("../_lib/railway");
+const { COURSE_CATALOG } = require("../../lib/course-catalog");
+const { sendJson } = require("../../lib/http");
+const { forwardToRailway } = require("../../lib/railway");
 
 const getBaseUrl = (req) => {
   const configured = process.env.PUBLIC_SITE_URL;
