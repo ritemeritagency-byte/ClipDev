@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="page-collaboration">
     <nav class="navbar">
         <a href="/" class="logo" aria-label="ClipDevs home"><span class="logo-badge" aria-hidden="true">CD</span><span class="logo-wordmark">ClipDevs</span></a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
@@ -202,7 +202,7 @@
                     </div>
                 </aside>
 
-                <form class="collab-form collab-form-redesign" id="collab-form">
+                <form class="collab-form collab-form-redesign" id="collab-form" aria-describedby="collab-mobile-cta-help">
                     <div class="collab-progress">
                         <span class="progress-pill active">Step 1</span>
                         <span class="progress-pill">Step 2</span>
@@ -211,19 +211,21 @@
 
                     <fieldset class="form-step">
                         <legend>Step 1: Basic Information</legend>
+                        <p class="form-step-feedback" data-step-feedback aria-live="polite"></p>
 
                         <label for="collab-name">Full Name</label>
-                        <input id="collab-name" name="name" type="text" placeholder="Your full name" required>
+                        <input id="collab-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required>
 
                         <label for="collab-phone">Phone Number</label>
-                        <input id="collab-phone" name="phone" type="tel" placeholder="+63..." required>
+                        <input id="collab-phone" name="phone" type="tel" placeholder="+63..." autocomplete="tel" inputmode="tel" required>
 
                         <label for="collab-location">Location</label>
-                        <input id="collab-location" name="location" type="text" placeholder="City / Country" required>
+                        <input id="collab-location" name="location" type="text" placeholder="City / Country" autocomplete="address-level2" required>
                     </fieldset>
 
                     <fieldset class="form-step">
                         <legend>Step 2: Skills and Project Fit</legend>
+                        <p class="form-step-feedback" data-step-feedback aria-live="polite"></p>
 
                         <label for="collab-role">Current Level</label>
                         <select id="collab-role" name="role" required>
@@ -234,7 +236,7 @@
                         </select>
 
                         <label for="collab-stack">Skills / Tools</label>
-                        <input id="collab-stack" name="stack" type="text" placeholder="HTML, CSS, JS, React, UI Design, etc.">
+                        <input id="collab-stack" name="stack" type="text" placeholder="HTML, CSS, JS, React, UI Design, etc." autocomplete="off" spellcheck="false">
 
                         <div class="build-type-cards" aria-hidden="true">
                             <span>Website Build</span>
@@ -258,9 +260,10 @@
 
                     <fieldset class="form-step">
                         <legend>Step 3: Motivation</legend>
+                        <p class="form-step-feedback" data-step-feedback aria-live="polite"></p>
 
                         <label for="collab-message">Why do you want to become a ClipDevs talent?</label>
-                        <textarea id="collab-message" name="message" rows="4" placeholder="Tell us your goals..." required></textarea>
+                        <textarea id="collab-message" name="message" rows="4" placeholder="Tell us your goals..." autocomplete="off" required></textarea>
 
                         <label class="consent-check">
                             <input type="checkbox" required>
@@ -269,6 +272,7 @@
                     </fieldset>
 
                     <button type="submit" class="cta-button">Apply to Join ClipDevs Community</button>
+                    <p id="collab-mobile-cta-help" class="sr-only">A quick apply button is available at the bottom of the screen on mobile.</p>
                     <p class="apply-response-time">Application review window: 3-7 business days.</p>
                 </form>
             </div>
@@ -306,6 +310,7 @@
             <p class="updates-note">Interested in any open slot? Submit your application above and mention which track you want to join.</p>
         </section>
     </main>
+    <a class="mobile-sticky-apply" href="#collab-form">Apply as Talent</a>
 
     <footer id="contact" class="footer">
         <div class="footer-grid">

@@ -1493,6 +1493,20 @@
     transform: translateY(-2px);
 }
 
+.form-step.has-error {
+    border-color: rgba(204, 48, 74, 0.5);
+    background: linear-gradient(180deg, rgba(255, 240, 244, 0.72), rgba(255, 255, 255, 0.98));
+    box-shadow: 0 14px 28px rgba(143, 29, 52, 0.12);
+}
+
+.form-step-feedback {
+    min-height: 1.2em;
+    margin: 0 0 8px;
+    color: #b4233b;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
 .build-type-cards {
     display: flex;
     gap: 8px;
@@ -1594,6 +1608,11 @@
     resize: vertical;
 }
 
+.collab-form [aria-invalid="true"] {
+    border-color: rgba(204, 48, 74, 0.62);
+    box-shadow: 0 0 0 3px rgba(204, 48, 74, 0.14);
+}
+
 .cta-button {
     display: inline-flex;
     align-items: center;
@@ -1627,7 +1646,12 @@
 .nav-toggle:focus-visible,
 .project-link:focus-visible,
 .contact-button:focus-visible,
-.footer-link-button:focus-visible {
+.footer-link-button:focus-visible,
+.mobile-sticky-apply:focus-visible {
     outline: 3px solid var(--accent-deep);
     outline-offset: 2px;
+}
+
+.mobile-sticky-apply {
+    display: none;
 }

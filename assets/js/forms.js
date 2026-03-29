@@ -103,6 +103,58 @@ const setupCollabForm = () => {
 
   const progressPills = Array.from(collabForm.querySelectorAll(".progress-pill"));
   const formSteps = Array.from(collabForm.querySelectorAll(".form-step"));
+  const stepFeedbackNodes = formSteps.map((step) => step.querySelector("[data-step-feedback]"));
+
+  const getStepFields = (step) =>
+    Array.from(step.querySelectorAll("input, select, textarea")).filter((field) => !field.disabled && field.type !== "hidden");
+
+  const getFieldLabel = (field) => {
+    if (!field) return "This field";
+    if (field.id) {
+      const linkedLabel = collabForm.querySelector(`label[for="${field.id}"]`);
+      if (linkedLabel) return linkedLabel.textContent?.trim() || "This field";
+    }
+    const wrappedLabel = field.closest("label");
+    if (wrappedLabel) return wrappedLabel.textContent?.trim() || "This field";
+    return field.name || "This field";
+  };
+
+  const clearStepError = (stepIndex) => {
+    const step = formSteps[stepIndex];
+    const feedbackNode = stepFeedbackNodes[stepIndex];
+    if (!step) return;
+
+    step.classList.remove("has-error");
+    if (feedbackNode) feedbackNode.textContent = "";
+
+    getStepFields(step).forEach((field) => {
+      field.removeAttribute("aria-invalid");
+    });
+  };
+
+  const validateStep = (stepIndex) => {
+    const step = formSteps[stepIndex];
+    const feedbackNode = stepFeedbackNodes[stepIndex];
+    if (!step) return { isValid: true, firstInvalidField: null };
+
+    const fields = getStepFields(step);
+    const firstInvalidField = fields.find((field) => !field.checkValidity()) || null;
+
+    clearStepError(stepIndex);
+
+    if (!firstInvalidField) return { isValid: true, firstInvalidField: null };
+
+    const fieldLabel = getFieldLabel(firstInvalidField);
+    const message = firstInvalidField.validity.valueMissing
+      ? `${fieldLabel} is required.`
+      : firstInvalidField.validationMessage || `Please check ${fieldLabel.toLowerCase()}.`;
+
+    step.classList.add("has-error");
+    firstInvalidField.setAttribute("aria-invalid", "true");
+    if (feedbackNode) feedbackNode.textContent = message;
+
+    return { isValid: false, firstInvalidField };
+  };
 
   const setActiveFormStep = (index) => {
     progressPills.forEach((pill, pillIndex) => {
@@ -116,6 +168,8 @@ const setupCollabForm = () => {
 
   formSteps.forEach((step, index) => {
     step.addEventListener("focusin", () => setActiveFormStep(index));
+    step.addEventListener("input", () => clearStepError(index));
+    step.addEventListener("change", () => clearStepError(index));
 
     if (window.matchMedia("(hover: hover)").matches) {
       step.addEventListener("mouseenter", () => setActiveFormStep(index));
@@ -126,6 +180,25 @@ const setupCollabForm = () => {
 
   collabForm.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    let firstInvalidStep = -1;
+    let firstInvalidField = null;
+
+    formSteps.some((_, index) => {
+      const result = validateStep(index);
+      if (!result.isValid) {
+        firstInvalidStep = index;
+        firstInvalidField = result.firstInvalidField;
+        return true;
+      }
+      return false;
+    });
+
+    if (firstInvalidStep >= 0) {
+      setActiveFormStep(firstInvalidStep);
+      firstInvalidField?.focus();
+      return;
+    }
 
     const name = collabForm.querySelector("[name='name']")?.value?.trim() || "";
     const phone = collabForm.querySelector("[name='phone']")?.value?.trim() || "";
@@ -162,6 +235,8 @@ const setupCollabForm = () => {
     showFormNotice(collabForm, "Application sent. We will review your profile within 3-7 business days.");
     window.open(buildWhatsAppUrl(payload), "_blank", "noopener");
     collabForm.reset();
+    formSteps.forEach((_, index) => clearStepError(index));
+    setActiveFormStep(0);
   });
 };
 
