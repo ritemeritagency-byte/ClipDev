@@ -925,6 +925,10 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin-top: 22px;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 .btn-primary {
     display: inline-flex;
     align-items: center;

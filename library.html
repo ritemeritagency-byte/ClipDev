@@ -76,54 +76,6 @@
     </header>
 
     <main>
-        <section class="container">
-            <div class="section-title">
-                <h2>Access Status</h2>
-                <div class="underline"></div>
-            </div>
-            <div class="payment-layout">
-                <article class="payment-gateway-panel scroll-merge merge-left">
-                    <p class="meta-pill">How this works</p>
-                    <h3>Log in, then the page checks your active membership</h3>
-                    <p>Course Club now supports a member account flow. The library below is intended for users with an active monthly membership attached to their account email.</p>
-                    <ul class="doc-expertise-list">
-                        <li>Create or log in to your account using the checkout email</li>
-                        <li>Active membership unlocks the library area below</li>
-                        <li>Pending or cancelled membership keeps the library hidden</li>
-                        <li>Manage billing and cancellation from your account or courses page</li>
-                    </ul>
-                </article>
-
-                <aside class="payment-action-card scroll-merge merge-right">
-                    <p class="course-plan-label">Account check</p>
-                    <h3>Member access status</h3>
-                    <p class="course-payment-status" data-library-session-status aria-live="polite">Checking your account...</p>
-                    <div class="membership-result-card" data-library-session-result hidden>
-                        <h4>Current Access</h4>
-                        <dl class="membership-result-list">
-                            <div>
-                                <dt>Email</dt>
-                                <dd data-library-session-email>Not signed in</dd>
-                            </div>
-                            <div>
-                                <dt>Plan</dt>
-                                <dd data-library-session-plan>Status unknown</dd>
-                            </div>
-                            <div>
-                                <dt>Library access</dt>
-                                <dd data-library-session-access>Locked</dd>
-                            </div>
-                        </dl>
-                    </div>
-                    <div class="course-plan-actions">
-                        <a href="/login" class="btn-primary" data-library-login-cta>Log In to Continue</a>
-                        <a href="/account" class="btn-secondary" data-library-account-cta hidden>Open Account</a>
-                    </div>
-                    <p class="course-plan-note">If the email on your account matches the email used during checkout, the library can unlock automatically once the membership is active.</p>
-                </aside>
-            </div>
-        </section>
-
         <section class="container library-shell-section" data-library-shell hidden>
             <div class="section-title">
                 <h2>Current Member Library</h2>
@@ -203,6 +155,54 @@
                             <li>Connect the Facebook Page and verify the bot responds properly</li>
                         </ul>
                     </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-title">
+                <h2>Access Status</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="payment-layout">
+                <article class="payment-gateway-panel scroll-merge merge-left">
+                    <p class="meta-pill">How this works</p>
+                    <h3>Log in, then the page checks your active membership</h3>
+                    <p>Course Club now supports a member account flow. The library below is intended for users with an active monthly membership attached to their account email.</p>
+                    <ul class="doc-expertise-list">
+                        <li>Create or log in to your account using the checkout email</li>
+                        <li>Active membership unlocks the library area below</li>
+                        <li>Pending or cancelled membership keeps the library hidden</li>
+                        <li>Manage billing and cancellation from your account or courses page</li>
+                    </ul>
+                </article>
+
+                <aside class="payment-action-card scroll-merge merge-right">
+                    <p class="course-plan-label">Account check</p>
+                    <h3>Member access status</h3>
+                    <p class="course-payment-status" data-library-session-status aria-live="polite">Checking your account...</p>
+                    <div class="membership-result-card" data-library-session-result hidden>
+                        <h4>Current Access</h4>
+                        <dl class="membership-result-list">
+                            <div>
+                                <dt>Email</dt>
+                                <dd data-library-session-email>Not signed in</dd>
+                            </div>
+                            <div>
+                                <dt>Plan</dt>
+                                <dd data-library-session-plan>Status unknown</dd>
+                            </div>
+                            <div>
+                                <dt>Library access</dt>
+                                <dd data-library-session-access>Locked</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="course-plan-actions">
+                        <a href="/login" class="btn-primary" data-library-login-cta>Log In to Continue</a>
+                        <a href="/account" class="btn-secondary" data-library-account-cta hidden>Open Account</a>
+                    </div>
+                    <p class="course-plan-note">If the email on your account matches the email used during checkout, the library can unlock automatically once the membership is active.</p>
                 </aside>
             </div>
         </section>
