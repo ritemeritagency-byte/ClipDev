@@ -1587,23 +1587,6 @@ body.nav-open .nav-toggle span:nth-child(3) {
         linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.22) 36%, rgba(15, 23, 42, 0.68) 100%);
 }
 
-.course-showcase-preview-pill {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    color: #f8fbff;
-    font-size: 0.84rem;
-    font-weight: 700;
-    backdrop-filter: blur(6px);
-}
-
 .course-showcase-lock {
     display: inline-flex;
     align-items: center;
