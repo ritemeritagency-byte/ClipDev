@@ -10,6 +10,7 @@ const {
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const SESSION_DURATION_DAYS = 30;
+const DEFAULT_ADMIN_EMAILS = ["cliperedbagundol@gmail.com"];
 
 const PLAN_TO_COURSE = {
   courseClubMonthly: "course-club",
@@ -23,10 +24,15 @@ const normalizeAccountType = (value) => {
   return normalized === "recruitment_agency" || normalized === "individual" ? normalized : null;
 };
 const getAdminEmails = () =>
-  String(process.env.ADMIN_EMAILS || "")
-    .split(",")
-    .map((value) => value.trim().toLowerCase())
-    .filter(Boolean);
+  Array.from(
+    new Set([
+      ...DEFAULT_ADMIN_EMAILS,
+      ...String(process.env.ADMIN_EMAILS || "")
+        .split(",")
+        .map((value) => value.trim().toLowerCase())
+        .filter(Boolean),
+    ])
+  );
 const isAdminEmail = (email) => getAdminEmails().includes(String(email || "").trim().toLowerCase());
 const getUserRole = (email) => (isAdminEmail(email) ? "admin" : "member");
 
