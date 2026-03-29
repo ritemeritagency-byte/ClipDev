@@ -119,6 +119,9 @@
         width: 100%;
         display: block;
     }
+    .nav-mega-trigger {
+        justify-content: space-between;
+    }
     .nav-mega-menu {
         position: static;
         width: 100%;
@@ -133,6 +136,8 @@
         box-shadow: none;
         background: rgba(244, 249, 255, 0.96);
         border-color: rgba(15, 39, 64, 0.08);
+        max-height: min(70dvh, 560px);
+        overflow-y: auto;
     }
     .nav-links li.is-mega-open .nav-mega-menu {
         display: block;
@@ -153,6 +158,15 @@
         background: #edf5ff;
         color: var(--accent-deep);
         border-color: rgba(27, 116, 228, 0.16);
+        width: 100%;
+        margin-left: 0;
+    }
+    .nav-mega-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav-mega-footer::before {
+        flex: none;
     }
     .nav-links a { width: 100%; }
     .nav-search-item { width: 100%; }
