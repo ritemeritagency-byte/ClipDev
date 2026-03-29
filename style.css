@@ -863,6 +863,36 @@ body.nav-open .nav-toggle span:nth-child(3) {
     justify-content: flex-start;
 }
 
+.library-login-banner {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.library-login-banner-label {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.library-login-banner-link {
+    color: var(--primary-ink);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.library-login-banner-link:hover {
+    color: var(--accent-blue);
+}
+
 .subpage-hero-visual {
     min-height: 320px;
     display: grid;
@@ -6469,6 +6499,12 @@ button:focus-visible {
     .subpage-hero-layout {
         grid-template-columns: 1fr;
         gap: 22px;
+    }
+
+    .library-login-banner {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     .subpage-hero-visual {
