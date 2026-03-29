@@ -1337,6 +1337,102 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin: 8px 0 6px;
 }
 
+.training-session-offer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 22px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+.training-session-copy,
+.training-session-card {
+    background: #ffffff;
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.08);
+}
+
+.training-session-copy {
+    padding: 28px;
+}
+
+.training-session-copy h3 {
+    color: var(--primary-ink);
+    margin: 8px 0 12px;
+}
+
+.training-session-summary {
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 62ch;
+}
+
+.training-session-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.training-session-points span {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(27, 116, 228, 0.08);
+    color: var(--accent-deep);
+    font-size: 0.84rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+}
+
+.training-session-card {
+    padding: 24px;
+}
+
+.training-session-card h4 {
+    color: var(--primary-ink);
+    margin: 8px 0 10px;
+}
+
+.training-session-card h5 {
+    color: var(--primary-ink);
+    margin: 6px 0 8px;
+    font-size: 1rem;
+}
+
+.training-session-price {
+    color: var(--accent-deep);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 16px;
+}
+
+.training-session-price span {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.training-session-booking,
+.training-payment-form {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.training-booking-button {
+    margin-top: 12px;
+}
+
+.training-booking-button > * {
+    width: 100%;
+}
+
 .course-plan-price {
     color: var(--accent-deep);
     font-size: 2rem;
@@ -5419,6 +5515,7 @@ button:focus-visible {
     .course-showcase { grid-template-columns: 1fr; }
     .course-showcase-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .coming-soon-grid { grid-template-columns: 1fr; }
+    .training-session-offer { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .auth-grid { grid-template-columns: 1fr; }

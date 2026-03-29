@@ -716,6 +716,73 @@ const setupCoursePaymentLinks = () => {
 
 setupCoursePaymentLinks();
 
+const setupTrainingCheckout = () => {
+  document.querySelectorAll("[data-training-checkout]").forEach((button) => {
+    const paymentKey = button.getAttribute("data-training-checkout") || "";
+    const form = button.closest("[data-training-payment-form]");
+    const statusNode = form?.querySelector("[data-training-payment-status]") || null;
+    const defaultLabel = (button.textContent || "").trim();
+
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const fullName = (form?.querySelector('input[name="fullName"]')?.value || "").trim();
+      const email = (form?.querySelector('input[name="email"]')?.value || "").trim().toLowerCase();
+
+      if (statusNode) {
+        statusNode.textContent = "";
+        statusNode.classList.remove("is-error", "is-success");
+      }
+
+      if (!fullName || !email || !email.includes("@")) {
+        if (statusNode) {
+          statusNode.textContent = "Enter your full name and a valid email before payment.";
+          statusNode.classList.add("is-error");
+        }
+        return;
+      }
+
+      button.classList.add("is-loading");
+      button.setAttribute("aria-busy", "true");
+      button.textContent = "Opening checkout...";
+
+      try {
+        const response = await fetch("/api/paymongo/create-checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            courseId: paymentKey,
+            email,
+            fullName,
+          }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        const checkoutUrl = payload?.checkoutUrl;
+
+        if (!response.ok || !checkoutUrl) {
+          throw new Error(payload?.error || "Unable to create PayMongo checkout session.");
+        }
+
+        window.location.href = checkoutUrl;
+      } catch (error) {
+        if (statusNode) {
+          statusNode.textContent = error.message || "Unable to open checkout right now.";
+          statusNode.classList.add("is-error");
+        }
+      } finally {
+        button.classList.remove("is-loading");
+        button.removeAttribute("aria-busy");
+        button.textContent = defaultLabel;
+      }
+    });
+  });
+};
+
+setupTrainingCheckout();
+
 const setupCourseLaunchOffer = () => {
   const offerSections = document.querySelectorAll("[data-launch-offer-section]");
   if (!offerSections.length) return;

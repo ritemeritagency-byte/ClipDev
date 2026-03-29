@@ -30,6 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 </head>
 <body class="page-courses">
     <nav class="navbar">
@@ -309,6 +311,58 @@
                     </article>
                 </div>
             </section>
+            <section class="training-session-offer scroll-merge merge-left" aria-label="1-on-1 training offer">
+                <div class="training-session-copy">
+                    <p class="meta-pill">1-on-1 Training</p>
+                    <h3>Need guided help instead of learning alone?</h3>
+                    <p class="training-session-summary">Book a private 1-on-1 training package for <strong>PHP 999</strong> and get guided help across one week. This works well for agency owners, VAs, and first-time members who want faster implementation with direct support.</p>
+                    <div class="training-session-points">
+                        <span>1.5 hours per day</span>
+                        <span>1 week training</span>
+                        <span>Private live guidance</span>
+                    </div>
+                </div>
+                <aside class="training-session-card">
+                    <p class="course-plan-label">Private Session</p>
+                    <h4>Schedule 1-on-1 Training</h4>
+                    <p class="training-session-price">PHP 999 <span>/ 1 week</span></p>
+                    <ul class="doc-expertise-list">
+                        <li>1.5-hour live training each day for 1 week</li>
+                        <li>Setup ChatMaxima and Facebook Page connection properly</li>
+                        <li>Connect Google Sheets and structure the database setup</li>
+                        <li>Ask questions live and get direct implementation help</li>
+                        <li>Sessions are held through Google Meet</li>
+                    </ul>
+                    <p class="course-plan-note"><strong>Available schedule:</strong> Weekdays from 9:00 PM to 10:00 PM PH time, and weekends from 1:00 PM to 5:00 PM PH time.</p>
+                    <div class="training-session-booking">
+                        <p class="course-plan-label">Step 1</p>
+                        <h5>Book your schedule</h5>
+                        <p class="course-plan-note">Choose an available Google Calendar slot first so your session does not get double-booked.</p>
+                        <div class="training-booking-button" data-training-booking-button></div>
+                    </div>
+                    <form class="training-payment-form" data-training-payment-form>
+                        <p class="course-plan-label">Step 2</p>
+                        <h5>Pay to confirm</h5>
+                        <p class="course-plan-note">After booking your preferred slot, complete the PayMongo payment below so we can confirm your 1-on-1 training.</p>
+                        <label class="course-payment-field">
+                            <span>Full name</span>
+                            <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" required>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Email address</span>
+                            <input type="email" name="email" autocomplete="email" placeholder="your@email.com" required>
+                        </label>
+                        <div class="course-plan-actions">
+                            <button type="button" class="btn-primary" data-training-checkout="oneOnOneTrainingWeek">Pay PHP 999 via PayMongo</button>
+                        </div>
+                        <p class="course-payment-status" data-training-payment-status aria-live="polite"></p>
+                    </form>
+                    <div class="course-plan-actions">
+                        <a href="https://api.whatsapp.com/send?phone=639603780196&text=Hi%20ClipDevs%2C%20I%20booked%20a%201-on-1%20training%20slot%20and%20want%20to%20confirm%20the%20Google%20Meet%20details." class="btn-secondary" target="_blank" rel="noopener noreferrer">Message On WhatsApp</a>
+                    </div>
+                    <p class="course-plan-note">Booking is confirmed after payment. If the meeting does not happen from our side, your payment is refundable or can be moved to a new schedule. Topics can cover ChatMaxima setup, Facebook setup, Google Sheet connection, and database setup.</p>
+                </aside>
+            </section>
         </section>
 
         <div class="paywall-modal" data-paywall-modal hidden>
@@ -439,6 +493,18 @@
         </div>
     </div>
 
+    <script>
+    window.addEventListener("load", function () {
+        var target = document.querySelector("[data-training-booking-button]");
+        if (!target || !window.calendar || !window.calendar.schedulingButton) return;
+        window.calendar.schedulingButton.load({
+            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true",
+            color: "#039BE5",
+            label: "Book an appointment",
+            target: target,
+        });
+    });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
