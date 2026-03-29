@@ -1191,6 +1191,25 @@ body.nav-open .nav-toggle span:nth-child(3) {
     max-width: 62ch;
 }
 
+.course-membership-hooks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.course-membership-hooks span {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(27, 116, 228, 0.08);
+    color: var(--accent-deep);
+    font-size: 0.84rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+}
+
 .course-membership-points {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1224,6 +1243,44 @@ body.nav-open .nav-toggle span:nth-child(3) {
 .course-point-card p {
     margin: 0;
     font-size: 0.92rem;
+}
+
+.course-membership-media-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.course-membership-media-card {
+    position: relative;
+    min-height: 190px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    background: #e3edf9;
+    box-shadow: 0 12px 24px rgba(13, 27, 42, 0.06);
+}
+
+.course-membership-media-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.course-membership-media-card figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--primary-ink);
+    font-size: 0.8rem;
+    font-weight: 800;
 }
 
 .course-plan-card {
@@ -1492,6 +1549,65 @@ body.nav-open .nav-toggle span:nth-child(3) {
     color: var(--text-muted);
     font-size: 0.94rem;
     line-height: 1.45;
+}
+
+.member-guide-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.member-guide-card {
+    display: grid;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    box-shadow: 0 16px 34px rgba(13, 27, 42, 0.06);
+}
+
+.member-guide-card h3,
+.member-guide-step strong,
+.member-guide-step span {
+    margin: 0;
+}
+
+.member-guide-steps {
+    background:
+        radial-gradient(240px 140px at 0% 0%, rgba(214, 233, 255, 0.86), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+}
+
+.member-guide-step-list {
+    display: grid;
+    gap: 12px;
+}
+
+.member-guide-step {
+    display: grid;
+    gap: 6px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(17, 38, 61, 0.08);
+}
+
+.member-guide-step strong {
+    color: var(--primary-ink);
+    font-size: 0.98rem;
+}
+
+.member-guide-step span {
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+.member-guide-perks {
+    align-content: start;
+    background:
+        radial-gradient(220px 140px at 100% 0%, rgba(218, 243, 234, 0.82), transparent 58%),
+        linear-gradient(180deg, #ffffff 0%, #f7fcfa 100%);
 }
 
 .course-showcase {
@@ -5095,9 +5211,11 @@ button:focus-visible {
     .featured-case-card { grid-template-columns: 1fr; }
     .course-membership-card { grid-template-columns: 1fr; }
     .course-membership-points { grid-template-columns: 1fr; }
+    .course-membership-media-strip { grid-template-columns: 1fr; }
     .course-plan-card { position: static; }
     .course-catalog-grid { grid-template-columns: 1fr; }
     .course-visual-strip { grid-template-columns: 1fr; }
+    .member-guide-shell { grid-template-columns: 1fr; }
     .course-showcase { grid-template-columns: 1fr; }
     .course-showcase-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .coming-soon-grid { grid-template-columns: 1fr; }
@@ -6296,6 +6414,14 @@ button:focus-visible {
         min-height: 190px;
     }
 
+    .member-guide-card {
+        padding: 20px;
+    }
+
+    .course-membership-media-card {
+        min-height: 170px;
+    }
+
     .page-home .home-hero .hero-content {
         gap: 20px;
     }
@@ -6341,6 +6467,20 @@ button:focus-visible {
         padding: 16px;
         gap: 16px;
         border-radius: 18px;
+    }
+
+    .member-guide-card {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .course-membership-hooks {
+        gap: 8px;
+    }
+
+    .course-membership-hooks span {
+        width: 100%;
+        justify-content: center;
     }
 
     .course-hero-visual {
