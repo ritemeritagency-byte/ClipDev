@@ -30,8 +30,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 </head>
 <body>
     <nav class="navbar">
@@ -528,9 +526,27 @@
                     </div>
                     <div class="training-session-booking">
                         <p class="course-plan-label">See Available Time</p>
-                        <h5>Check weekday and weekend slots</h5>
-                        <p class="course-plan-note">Use the schedule button below to view the live calendar. Current general availability is weekdays in the evening and weekends based on open slots.</p>
-                        <div class="training-booking-button" data-hourly-booking-button></div>
+                        <h5>Check the live calendar before you book</h5>
+                        <p class="course-plan-note">The schedule below shows my current available time. Weekday evening and weekend slots will update based on what is still open.</p>
+                        <div class="availability-panel">
+                            <div class="availability-panel-header">
+                                <span class="availability-live-badge">Live availability</span>
+                                <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true" class="btn-primary" target="_blank" rel="noopener noreferrer">Open Schedule In New Tab</a>
+                            </div>
+                            <ul class="availability-checklist">
+                                <li>Review the open time slots in the calendar</li>
+                                <li>Choose your preferred weekday or weekend option in the form</li>
+                                <li>Pay first, then send your task details on WhatsApp so I can confirm the final slot</li>
+                            </ul>
+                            <div class="availability-embed">
+                                <iframe
+                                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true"
+                                    title="ClipDevs live availability calendar"
+                                    loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            </div>
+                            <p class="course-plan-note">If the calendar does not load inside the page on your device, use the button above to open the live schedule directly.</p>
+                        </div>
                     </div>
                 </div>
                 <aside class="training-session-card">
@@ -747,19 +763,6 @@
             <button class="wa-send" type="button" data-wa-send>Send to Messenger</button>
         </div>
     </div>
-
-    <script>
-    window.addEventListener("load", function () {
-        var target = document.querySelector("[data-hourly-booking-button]");
-        if (!target || !window.calendar || !window.calendar.schedulingButton) return;
-        window.calendar.schedulingButton.load({
-            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true",
-            color: "#039BE5",
-            label: "See available time",
-            target: target,
-        });
-    });
-    </script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
