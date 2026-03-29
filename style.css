@@ -1799,11 +1799,52 @@ body.nav-open .nav-toggle span:nth-child(3) {
     position: absolute;
     inset: 0;
     display: grid;
-    align-content: end;
+    align-content: space-between;
     gap: 12px;
     padding: 22px;
     background:
         linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.22) 36%, rgba(15, 23, 42, 0.68) 100%);
+}
+
+.course-showcase-play {
+    place-self: center;
+    display: inline-grid;
+    justify-items: center;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.course-showcase-play-icon {
+    display: grid;
+    place-items: center;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.86), rgba(59, 130, 246, 0.9));
+    box-shadow: 0 18px 34px rgba(30, 64, 175, 0.34);
+    color: #ffffff;
+    font-size: 1.8rem;
+}
+
+.course-showcase-play-icon i {
+    margin-left: 4px;
+}
+
+.course-showcase-play-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-size: 0.84rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .course-showcase-lock {
@@ -5537,6 +5578,19 @@ button:focus-visible {
         padding: 16px;
         gap: 10px;
     }
+    .course-showcase-play {
+        gap: 10px;
+    }
+    .course-showcase-play-icon {
+        width: 76px;
+        height: 76px;
+        font-size: 1.55rem;
+    }
+    .course-showcase-play-label {
+        min-height: 34px;
+        padding: 7px 12px;
+        font-size: 0.76rem;
+    }
     .course-showcase-lock {
         width: 100%;
         justify-content: center;
@@ -6431,6 +6485,22 @@ button:focus-visible {
         aspect-ratio: 9 / 11;
     }
 
+    .page-home .course-membership-copy,
+    .page-home .course-plan-card,
+    .page-home .course-point-card {
+        padding: 18px;
+    }
+
+    .course-membership-media-card figcaption {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        width: auto;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.76rem;
+    }
+
     .page-home .home-hero .hero-actions {
         width: 100%;
         gap: 10px;
@@ -6535,6 +6605,21 @@ button:focus-visible {
         text-align: center;
     }
 
+    .course-showcase-play {
+        margin-bottom: 4px;
+    }
+
+    .course-showcase-play-icon {
+        width: 68px;
+        height: 68px;
+        font-size: 1.35rem;
+    }
+
+    .course-showcase-play-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+    }
+
     .course-showcase-lock {
         padding: 9px 12px;
         font-size: 0.84rem;
@@ -6608,6 +6693,27 @@ button:focus-visible {
     .payment-action-card,
     .payment-method-card {
         padding: 16px;
+    }
+
+    .page-home .course-membership-copy,
+    .page-home .course-plan-card,
+    .page-home .course-point-card,
+    .page-home .course-membership-media-card {
+        border-radius: 16px;
+    }
+
+    .course-membership-hooks {
+        gap: 8px;
+    }
+
+    .course-membership-hooks span {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .page-home .home-hero .hero-actions,
+    .page-home .hero-proof-badges {
+        align-items: stretch;
     }
 }
 
