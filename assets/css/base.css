@@ -436,13 +436,13 @@ body.is-scrolled .navbar {
     width: min(280px, 100%);
     margin-left: auto;
     border-radius: 18px;
-    background: linear-gradient(135deg, rgba(47, 128, 237, 0.14) 0%, rgba(47, 128, 237, 0.06) 100%);
-    color: var(--accent-deep);
+    background: linear-gradient(135deg, #6f45d8 0%, #8e61ff 100%);
+    color: #f8f5ff;
     text-decoration: none;
     font-weight: 800;
     font-size: 1.05rem;
-    border: 1px solid rgba(47, 128, 237, 0.14);
-    box-shadow: 0 10px 22px rgba(47, 128, 237, 0.08);
+    border: 1px solid rgba(111, 69, 216, 0.38);
+    box-shadow: 0 14px 26px rgba(111, 69, 216, 0.22);
 }
 
 .nav-mega-cta::after {
@@ -450,7 +450,7 @@ body.is-scrolled .navbar {
 }
 
 .nav-mega-cta:hover {
-    background: linear-gradient(135deg, rgba(47, 128, 237, 0.2) 0%, rgba(47, 128, 237, 0.08) 100%);
+    background: linear-gradient(135deg, #6237d0 0%, #8353ff 100%);
 }
 
 @media (max-width: 1200px) {

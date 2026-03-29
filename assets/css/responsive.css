@@ -155,9 +155,9 @@
         color: var(--text-muted);
     }
     .nav-mega-cta {
-        background: #edf5ff;
-        color: var(--accent-deep);
-        border-color: rgba(27, 116, 228, 0.16);
+        background: linear-gradient(135deg, #6f45d8 0%, #8e61ff 100%);
+        color: #f8f5ff;
+        border-color: rgba(111, 69, 216, 0.38);
         width: 100%;
         margin-left: 0;
     }
