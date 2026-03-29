@@ -1429,6 +1429,42 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin-top: 18px;
 }
 
+.training-session-context-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.training-session-context-card,
+.training-session-process {
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    box-shadow: 0 12px 24px rgba(13, 27, 42, 0.06);
+    padding: 18px;
+}
+
+.training-session-context-card h4 {
+    color: var(--primary-ink);
+    margin: 6px 0 8px;
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.training-session-context-card p:last-child,
+.training-session-process .doc-expertise-list {
+    margin-bottom: 0;
+}
+
+.training-session-context-card p:last-child {
+    color: var(--text-muted);
+}
+
+.training-session-process {
+    margin-top: 18px;
+}
+
 .training-session-card {
     padding: 24px;
 }
@@ -5558,6 +5594,7 @@ button:focus-visible {
     .course-showcase-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .coming-soon-grid { grid-template-columns: 1fr; }
     .training-session-offer { grid-template-columns: 1fr; }
+    .training-session-context-grid { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .auth-grid { grid-template-columns: 1fr; }
