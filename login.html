@@ -84,7 +84,10 @@
                         </label>
                         <label class="course-payment-field">
                             <span>Password</span>
-                            <input type="password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+                            <div class="password-field">
+                                <input type="password" name="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+                                <button type="button" class="password-toggle" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+                            </div>
                         </label>
                         <label class="course-payment-field">
                             <span>Account type</span>
@@ -125,7 +128,10 @@
                         </label>
                         <label class="course-payment-field">
                             <span>Password</span>
-                            <input type="password" name="password" placeholder="Your password" autocomplete="current-password" required>
+                            <div class="password-field">
+                                <input type="password" name="password" placeholder="Your password" autocomplete="current-password" required>
+                                <button type="button" class="password-toggle" data-password-toggle aria-label="Show password" aria-pressed="false">Show</button>
+                            </div>
                         </label>
                         <p class="course-payment-status" data-login-status aria-live="polite"></p>
                         <div class="course-plan-actions">

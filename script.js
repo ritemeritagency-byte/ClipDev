@@ -944,6 +944,24 @@ const setupAuthForms = () => {
   const signupForm = document.querySelector("[data-signup-form]");
   const loginForm = document.querySelector("[data-login-form]");
 
+  const bindPasswordToggles = (form) => {
+    if (!form) return;
+
+    form.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      const field = button.closest(".password-field");
+      const input = field?.querySelector("input");
+      if (!input) return;
+
+      button.addEventListener("click", () => {
+        const showing = input.type === "text";
+        input.type = showing ? "password" : "text";
+        button.textContent = showing ? "Show" : "Hide";
+        button.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+        button.setAttribute("aria-pressed", String(!showing));
+      });
+    });
+  };
+
   const bindForm = (form, options) => {
     if (!form) return;
 
@@ -1030,6 +1048,8 @@ const setupAuthForms = () => {
     }),
   });
 
+  bindPasswordToggles(signupForm);
+  bindPasswordToggles(loginForm);
   bindAvatarUploader(signupForm, { previewSelector: "[data-signup-avatar-preview]" });
   bindAccountTypeVisibility(signupForm);
 };
