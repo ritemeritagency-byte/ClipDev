@@ -1,5 +1,6 @@
 const { COURSE_CATALOG } = require("./catalog");
 const { sendJson } = require("../_lib/http");
+const { forwardToRailway } = require("../_lib/railway");
 
 const getBaseUrl = (req) => {
   const configured = process.env.PUBLIC_SITE_URL;
@@ -41,6 +42,28 @@ module.exports = async (req, res) => {
   const successUrl = `${baseUrl}/courses?payment=success&course=${encodeURIComponent(course.id)}`;
   const cancelUrl = `${baseUrl}/courses?payment=cancelled&course=${encodeURIComponent(course.id)}`;
 
+  let lineItemAmount = course.amount;
+  let launchOfferStatus = null;
+
+  if (course.id === "courseClubMonthly" && course.launchOffer) {
+    try {
+      const offerResponse = await forwardToRailway(
+        "/api/offers/course-club-launch",
+        undefined,
+        { method: "GET" }
+      );
+
+      if (offerResponse.ok && offerResponse.payload) {
+        launchOfferStatus = offerResponse.payload;
+        if (offerResponse.payload.active) {
+          lineItemAmount = course.launchOffer.discountedAmount;
+        }
+      }
+    } catch (error) {
+      launchOfferStatus = null;
+    }
+  }
+
   try {
     const response = await fetch("https://api.paymongo.com/v1/checkout_sessions", {
       method: "POST",
@@ -58,7 +81,7 @@ module.exports = async (req, res) => {
             line_items: [
               {
                 currency: course.currency,
-                amount: course.amount,
+                amount: lineItemAmount,
                 description: course.description,
                 name: course.name,
                 quantity: 1,
@@ -70,6 +93,8 @@ module.exports = async (req, res) => {
               course_name: course.name,
               customer_email: customerEmail,
               full_name: customerName,
+              launch_offer_applied: String(Boolean(launchOfferStatus?.active)),
+              launch_offer_remaining: String(launchOfferStatus?.remaining ?? ""),
             },
             show_description: true,
             show_line_items: true,
@@ -92,6 +117,12 @@ module.exports = async (req, res) => {
       checkoutUrl,
       courseId: course.id,
       customerEmail: customerEmail || null,
+      pricing: {
+        amount: lineItemAmount,
+        regularAmount: course.regularAmount || course.amount,
+        currency: course.currency,
+        launchOfferActive: Boolean(launchOfferStatus?.active),
+      },
     });
   } catch (error) {
     return sendJson(res, 500, {

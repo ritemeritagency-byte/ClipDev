@@ -4,8 +4,14 @@ const COURSE_CATALOG = {
     name: "Course Club Monthly",
     description: "Monthly membership access to the full private ClipDevs VOD course library, including future course videos.",
     amount: 99900,
+    regularAmount: 99900,
     currency: "PHP",
     paymentMethodTypes: ["qrph"],
+    launchOffer: {
+      maxRedemptions: 10,
+      discountPercent: 30,
+      discountedAmount: 69900,
+    },
   },
   flagshipCourseOneTime: {
     id: "flagshipCourseOneTime",

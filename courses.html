@@ -61,7 +61,7 @@
                 <h1>Build the skills to market independently or help your agency attract applicants worldwide</h1>
                 <p class="subtitle">This membership is designed to help you build the skills to work as an independent social media marketer or help your agency attract qualified applicants worldwide through effective online marketing and recruitment systems, with access to current courses and upcoming video releases.</p>
                 <div class="hero-actions">
-                    <button type="button" class="btn-primary" data-open-paywall>Start Monthly Access</button>
+                    <button type="button" class="btn-primary" data-open-paywall data-launch-offer-cta>Claim Launch Offer</button>
                     <a href="/login" class="btn-secondary">Library Login</a>
                 </div>
                 <p class="hero-microcopy">New here? Start monthly access. Already subscribed? Use Library Login to enter your member account and open the library.</p>
@@ -146,7 +146,7 @@
                         <li>Keep everything tied to one member profile for easier account and access management</li>
                     </ul>
                     <div class="course-plan-actions">
-                        <button type="button" class="btn-primary" data-open-paywall>Become A Member</button>
+                        <button type="button" class="btn-primary" data-open-paywall data-launch-offer-cta>Claim Launch Offer</button>
                     </div>
                 </div>
             </section>
@@ -234,12 +234,20 @@
                     <div class="course-showcase-side-card">
                         <p class="course-highlight-label">Included in Course Club</p>
                         <div class="course-offer-price-stack">
-                            <p class="course-highlight-duration">PHP 999<span> / month</span></p>
-                            <p class="course-offer-compare">PHP 1,499 value</p>
+                            <p class="course-highlight-duration" data-course-price-main>PHP 699<span> / first month</span></p>
+                            <p class="course-offer-compare" data-course-price-note>Then PHP 999 / month</p>
+                        </div>
+                        <div class="course-launch-offer" data-launch-offer-section>
+                            <div class="course-launch-offer-topline">
+                                <span class="course-launch-offer-pill">Launch Offer</span>
+                                <span class="course-launch-offer-remaining" data-launch-offer-remaining>10 of 10 spots left</span>
+                            </div>
+                            <p class="course-launch-offer-title" data-launch-offer-title>30% off for the first 10 paid members</p>
+                            <p class="course-launch-offer-copy" data-launch-offer-copy>Start at <strong data-launch-offer-price>PHP 699</strong> for your first month, then continue at <span data-launch-offer-regular>PHP 999 / month</span> while your subscription stays active.</p>
                         </div>
                         <div class="course-offer-badges" aria-label="Course Club offer badges">
                             <span class="course-offer-badge is-premium"><i class="far fa-gem" aria-hidden="true"></i> Premium</span>
-                            <span class="course-offer-badge is-featured">Featured</span>
+                            <span class="course-offer-badge is-featured" data-launch-offer-badge>Launch Offer</span>
                         </div>
                         <p class="course-showcase-side-copy">This is a monthly subscription, not a one-time course purchase. Your active subscription unlocks current courses plus upcoming Course Club video releases.</p>
                     </div>
@@ -263,7 +271,7 @@
                         <li>Use the member library to access the full lesson player</li>
                     </ul>
                     <div class="course-plan-actions">
-                        <button type="button" class="btn-primary" data-open-paywall>Unlock This Course</button>
+                        <button type="button" class="btn-primary" data-open-paywall data-launch-offer-cta>Claim Launch Offer</button>
                     </div>
                 </aside>
             </section>
@@ -317,6 +325,14 @@
                     <a href="/library" class="btn-secondary">Open Member Library</a>
                 </div>
                 <div class="payment-price-block">
+                    <div class="course-launch-offer course-launch-offer-modal" data-launch-offer-section>
+                        <div class="course-launch-offer-topline">
+                            <span class="course-launch-offer-pill">Launch Offer</span>
+                            <span class="course-launch-offer-remaining" data-launch-offer-remaining>10 of 10 spots left</span>
+                        </div>
+                        <p class="course-launch-offer-title" data-launch-offer-title>30% off for the first 10 paid members</p>
+                        <p class="course-launch-offer-copy" data-launch-offer-copy>Pay <strong data-launch-offer-price>PHP 699</strong> for your first month, then renew at <span data-launch-offer-regular>PHP 999 / month</span>.</p>
+                    </div>
                     <div class="course-offer-rating payment-offer-rating" aria-label="Premium course membership">
                         <span class="course-offer-rating-score">Premium</span>
                         <span class="course-offer-rating-stars" aria-hidden="true">
@@ -329,12 +345,12 @@
                         <span class="course-offer-rating-note">Member library access</span>
                     </div>
                     <div class="course-offer-price-stack">
-                        <p class="course-plan-price">PHP 999<span> / month</span></p>
-                        <p class="course-offer-compare">PHP 1,499 value</p>
+                        <p class="course-plan-price" data-course-plan-price>PHP 699<span> / first month</span></p>
+                        <p class="course-offer-compare" data-course-plan-note>Then PHP 999 / month</p>
                     </div>
                     <div class="course-offer-badges" aria-label="Membership badges">
                         <span class="course-offer-badge is-premium"><i class="far fa-gem" aria-hidden="true"></i> Premium</span>
-                        <span class="course-offer-badge is-featured">Best for new members</span>
+                        <span class="course-offer-badge is-featured" data-launch-offer-badge>Best for first 10 members</span>
                     </div>
                     <p class="payment-price-note">One recurring membership for the full Course Club library.</p>
                 </div>
@@ -349,7 +365,7 @@
                     </label>
                     <p class="course-payment-status" data-course-payment-status aria-live="polite"></p>
                     <div class="course-plan-actions">
-                        <button type="submit" class="btn-primary" data-payment-link="courseClubMonthly">Subscribe Monthly</button>
+                        <button type="submit" class="btn-primary" data-payment-link="courseClubMonthly" data-launch-offer-cta>Claim Launch Offer</button>
                     </div>
                 </form>
             </div>

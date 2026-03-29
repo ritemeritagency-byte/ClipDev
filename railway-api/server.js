@@ -16,6 +16,14 @@ const PLAN_TO_COURSE = {
   courseClubMonthly: "course-club",
   flagshipCourseOneTime: "flagship-course",
 };
+const COURSE_CLUB_LAUNCH_OFFER = {
+  planCode: "courseClubMonthly",
+  maxRedemptions: 10,
+  discountPercent: 30,
+  regularAmountCents: 99900,
+  discountedAmountCents: 69900,
+  currency: "PHP",
+};
 
 const json = (res, status, payload) => res.status(status).json(payload);
 const normalizeAccountType = (value) => {
@@ -657,6 +665,43 @@ app.post("/api/auth/logout", requireInternalSecret, async (req, res) => {
     return json(res, 200, { ok: true });
   } catch (error) {
     return json(res, 500, { error: "Unable to log out.", details: error.message });
+  }
+});
+
+app.get("/api/offers/course-club-launch", requireInternalSecret, async (req, res) => {
+  const pool = getPool();
+  const client = await pool.connect();
+
+  try {
+    const result = await client.query(
+      `
+        select count(distinct p.user_id)::int as redeemed
+        from payments p
+        join subscriptions s on s.id = p.subscription_id
+        join subscription_plans sp on sp.id = s.plan_id
+        where sp.plan_code = $1
+          and p.status = 'paid'
+      `,
+      [COURSE_CLUB_LAUNCH_OFFER.planCode]
+    );
+
+    const redeemed = Number(result.rows[0]?.redeemed || 0);
+    const remaining = Math.max(0, COURSE_CLUB_LAUNCH_OFFER.maxRedemptions - redeemed);
+
+    return json(res, 200, {
+      active: remaining > 0,
+      redeemed,
+      remaining,
+      maxRedemptions: COURSE_CLUB_LAUNCH_OFFER.maxRedemptions,
+      discountPercent: COURSE_CLUB_LAUNCH_OFFER.discountPercent,
+      regularAmount: COURSE_CLUB_LAUNCH_OFFER.regularAmountCents,
+      discountedAmount: COURSE_CLUB_LAUNCH_OFFER.discountedAmountCents,
+      currency: COURSE_CLUB_LAUNCH_OFFER.currency,
+    });
+  } catch (error) {
+    return json(res, 500, { error: "Unable to load launch offer.", details: error.message });
+  } finally {
+    client.release();
   }
 });
 

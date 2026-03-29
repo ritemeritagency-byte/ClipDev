@@ -73,6 +73,11 @@ const formatDateLabel = (value, fallback = "No recent activity") => {
   }).format(date);
 };
 
+const formatPhpAmount = (amountInCents) => {
+  const amount = Math.round(Number(amountInCents || 0) / 100);
+  return `PHP ${new Intl.NumberFormat("en-PH").format(amount)}`;
+};
+
 const setupSiteIntro = () => {
   if (!body.classList.contains("page-home")) return;
 
@@ -710,6 +715,85 @@ const setupCoursePaymentLinks = () => {
 };
 
 setupCoursePaymentLinks();
+
+const setupCourseLaunchOffer = () => {
+  const offerSections = document.querySelectorAll("[data-launch-offer-section]");
+  if (!offerSections.length) return;
+
+  const updatePriceNode = (selector, amountInCents, suffix) => {
+    document.querySelectorAll(selector).forEach((node) => {
+      node.innerHTML = `${formatPhpAmount(amountInCents)}<span>${suffix}</span>`;
+    });
+  };
+
+  fetch("/api/offers/course-club-launch")
+    .then((response) => response.json().then((payload) => ({ ok: response.ok, payload })))
+    .then(({ ok, payload }) => {
+      if (!ok || !payload) return;
+
+      const active = Boolean(payload.active);
+      const remaining = Number(payload.remaining || 0);
+      const maxRedemptions = Number(payload.maxRedemptions || 10);
+      const regularAmount = Number(payload.regularAmount || 99900);
+      const discountedAmount = Number(payload.discountedAmount || regularAmount);
+      const discountPercent = Number(payload.discountPercent || 30);
+
+      updatePriceNode("[data-course-price-main]", active ? discountedAmount : regularAmount, active ? " / first month" : " / month");
+      updatePriceNode("[data-course-plan-price]", active ? discountedAmount : regularAmount, active ? " / first month" : " / month");
+
+      document.querySelectorAll("[data-course-price-note]").forEach((node) => {
+        node.textContent = active ? `Then ${formatPhpAmount(regularAmount)} / month` : `${formatPhpAmount(regularAmount)} regular monthly rate`;
+      });
+
+      document.querySelectorAll("[data-course-plan-note]").forEach((node) => {
+        node.textContent = active ? `Then ${formatPhpAmount(regularAmount)} / month` : `${formatPhpAmount(regularAmount)} regular monthly rate`;
+      });
+
+      document.querySelectorAll("[data-launch-offer-price]").forEach((node) => {
+        node.textContent = formatPhpAmount(active ? discountedAmount : regularAmount);
+      });
+
+      document.querySelectorAll("[data-launch-offer-regular]").forEach((node) => {
+        node.textContent = `${formatPhpAmount(regularAmount)} / month`;
+      });
+
+      document.querySelectorAll("[data-launch-offer-remaining]").forEach((node) => {
+        node.textContent = active
+          ? `${remaining} of ${maxRedemptions} spots left`
+          : "Launch offer claimed";
+      });
+
+      document.querySelectorAll("[data-launch-offer-title]").forEach((node) => {
+        node.textContent = active
+          ? `${discountPercent}% off for the first ${maxRedemptions} paid members`
+          : "Launch offer has now been claimed";
+      });
+
+      document.querySelectorAll("[data-launch-offer-copy]").forEach((node) => {
+        if (active) return;
+        node.innerHTML = `The launch discount has been claimed. New members now join at <strong>${formatPhpAmount(
+          regularAmount
+        )}</strong> per month for full Course Club access.`;
+      });
+
+      document.querySelectorAll("[data-launch-offer-badge]").forEach((node) => {
+        node.textContent = active ? "Launch Offer" : "Regular Rate";
+      });
+
+      document.querySelectorAll("[data-launch-offer-cta]").forEach((node) => {
+        node.textContent = active ? "Claim Launch Offer" : "Subscribe Monthly";
+      });
+
+      if (!active) {
+        offerSections.forEach((section) => {
+          section.classList.add("is-inactive");
+        });
+      }
+    })
+    .catch(() => {});
+};
+
+setupCourseLaunchOffer();
 
 const setupPaywallModal = () => {
   const modal = document.querySelector("[data-paywall-modal]");
