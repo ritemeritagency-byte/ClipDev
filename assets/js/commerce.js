@@ -5,6 +5,42 @@ import {
   trackAnalyticsEvent,
 } from "./shared.js";
 
+const setupPaymentStatusBanners = () => {
+  const hosts = document.querySelectorAll("[data-payment-status-host]");
+  if (!hosts.length) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get("payment");
+  const courseId = params.get("course");
+
+  if (!status || !["success", "cancelled"].includes(status)) return;
+
+  const defaultMessages = {
+    success: "<strong>Payment received.</strong> Send your preferred weekday or weekend availability and we will confirm the next step.",
+    cancelled: "<strong>Checkout was cancelled.</strong> You can try again anytime or message us first if you want help choosing the right service block.",
+  };
+
+  const customMessage =
+    courseId === "freelanceHourlySupport"
+      ? {
+          success:
+            "<strong>Hourly support payment received.</strong> Message us with your task and your preferred weekday or weekend availability so we can confirm the work slot.",
+          cancelled:
+            "<strong>Hourly support checkout was cancelled.</strong> You can try again anytime or message us first if you want to discuss the task before paying.",
+        }[status]
+      : defaultMessages[status];
+
+  hosts.forEach((host) => {
+    if (!host || host.querySelector("[data-payment-status]")) return;
+
+    const banner = document.createElement("div");
+    banner.className = `payment-status-banner payment-status-${status}`;
+    banner.setAttribute("data-payment-status", "true");
+    banner.innerHTML = customMessage;
+    host.prepend(banner);
+  });
+};
+
 const setupCoursePaymentLinks = () => {
   const paymentButtons = document.querySelectorAll("[data-payment-link]");
   if (!paymentButtons.length) return;
@@ -131,6 +167,9 @@ const setupTrainingCheckout = () => {
 
       const fullName = (form?.querySelector('input[name="fullName"]')?.value || "").trim();
       const email = (form?.querySelector('input[name="email"]')?.value || "").trim().toLowerCase();
+      const selectedService = (form?.querySelector('[name="selectedService"]')?.value || "").trim();
+      const preferredAvailability = (form?.querySelector('[name="preferredAvailability"]')?.value || "").trim();
+      const projectNotes = (form?.querySelector('[name="projectNotes"]')?.value || "").trim();
 
       if (statusNode) {
         statusNode.textContent = "";
@@ -153,7 +192,14 @@ const setupTrainingCheckout = () => {
         const response = await fetch("/api/paymongo/create-checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ courseId: paymentKey, email, fullName }),
+          body: JSON.stringify({
+            courseId: paymentKey,
+            email,
+            fullName,
+            selectedService,
+            preferredAvailability,
+            projectNotes,
+          }),
         });
 
         const payload = await response.json().catch(() => ({}));
@@ -398,9 +444,75 @@ const setupMembershipManagement = () => {
   });
 };
 
+const setupHourlyServiceCards = () => {
+  const cardGroups = document.querySelectorAll("[data-hourly-service-selector]");
+  if (!cardGroups.length) return;
+
+  cardGroups.forEach((group) => {
+    const cards = Array.from(group.querySelectorAll("[data-hourly-service-card]"));
+    const hiddenInput = document.querySelector(group.getAttribute("data-target-input") || "");
+
+    if (!cards.length || !hiddenInput) return;
+
+    const setSelected = (value) => {
+      hiddenInput.value = value;
+      cards.forEach((card) => {
+        const isSelected = card.getAttribute("data-hourly-service-card") === value;
+        card.classList.toggle("is-selected", isSelected);
+        card.setAttribute("aria-pressed", String(isSelected));
+      });
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        setSelected(card.getAttribute("data-hourly-service-card") || "");
+      });
+    });
+
+    setSelected(hiddenInput.value || cards[0].getAttribute("data-hourly-service-card") || "");
+  });
+};
+
+const setupHourlyWhatsAppBrief = () => {
+  const forms = document.querySelectorAll("[data-hourly-support-form]");
+  if (!forms.length) return;
+
+  forms.forEach((form) => {
+    const trigger = form.parentElement?.querySelector("[data-hourly-whatsapp]") || null;
+    if (!trigger) return;
+
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const fullName = (form.querySelector('[name="fullName"]')?.value || "").trim();
+      const email = (form.querySelector('[name="email"]')?.value || "").trim();
+      const selectedService = (form.querySelector('[name="selectedService"]')?.value || "").trim();
+      const preferredAvailability = (form.querySelector('[name="preferredAvailability"]')?.value || "").trim();
+      const projectNotes = (form.querySelector('[name="projectNotes"]')?.value || "").trim();
+
+      const message = [
+        "Hi ClipDevs, I want to hire you for hourly online support.",
+        fullName ? `Name: ${fullName}` : "",
+        email ? `Email: ${email}` : "",
+        selectedService ? `Selected Service: ${selectedService}` : "",
+        preferredAvailability ? `Preferred Availability: ${preferredAvailability}` : "",
+        projectNotes ? `Responsibilities / Task Details: ${projectNotes}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      const url = `${COURSE_PAYMENT_FALLBACK.split("&text=")[0]}&text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener");
+    });
+  });
+};
+
 export const setupCommerce = () => {
+  setupPaymentStatusBanners();
   setupCoursePaymentLinks();
   setupTrainingCheckout();
+  setupHourlyServiceCards();
+  setupHourlyWhatsAppBrief();
   setupCourseLaunchOffer();
   setupPaywallModal();
   setupMembershipManagement();

@@ -30,6 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 </head>
 <body>
     <nav class="navbar">
@@ -79,7 +81,7 @@
     </header>
 
     <main>
-        <section class="container services-page">
+        <section class="container services-page" data-payment-status-host>
             <div class="services-intro about-card">
                 <p>We structure services around the bottleneck, not just the deliverable. Sometimes the issue is weak positioning. Sometimes it is the website itself. Sometimes it is the missing handoff between the page, the form, and the team that needs to respond.</p>
                 <p>That is why ClipDevs combines website production, lead routing logic, and workflow support instead of treating each one like a disconnected add-on. The goal is not just to launch assets. It is to make the business easier to understand, trust, and act on.</p>
@@ -125,6 +127,55 @@
                     <article class="policy-item scroll-merge merge-right">
                         <h3><i class="fas fa-diagram-project"></i> Workflow First</h3>
                         <p>Best when traffic already exists but internal follow-up, lead tracking, or applicant coordination still feels slow or messy.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="service-packages-block">
+                <div class="section-title">
+                    <h2>Choose How You Want To Work With Me</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="services-intro about-card">
+                    <p>You can work with ClipDevs in three different ways depending on your budget, timeline, and the level of support you need right now.</p>
+                    <p>If you want direct task help, choose hourly support. If you want live guidance, choose 1-on-1 training. If you want to learn at your own pace, subscribe to the course library.</p>
+                </div>
+                <div class="package-grid">
+                    <article class="package-card">
+                        <p class="meta-pill">Done-With-You</p>
+                        <h3>Hire Me Online</h3>
+                        <p class="package-price">PHP 560 / hour</p>
+                        <ul class="collab-list">
+                            <li>Best for quick implementation and project-to-project tasks</li>
+                            <li>Good for Facebook Page setup, ChatMaxima, chatbot work, Sheets structure, ads support, and landing pages</li>
+                            <li>Online only, based on available weekday or weekend time</li>
+                            <li>Payment is required first before the work block starts</li>
+                        </ul>
+                        <a href="#hire-me-online" class="project-link">Hire Me Now</a>
+                    </article>
+                    <article class="package-card scroll-merge merge-center">
+                        <p class="meta-pill">Guided Learning</p>
+                        <h3>1-on-1 Training With Me</h3>
+                        <p class="package-price">PHP 999 / session</p>
+                        <ul class="collab-list">
+                            <li>Best if you want me to teach you live while we work through the setup together</li>
+                            <li>Includes direct question-and-answer support during the session</li>
+                            <li>Good for ChatMaxima, Facebook setup, Sheets connection, and workflow guidance</li>
+                            <li>Private session with live implementation help</li>
+                        </ul>
+                        <a href="/courses#one-on-one-training" class="project-link">Book 1-on-1 Training</a>
+                    </article>
+                    <article class="package-card scroll-merge merge-right">
+                        <p class="meta-pill">Self-Paced Access</p>
+                        <h3>Subscribe To My Course</h3>
+                        <p class="package-price">Monthly subscription</p>
+                        <ul class="collab-list">
+                            <li>Best if you want to learn on your own time and access the full course library</li>
+                            <li>Watch current and future lessons inside the member area</li>
+                            <li>Good for people who want lower-cost access to the full system</li>
+                            <li>Learn anytime while your subscription is active</li>
+                        </ul>
+                        <a href="/courses#payment-options" class="project-link">Subscribe Now</a>
                     </article>
                 </div>
             </section>
@@ -415,6 +466,123 @@
                 </div>
             </section>
 
+            <section id="hire-me-online" class="training-session-offer">
+                <div class="training-session-copy">
+                    <p class="meta-pill">Hire Me Online</p>
+                    <h3>Project-to-project hourly support for the tasks you need right now</h3>
+                    <p class="training-session-summary">If you need direct implementation help instead of a full project scope, you can hire me online based on my available time during weekdays or weekends. This works well for agency support, setup tasks, and focused execution blocks.</p>
+                    <div class="training-session-points">
+                        <span>Approx. USD 10/hour</span>
+                        <span>Online work only</span>
+                        <span>Paid first before work starts</span>
+                    </div>
+                    <div class="training-session-context-grid">
+                        <article class="training-session-context-card">
+                            <p class="meta-pill">What I Can Help With</p>
+                            <h4>Execution support for agency growth and setup tasks</h4>
+                            <p>Good fit for teams that need help with Facebook Page setup, ChatMaxima, chatbot setup, Google Sheets structure, cold leads calling support, Facebook Ads support, and landing page work.</p>
+                        </article>
+                        <article class="training-session-context-card">
+                            <p class="meta-pill">Availability</p>
+                            <h4>Weekdays and weekends based on my available schedule</h4>
+                            <p>After payment, send your preferred task details and your available day. We will confirm the final slot based on my weekday or weekend availability.</p>
+                        </article>
+                    </div>
+                    <div class="training-session-process">
+                        <p class="meta-pill">Tasks You Can Hire Me For</p>
+                        <ul class="doc-expertise-list">
+                            <li>Create Facebook Page</li>
+                            <li>ChatMaxima setup</li>
+                            <li>Chatbot setup</li>
+                            <li>Google Sheets structure</li>
+                            <li>Cold leads calling support</li>
+                            <li>Facebook Ads campaign support</li>
+                            <li>Website landing page support</li>
+                            <li>Focused support for scaling agency lead flow</li>
+                        </ul>
+                    </div>
+                    <div class="hourly-service-selector" data-hourly-service-selector data-target-input="#hourly-selected-service">
+                        <p class="meta-pill">Choose The Task First</p>
+                        <div class="hourly-service-grid">
+                            <button type="button" class="hourly-service-card is-selected" data-hourly-service-card="Facebook Page Setup" aria-pressed="true">
+                                <img src="./servicesphoto/snehaltechnotery-woman-6573021_1920.jpg" alt="Facebook Page setup support" loading="lazy">
+                                <span>Facebook Page Setup</span>
+                                <small>Setup, structure, and page readiness</small>
+                            </button>
+                            <button type="button" class="hourly-service-card" data-hourly-service-card="ChatMaxima / Chatbot Setup" aria-pressed="false">
+                                <img src="./clipdevphoto/chatmaxima.png" alt="ChatMaxima and chatbot support" loading="lazy">
+                                <span>ChatMaxima / Chatbot</span>
+                                <small>Automation, connection, and setup help</small>
+                            </button>
+                            <button type="button" class="hourly-service-card" data-hourly-service-card="Google Sheets Structure" aria-pressed="false">
+                                <img src="./servicesphoto/Leads Tracker.png" alt="Google Sheets structure support" loading="lazy">
+                                <span>Google Sheets Structure</span>
+                                <small>Trackers, structure, and workflow support</small>
+                            </button>
+                            <button type="button" class="hourly-service-card" data-hourly-service-card="Facebook Ads / Landing Page Support" aria-pressed="false">
+                                <img src="./servicesphoto/Website.png" alt="Landing page and ads support" loading="lazy">
+                                <span>Ads / Landing Page</span>
+                                <small>Campaign support or landing-page improvements</small>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="training-session-booking">
+                        <p class="course-plan-label">See Available Time</p>
+                        <h5>Check weekday and weekend slots</h5>
+                        <p class="course-plan-note">Use the schedule button below to view the live calendar. Current general availability is weekdays in the evening and weekends based on open slots.</p>
+                        <div class="training-booking-button" data-hourly-booking-button></div>
+                    </div>
+                </div>
+                <aside class="training-session-card">
+                    <p class="course-plan-label">Hourly Support</p>
+                    <h4>Book A 1-Hour Work Block</h4>
+                    <p class="training-session-price">PHP 560 <span>/ 1 hour</span></p>
+                    <ul class="doc-expertise-list">
+                        <li>Online support only</li>
+                        <li>Project-to-project setup help</li>
+                        <li>Focused work block for one clear task or priority</li>
+                        <li>Best for quick implementation or execution support</li>
+                    </ul>
+                    <p class="course-plan-note"><strong>Availability:</strong> Weekdays and weekends based on my available time. Final work slot is confirmed after payment and message confirmation.</p>
+                    <form class="training-payment-form" data-training-payment-form data-hourly-support-form>
+                        <p class="course-plan-label">Pay First To Confirm</p>
+                        <h5>Reserve your hourly support block</h5>
+                        <p class="course-plan-note">Complete the PayMongo payment first, then send your task details and preferred availability so we can confirm the work schedule.</p>
+                        <input type="hidden" id="hourly-selected-service" name="selectedService" value="Facebook Page Setup">
+                        <label class="course-payment-field">
+                            <span>Full name</span>
+                            <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" required>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Email address</span>
+                            <input type="email" name="email" autocomplete="email" placeholder="your@email.com" required>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Preferred availability</span>
+                            <select name="preferredAvailability" required>
+                                <option value="">Choose preferred time</option>
+                                <option>Weekday evening</option>
+                                <option>Weekend afternoon</option>
+                                <option>Weekend evening</option>
+                                <option>Flexible - check calendar first</option>
+                            </select>
+                        </label>
+                        <label class="course-payment-field">
+                            <span>Task details</span>
+                            <textarea name="projectNotes" rows="3" placeholder="Tell us what you need help with so we can prepare before the work block."></textarea>
+                        </label>
+                        <div class="course-plan-actions">
+                            <button type="button" class="btn-primary" data-training-checkout="freelanceHourlySupport">Pay PHP 560 via PayMongo</button>
+                        </div>
+                        <p class="course-payment-status" data-training-payment-status aria-live="polite"></p>
+                    </form>
+                    <div class="course-plan-actions">
+                        <a href="https://api.whatsapp.com/send?phone=639603780196&text=Hi%20ClipDevs%2C%20I%20want%20to%20hire%20you%20for%20hourly%20online%20support." class="btn-secondary" target="_blank" rel="noopener noreferrer" data-hourly-whatsapp>Send Task On WhatsApp</a>
+                    </div>
+                    <p class="course-plan-note">Payment is required first before work starts. You can also send your responsibilities, expected output, and preferred schedule on WhatsApp so everything is clear before the work block starts.</p>
+                </aside>
+            </section>
+
             <section class="services-system">
                 <div class="section-title">
                     <h2>How The Engagement Usually Runs</h2>
@@ -580,6 +748,18 @@
         </div>
     </div>
 
+    <script>
+    window.addEventListener("load", function () {
+        var target = document.querySelector("[data-hourly-booking-button]");
+        if (!target || !window.calendar || !window.calendar.schedulingButton) return;
+        window.calendar.schedulingButton.load({
+            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true",
+            color: "#039BE5",
+            label: "See available time",
+            target: target,
+        });
+    });
+    </script>
     <script type="module" src="script.js"></script>
 </body>
 </html>

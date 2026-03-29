@@ -854,6 +854,62 @@
     margin-top: 18px;
 }
 
+.hourly-service-selector {
+    margin-top: 18px;
+}
+
+.hourly-service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.hourly-service-card {
+    display: grid;
+    gap: 10px;
+    text-align: left;
+    padding: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(17, 38, 61, 0.08);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 24px rgba(13, 27, 42, 0.06);
+    cursor: pointer;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.hourly-service-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+.hourly-service-card span {
+    color: var(--primary-ink);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.hourly-service-card small {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.hourly-service-card:hover,
+.hourly-service-card:focus-visible,
+.hourly-service-card.is-selected {
+    transform: translateY(-2px);
+    border-color: rgba(27, 116, 228, 0.24);
+    box-shadow: 0 16px 28px rgba(13, 27, 42, 0.1);
+}
+
+.hourly-service-card.is-selected {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(237, 245, 255, 0.96) 100%);
+}
+
 .training-session-card {
     padding: 24px;
 }
@@ -2670,4 +2726,3 @@ a.is-loading {
     background: var(--accent);
     margin: 10px auto;
 }
-

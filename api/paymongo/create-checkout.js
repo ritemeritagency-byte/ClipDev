@@ -24,6 +24,9 @@ module.exports = async (req, res) => {
   const courseId = req.body?.courseId;
   const customerEmail = (req.body?.email || "").trim().toLowerCase();
   const customerName = (req.body?.fullName || "").trim();
+  const selectedService = (req.body?.selectedService || "").trim();
+  const preferredAvailability = (req.body?.preferredAvailability || "").trim();
+  const projectNotes = (req.body?.projectNotes || "").trim();
   const course = courseId ? COURSE_CATALOG[courseId] : null;
   if (!course) {
     return sendJson(res, 400, { error: "Unknown course selection." });
@@ -38,8 +41,10 @@ module.exports = async (req, res) => {
   }
 
   const baseUrl = getBaseUrl(req);
-  const successUrl = `${baseUrl}/courses?payment=success&course=${encodeURIComponent(course.id)}`;
-  const cancelUrl = `${baseUrl}/courses?payment=cancelled&course=${encodeURIComponent(course.id)}`;
+  const successPath = course.successPath || "/courses";
+  const cancelPath = course.cancelPath || successPath;
+  const successUrl = `${baseUrl}${successPath}?payment=success&course=${encodeURIComponent(course.id)}`;
+  const cancelUrl = `${baseUrl}${cancelPath}?payment=cancelled&course=${encodeURIComponent(course.id)}`;
 
   let lineItemAmount = course.amount;
   let launchOfferStatus = null;
@@ -82,6 +87,9 @@ module.exports = async (req, res) => {
               course_name: course.name,
               customer_email: customerEmail,
               full_name: customerName,
+              selected_service: selectedService,
+              preferred_availability: preferredAvailability,
+              project_notes: projectNotes,
               launch_offer_applied: String(Boolean(launchOfferStatus?.active)),
               launch_offer_remaining: String(launchOfferStatus?.remaining ?? ""),
             },

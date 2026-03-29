@@ -24,6 +24,7 @@
     .coming-soon-grid { grid-template-columns: 1fr; }
     .training-session-offer { grid-template-columns: 1fr; }
     .training-session-context-grid { grid-template-columns: 1fr; }
+    .hourly-service-grid { grid-template-columns: 1fr; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
     .auth-grid { grid-template-columns: 1fr; }
