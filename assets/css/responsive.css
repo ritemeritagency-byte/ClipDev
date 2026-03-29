@@ -25,6 +25,10 @@
     .training-session-offer { grid-template-columns: 1fr; }
     .training-session-context-grid { grid-template-columns: 1fr; }
     .hourly-service-grid { grid-template-columns: 1fr; }
+    .services-page .training-session-card {
+        position: static;
+        top: auto;
+    }
     .availability-panel-header { align-items: stretch; }
     .payment-layout { grid-template-columns: 1fr; }
     .payment-gateway-list { grid-template-columns: 1fr; }
@@ -220,7 +224,7 @@
     .hero-content h1 { font-size: 2.2rem; }
     .subtitle { font-size: 0.98rem; }
     .availability-embed,
-    .availability-embed iframe { min-height: 460px; }
+    .availability-embed iframe { min-height: 380px; }
     .hero-actions,
     .featured-case-actions {
         flex-direction: column;

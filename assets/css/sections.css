@@ -886,6 +886,14 @@
     gap: 20px;
 }
 
+.services-page .subpage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.services-page .subpage-grid .subpage-card:last-child {
+    grid-column: 1 / -1;
+}
+
 .subpage-card {
     background: white;
     border-radius: 14px;
@@ -1623,4 +1631,3 @@
     outline: 3px solid var(--accent-deep);
     outline-offset: 2px;
 }
-
