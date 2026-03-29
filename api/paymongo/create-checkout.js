@@ -1,6 +1,5 @@
 const { COURSE_CATALOG } = require("../../lib/course-catalog");
 const { sendJson } = require("../../lib/http");
-const { forwardToRailway } = require("../../lib/railway");
 
 const getBaseUrl = (req) => {
   const configured = process.env.PUBLIC_SITE_URL;
@@ -46,22 +45,12 @@ module.exports = async (req, res) => {
   let launchOfferStatus = null;
 
   if (course.id === "courseClubMonthly" && course.launchOffer) {
-    try {
-      const offerResponse = await forwardToRailway(
-        "/api/offers/course-club-launch",
-        undefined,
-        { method: "GET" }
-      );
-
-      if (offerResponse.ok && offerResponse.payload) {
-        launchOfferStatus = offerResponse.payload;
-        if (offerResponse.payload.active) {
-          lineItemAmount = course.launchOffer.discountedAmount;
-        }
-      }
-    } catch (error) {
-      launchOfferStatus = null;
-    }
+    launchOfferStatus = {
+      active: true,
+      remaining: course.launchOffer.maxRedemptions,
+      discountedAmount: course.launchOffer.discountedAmount,
+    };
+    lineItemAmount = course.launchOffer.discountedAmount;
   }
 
   try {

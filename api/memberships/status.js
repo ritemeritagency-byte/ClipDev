@@ -1,5 +1,6 @@
 const { sendJson } = require("../../lib/http");
 const { forwardToRailway } = require("../../lib/railway");
+const { COURSE_CATALOG } = require("../../lib/course-catalog");
 
 module.exports = async (req, res) => {
   if (req.method !== "GET") {
@@ -9,18 +10,20 @@ module.exports = async (req, res) => {
 
   const offer = (req.query?.offer || "").trim().toLowerCase();
   if (offer === "course-club-launch") {
-    try {
-      const railwayResponse = await forwardToRailway("/api/offers/course-club-launch", undefined, {
-        method: "GET",
-      });
+    const launchOffer = COURSE_CATALOG.courseClubMonthly?.launchOffer;
+    const regularAmount = COURSE_CATALOG.courseClubMonthly?.regularAmount || COURSE_CATALOG.courseClubMonthly?.amount || 99900;
 
-      return sendJson(res, railwayResponse.status, railwayResponse.payload);
-    } catch (error) {
-      return sendJson(res, 500, {
-        error: "Unable to reach the Railway membership API.",
-        details: error.message,
-      });
-    }
+    return sendJson(res, 200, {
+      active: true,
+      redeemed: 0,
+      remaining: launchOffer?.maxRedemptions || 10,
+      maxRedemptions: launchOffer?.maxRedemptions || 10,
+      discountPercent: launchOffer?.discountPercent || 30,
+      regularAmount,
+      discountedAmount: launchOffer?.discountedAmount || regularAmount,
+      currency: COURSE_CATALOG.courseClubMonthly?.currency || "PHP",
+      source: "vercel-local-fallback",
+    });
   }
 
   const email = (req.query?.email || "").trim().toLowerCase();
