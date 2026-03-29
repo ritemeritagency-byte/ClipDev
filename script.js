@@ -1596,12 +1596,38 @@ const setupMemberLibrary = () => {
   const libraryShell = document.querySelector("[data-library-shell]");
   const loginCta = document.querySelector("[data-library-login-cta]");
   const accountCta = document.querySelector("[data-library-account-cta]");
+  const playerFrame = document.querySelector(".library-video-player[data-bunny-video-id]");
+  const playerNote = document.querySelector("[data-library-player-note]");
 
   const setStatus = (message, tone = "") => {
     if (!statusNode) return;
     statusNode.textContent = message;
     statusNode.classList.remove("is-error", "is-success");
     if (tone) statusNode.classList.add(tone);
+  };
+
+  const loadProtectedPlayer = async () => {
+    const videoId = playerFrame?.getAttribute("data-bunny-video-id") || "";
+    if (!playerFrame || !videoId || playerFrame.getAttribute("src")) return;
+
+    try {
+      if (playerNote) playerNote.textContent = "Loading your protected member lesson...";
+
+      const response = await fetch(`/api/library/player?videoId=${encodeURIComponent(videoId)}`);
+      const payload = await response.json().catch(() => ({}));
+
+      if (!response.ok || !payload?.embedUrl) {
+        throw new Error(payload?.error || "Unable to load the member video right now.");
+      }
+
+      playerFrame.setAttribute("src", payload.embedUrl);
+      if (playerNote) {
+        playerNote.textContent =
+          "This lesson walks through account creation, bot setup, Google Sheets mapping, Facebook connection, and testing inside your protected member lesson player.";
+      }
+    } catch (error) {
+      if (playerNote) playerNote.textContent = error.message || "Unable to load the member video right now.";
+    }
   };
 
   const renderMember = (user) => {
@@ -1639,6 +1665,7 @@ const setupMemberLibrary = () => {
       if (libraryShell) libraryShell.hidden = false;
       if (loginCta) loginCta.hidden = true;
       if (accountCta) accountCta.hidden = false;
+      await loadProtectedPlayer();
       setStatus("Active membership confirmed. Your library is unlocked below.", "is-success");
     } catch (error) {
       if (libraryShell) libraryShell.hidden = true;
