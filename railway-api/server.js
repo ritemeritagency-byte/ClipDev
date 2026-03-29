@@ -24,6 +24,7 @@ const COURSE_CLUB_LAUNCH_OFFER = {
   discountedAmountCents: 69900,
   currency: "PHP",
 };
+const TEST_ACCESS_EMAILS = ["cliperedbagundol@gmail.com"];
 
 const json = (res, status, payload) => res.status(status).json(payload);
 const normalizeAccountType = (value) => {
@@ -42,6 +43,7 @@ const getAdminEmails = () =>
     ])
   );
 const isAdminEmail = (email) => getAdminEmails().includes(String(email || "").trim().toLowerCase());
+const isTestAccessEmail = (email) => TEST_ACCESS_EMAILS.includes(String(email || "").trim().toLowerCase());
 const getUserRole = (email) => (isAdminEmail(email) ? "admin" : "member");
 
 const requireInternalSecret = (req, res, next) => {
@@ -131,7 +133,7 @@ const getMemberProfileByEmail = async (client, email) => {
 
   if (!result.rows.length) return null;
   const row = result.rows[0];
-  return {
+  const member = {
     id: row.user_id,
     email: row.email,
     fullName: row.full_name,
@@ -148,7 +150,24 @@ const getMemberProfileByEmail = async (client, email) => {
     planCode: row.plan_code,
     planName: row.display_name,
     access: row.access,
+    hasTestAccess: isTestAccessEmail(row.email),
   };
+
+  if (member.hasTestAccess) {
+    member.subscriptionStatus = "active";
+    member.planCode = member.planCode || "courseClubMonthly";
+    member.planName = member.planName || "Course Club Test Access";
+    member.access = [
+      {
+        courseSlug: "course-club",
+        accessStatus: "active",
+        grantedAt: null,
+        revokedAt: null,
+      },
+    ];
+  }
+
+  return member;
 };
 
 const getAuthenticatedUser = async (client, req) => {
