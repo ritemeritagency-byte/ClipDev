@@ -694,6 +694,56 @@ body.nav-open .nav-toggle span:nth-child(3) {
     padding: 70px 8% 50px;
 }
 
+.subpage-hero .hero-content {
+    position: relative;
+    max-width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 34px clamp(24px, 4vw, 42px);
+    border-radius: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(27, 116, 228, 0.12);
+    background:
+        radial-gradient(220px 140px at 0% 0%, rgba(232, 227, 255, 0.7), transparent 60%),
+        radial-gradient(220px 160px at 100% 100%, rgba(212, 243, 238, 0.72), transparent 58%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(245, 249, 255, 0.98) 100%);
+    box-shadow:
+        0 28px 60px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.subpage-hero .hero-content::before,
+.subpage-hero .hero-content::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.subpage-hero .hero-content::before {
+    top: 18px;
+    right: 18px;
+    width: min(28vw, 240px);
+    height: 138px;
+    border-radius: 24px;
+    border: 1px solid rgba(27, 116, 228, 0.1);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 247, 255, 0.92) 100%);
+    box-shadow: 0 16px 34px rgba(27, 116, 228, 0.08);
+    opacity: 0.96;
+}
+
+.subpage-hero .hero-content::after {
+    right: 38px;
+    top: 42px;
+    width: min(24vw, 190px);
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(27, 116, 228, 0.14);
+    box-shadow:
+        0 24px 0 rgba(27, 116, 228, 0.1),
+        0 48px 0 rgba(27, 116, 228, 0.08),
+        0 72px 0 rgba(27, 116, 228, 0.06);
+}
+
 .eyebrow {
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -713,6 +763,158 @@ body.nav-open .nav-toggle span:nth-child(3) {
     margin: 0 auto;
     color: var(--text-muted);
     font-size: 1.05rem;
+}
+
+.subpage-hero .eyebrow {
+    margin-bottom: 16px;
+}
+
+.subpage-hero .hero-content h1 {
+    max-width: 12ch;
+    margin-bottom: 16px;
+    line-height: 0.98;
+}
+
+.subpage-hero .subtitle {
+    max-width: 62ch;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.subpage-hero .hero-actions,
+.subpage-hero .hero-proof-badges {
+    justify-content: flex-start;
+}
+
+.subpage-hero .hero-proof-badges {
+    margin-top: 18px;
+}
+
+.subpage-hero .hero-proof-badges span {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(27, 116, 228, 0.1);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--accent-deep);
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.article-hero .hero-content {
+    max-width: min(980px, 100%);
+}
+
+.article-hero .hero-content::before {
+    width: min(24vw, 210px);
+    height: 156px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(245, 249, 255, 0.92) 100%);
+}
+
+.course-hero .hero-content {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.course-hero .hero-content::before,
+.course-hero .hero-content::after {
+    display: none;
+}
+
+.subpage-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: 30px;
+    align-items: center;
+}
+
+.subpage-hero-layout::before,
+.subpage-hero-layout::after {
+    display: none;
+}
+
+.subpage-hero-copy,
+.subpage-hero-visual {
+    position: relative;
+    z-index: 1;
+}
+
+.subpage-hero-copy {
+    text-align: left;
+}
+
+.subpage-hero-copy .subtitle,
+.subpage-hero-copy .hero-microcopy {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.subpage-hero-copy .hero-actions,
+.subpage-hero-copy .hero-proof-badges {
+    justify-content: flex-start;
+}
+
+.subpage-hero-visual {
+    min-height: 320px;
+    display: grid;
+    place-items: center;
+}
+
+.subpage-hero-frame {
+    position: relative;
+    width: min(100%, 500px);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(27, 116, 228, 0.12);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
+    transform: rotate(1.8deg);
+}
+
+.subpage-hero-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.subpage-hero-tag {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #4d2fd2 0%, #6b32d0 100%);
+    color: #f8f6ff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 14px 28px rgba(77, 47, 210, 0.24);
+}
+
+.subpage-hero-tag-secondary {
+    left: 0;
+    bottom: 12px;
+    background: linear-gradient(135deg, #c6eef2 0%, #afe5ef 100%);
+    color: #11596e;
+    box-shadow: 0 14px 28px rgba(17, 89, 110, 0.12);
+}
+
+.subpage-hero-visual .subpage-hero-tag:not(.subpage-hero-tag-secondary) {
+    top: 10px;
+    right: 12px;
 }
 
 .hero-actions {
@@ -1369,6 +1571,9 @@ body.nav-open .nav-toggle span:nth-child(3) {
     height: 100%;
     display: block;
     object-fit: cover;
+    object-position: top center;
+    transform: scale(1.02);
+    filter: saturate(1.02) contrast(1.04);
 }
 
 .course-showcase-overlay {
@@ -1379,7 +1584,24 @@ body.nav-open .nav-toggle span:nth-child(3) {
     gap: 12px;
     padding: 22px;
     background:
-        linear-gradient(180deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0.72) 100%);
+        linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.22) 36%, rgba(15, 23, 42, 0.68) 100%);
+}
+
+.course-showcase-preview-pill {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #f8fbff;
+    font-size: 0.84rem;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
 }
 
 .course-showcase-lock {
@@ -2162,13 +2384,35 @@ body.modal-open {
 
 .page-login .hero-content,
 .page-account .hero-content,
-.page-library .hero-content {
+.page-library .hero-content,
+.page-admin .hero-content {
     text-align: center;
 }
 
 .page-login .subtitle,
 .page-account .subtitle,
-.page-library .subtitle {
+.page-library .subtitle,
+.page-admin .subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-login .subpage-hero .hero-actions,
+.page-account .subpage-hero .hero-actions,
+.page-library .subpage-hero .hero-actions,
+.page-admin .subpage-hero .hero-actions,
+.page-login .subpage-hero .hero-proof-badges,
+.page-account .subpage-hero .hero-proof-badges,
+.page-library .subpage-hero .hero-proof-badges,
+.page-admin .subpage-hero .hero-proof-badges {
+    justify-content: center;
+}
+
+.page-login .subpage-hero .hero-content h1,
+.page-account .subpage-hero .hero-content h1,
+.page-library .subpage-hero .hero-content h1,
+.page-admin .subpage-hero .hero-content h1 {
+    max-width: 14ch;
     margin-left: auto;
     margin-right: auto;
 }
@@ -4910,6 +5154,26 @@ button:focus-visible {
         min-height: auto;
         padding: 62px 6% 42px;
     }
+    .subpage-hero .hero-content {
+        padding: 24px 20px;
+        border-radius: 26px;
+    }
+    .subpage-hero .hero-content::before {
+        width: 160px;
+        height: 108px;
+        top: 14px;
+        right: 14px;
+    }
+    .subpage-hero .hero-content::after {
+        right: 28px;
+        top: 34px;
+        width: 118px;
+        height: 8px;
+        box-shadow:
+            0 18px 0 rgba(27, 116, 228, 0.1),
+            0 36px 0 rgba(27, 116, 228, 0.08),
+            0 54px 0 rgba(27, 116, 228, 0.06);
+    }
     .hero-content {
         text-align: left;
     }
@@ -5101,6 +5365,14 @@ button:focus-visible {
     }
     .subpage-hero {
         padding: 56px 5% 36px;
+    }
+    .subpage-hero .hero-content {
+        padding: 22px 16px;
+        border-radius: 22px;
+    }
+    .subpage-hero .hero-content::before,
+    .subpage-hero .hero-content::after {
+        display: none;
     }
     .hero-content h1 {
         font-size: 1.9rem;
@@ -5780,6 +6052,26 @@ button:focus-visible {
         gap: 24px;
     }
 
+    .subpage-hero-layout {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .subpage-hero-visual {
+        min-height: auto;
+    }
+
+    .subpage-hero-frame {
+        width: 100%;
+        max-width: 100%;
+        transform: none;
+    }
+
+    .subpage-hero-tag {
+        padding: 9px 12px;
+        font-size: 0.74rem;
+    }
+
     .course-hero-visual {
         min-height: auto;
         padding-bottom: 24px;
@@ -5869,6 +6161,18 @@ button:focus-visible {
     .course-hero {
         padding-top: 62px;
         padding-bottom: 36px;
+    }
+
+    .subpage-hero-visual .subpage-hero-tag:not(.subpage-hero-tag-secondary),
+    .subpage-hero-tag-secondary {
+        top: auto;
+        right: auto;
+        left: 12px;
+        bottom: 12px;
+    }
+
+    .subpage-hero-tag-secondary {
+        bottom: 54px;
     }
 
     .course-hero-dashboard-card {
