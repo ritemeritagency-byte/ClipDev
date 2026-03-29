@@ -4772,16 +4772,37 @@ body.is-scrolled .wa-widget:not(.is-open) {
     gap: 18px;
 }
 
+.page-blog .container {
+    width: min(1240px, calc(100vw - 48px));
+    margin: 0 auto;
+    padding: 90px 0;
+}
+
+.page-blog .services-intro {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
 .blog-listing {
     grid-template-columns: 1fr;
     max-width: 980px;
     margin: 0 auto;
 }
 
+.page-blog .blog-listing {
+    max-width: 1140px;
+    gap: 24px;
+}
+
 .blog-listing .insight-card {
     display: grid;
     grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
     align-items: stretch;
+}
+
+.page-blog .blog-listing .insight-card {
+    grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+    border-radius: 22px;
 }
 
 .blog-listing .insight-card-image {
@@ -4791,6 +4812,22 @@ body.is-scrolled .wa-widget:not(.is-open) {
 .blog-listing .insight-card-image img {
     height: 100%;
     min-height: 280px;
+}
+
+.page-blog .blog-listing .insight-card-image img {
+    min-height: 320px;
+}
+
+.page-blog .founder-story-card .insight-card-image img {
+    height: 100%;
+    min-height: 360px;
+    object-fit: cover;
+    object-position: center top;
+    padding: 0;
+}
+
+.page-blog .blog-listing .insight-card-content {
+    padding: 30px 34px;
 }
 
 .blog-cta {
@@ -5246,6 +5283,14 @@ button:focus-visible {
 
 /* 11. RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
+    .page-blog .container {
+        width: min(100%, calc(100vw - 40px));
+        padding: 72px 0;
+    }
+    .page-blog .services-intro,
+    .page-blog .blog-listing {
+        max-width: none;
+    }
     .insight-grid { grid-template-columns: repeat(2, 1fr); }
     .stats-grid { grid-template-columns: 1fr; }
     .trust-grid { grid-template-columns: 1fr; }
@@ -5322,6 +5367,13 @@ button:focus-visible {
     .blog-listing { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
+    .page-blog .container {
+        width: min(100%, calc(100vw - 24px));
+        padding: 56px 0;
+    }
+    .page-blog .blog-listing .insight-card-content {
+        padding: 22px 20px 24px;
+    }
     .navbar { flex-direction: row; padding: 10px 6%; }
     .nav-toggle { display: inline-flex; }
     .nav-links {
@@ -5620,6 +5672,13 @@ button:focus-visible {
 }
 
 @media (max-width: 480px) {
+    .page-blog .container {
+        width: min(100%, calc(100vw - 16px));
+    }
+    .page-blog .blog-listing .insight-card-image img,
+    .page-blog .founder-story-card .insight-card-image img {
+        min-height: 240px;
+    }
     .navbar {
         padding-inline: 5%;
     }
