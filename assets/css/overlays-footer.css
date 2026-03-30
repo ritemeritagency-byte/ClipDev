@@ -648,6 +648,15 @@ body.is-scrolled .wa-widget:not(.is-open) {
     box-shadow: 0 14px 26px rgba(13, 44, 76, 0.14);
 }
 
+.footer-social-inline {
+    margin-top: 12px;
+}
+
+.footer-social-inline a {
+    width: 40px;
+    height: 40px;
+}
+
 .copyright {
     font-size: 0.88rem;
     color: var(--text-muted);
