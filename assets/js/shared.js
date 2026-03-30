@@ -167,7 +167,7 @@ export const sendToGoogleSheet = async (payload) => {
 };
 
 const whatsappNumber = "639603780196";
-const messengerPageUrl = "https://www.facebook.com/clipdevs";
+const messengerPageUrl = "https://web.facebook.com/clipdevs";
 
 export const buildWhatsAppUrl = (text) =>
   `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(text)}`;
