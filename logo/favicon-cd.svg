@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="ClipDevs CD favicon">
   <defs>
     <linearGradient id="cd-bg" x1="12" y1="10" x2="84" y2="86" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2f80ed"/>
-      <stop offset="1" stop-color="#174a86"/>
+      <stop offset="0" stop-color="#7b3ff2"/>
+      <stop offset="1" stop-color="#4f1ab8"/>
     </linearGradient>
   </defs>
   <rect x="8" y="8" width="80" height="80" rx="22" fill="url(#cd-bg)"/>
   <rect x="8" y="8" width="80" height="80" rx="22" fill="none" stroke="#ffffff" stroke-opacity="0.24"/>
   <path d="M39 29.5c-8.9 0-15.8 6.8-15.8 18.5 0 11.8 6.9 18.5 15.8 18.5 5.3 0 9.3-1.7 12.7-4.8l5.6 6.4C52.8 72.3 46.6 75 39.1 75 24.7 75 14 64.4 14 48s10.7-27 25.1-27c7.4 0 13.6 2.5 18.2 6.8l-5.6 6.5c-3.4-3.1-7.4-4.8-12.7-4.8z" fill="#ffffff"/>
-  <path d="M44 22h17c13 0 21 9.6 21 26s-8 26-21 26H44zm10.2 9.4v33.2h5.9c7.8 0 12.3-5.4 12.3-16.6S67.9 31.4 60.1 31.4z" fill="#dff0ff"/>
+  <path d="M44 22h17c13 0 21 9.6 21 26s-8 26-21 26H44zm10.2 9.4v33.2h5.9c7.8 0 12.3-5.4 12.3-16.6S67.9 31.4 60.1 31.4z" fill="#e9dcff"/>
 </svg>
