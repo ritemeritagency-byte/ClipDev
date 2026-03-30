@@ -1,21 +1,21 @@
 /* 1. GLOBAL SETTINGS & BRAND COLORS */
 :root {
-    --primary-ink: #0f2740;
-    --secondary-ink: #1a4467;
-    --accent: #2f80ed;
-    --accent-strong: #2468c4;
-    --accent-soft: #dbeeff;
-    --accent-deep: #1f5faa;
+    --primary-ink: #231a57;
+    --secondary-ink: #3b2a86;
+    --accent: #6a2de2;
+    --accent-strong: #5b20cf;
+    --accent-soft: #efe5ff;
+    --accent-deep: #4f1ab8;
     --white: #ffffff;
-    --paper: #eef6fb;
+    --paper: #f7f2ff;
     --surface: #ffffff;
-    --surface-soft: #f6fbff;
-    --border-soft: rgba(15, 39, 64, 0.12);
-    --shadow-soft: 0 14px 32px rgba(11, 35, 58, 0.09);
-    --shadow-strong: 0 16px 34px rgba(47, 128, 237, 0.22);
-    --text-main: #172433;
-    --text-muted: #5b6d80;
-    --card-dark: #0d1b2a;
+    --surface-soft: #fbf8ff;
+    --border-soft: rgba(79, 26, 184, 0.14);
+    --shadow-soft: 0 14px 32px rgba(35, 26, 87, 0.11);
+    --shadow-strong: 0 16px 34px rgba(106, 45, 226, 0.24);
+    --text-main: #211c36;
+    --text-muted: #696283;
+    --card-dark: #1a1438;
     --font-display: "Manrope", "Segoe UI", sans-serif;
     --font-body: "Manrope", "Segoe UI", sans-serif;
     --scroll-progress: 0;
@@ -35,9 +35,9 @@ html {
 
 body {
     font-family: var(--font-body);
-    background: radial-gradient(1200px 620px at 10% -10%, #e5f1ff 0%, transparent 62%),
-                radial-gradient(950px 540px at 100% 0%, #f4f8ff 0%, transparent 58%),
-                linear-gradient(180deg, #fbfdff 0%, #f2f7fc 100%);
+    background: radial-gradient(1200px 620px at 10% -10%, #e4f7ff 0%, transparent 62%),
+                radial-gradient(950px 540px at 100% 0%, #f6eaff 0%, transparent 58%),
+                linear-gradient(180deg, #fcfbff 0%, #f5f1ff 100%);
     color: var(--text-main);
     line-height: 1.6;
     position: relative;
