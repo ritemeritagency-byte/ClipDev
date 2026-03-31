@@ -405,7 +405,10 @@ const setupMobileNav = () => {
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setNavOpen(false));
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768 && link.classList.contains("nav-mega-trigger")) return;
+      setNavOpen(false);
+    });
   });
 
   window.addEventListener("keydown", (event) => {
