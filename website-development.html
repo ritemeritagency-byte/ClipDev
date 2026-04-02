@@ -12,6 +12,7 @@
     <meta property="og:description" content="ClipDevs builds business websites and landing pages for recruitment teams and service businesses that need stronger trust, clearer offers, and more qualified inquiries.">
     <meta property="og:url" content="https://www.clipdevs.com/website-development">
     <meta property="og:site_name" content="ClipDevs">
+    <meta property="og:locale" content="en_PH">
     <meta property="og:image" content="https://www.clipdevs.com/logo/Logo-clipdevs-web.png">
     <meta property="og:image:alt" content="ClipDevs brand logo">
     <meta name="twitter:card" content="summary_large_image">
@@ -25,14 +26,253 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260330-2" sizes="180x180">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#6a2de2">
+        <link rel="preload" as="image" href="./clipdevphoto/Maidpower.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "name": "ClipDevs",
+                    "url": "https://www.clipdevs.com",
+                    "logo": "https://www.clipdevs.com/logo/Logo-clipdevs-web.png",
+                    "sameAs": [
+                        "https://web.facebook.com/clipdevs",
+                        "https://www.tiktok.com/@clipdevs"
+                    ],
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "contactType": "sales",
+                        "email": "support@clipdevs.com"
+                    }
+                },
+                {
+                    "@type": "Service",
+                    "serviceType": "Website Development",
+                    "provider": {
+                        "@type": "Organization",
+                        "name": "ClipDevs"
+                    },
+                    "areaServed": "PH",
+                    "url": "https://www.clipdevs.com/website-development",
+                    "description": "Website development for recruitment and service businesses focused on trust, clear offers, and better inquiry conversion.",
+                    "offers": {
+                        "@type": "Offer",
+                        "availability": "https://schema.org/InStock"
+                    }
+                },
+                {
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        {
+                            "@type": "Question",
+                            "name": "What kinds of businesses is this website development service for?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "This service is designed for recruitment teams and service businesses that already have a real offer but need a clearer and more trustworthy website."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Do you only design pages, or do you also improve conversion flow?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "The work includes positioning, section hierarchy, CTA logic, and inquiry flow improvements across forms, WhatsApp, and Messenger, not only visual design."
+                            }
+                        },
+                        {
+                            "@type": "Question",
+                            "name": "Can you support both landing pages and full websites?",
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": "Yes. We build single-offer landing pages and multi-page business websites based on the conversion goals and service complexity."
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+        </script>
+    <style>
+        /* ── website-development page ── */
+        .page-website-development .service-detail-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 56px;
+        }
+        .page-website-development .service-detail-hero {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .page-website-development .detail-photo-card {
+            padding: 0;
+            overflow: hidden;
+        }
+        .page-website-development .detail-photo-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+        .page-website-development .detail-copy-card {
+            max-width: none;
+            border-left: 4px solid var(--accent);
+            padding-left: 28px;
+        }
+        /* Proof strip */
+        .wd-proof-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .wd-proof-stat {
+            text-align: center;
+            padding: 22px 16px;
+            border-radius: 16px;
+            background: linear-gradient(165deg, #ffffff, #f7f2ff);
+            border: 1px solid rgba(106, 45, 226, 0.12);
+            box-shadow: 0 8px 20px rgba(13, 27, 42, 0.06);
+        }
+        .wd-proof-stat strong {
+            display: block;
+            font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+            font-weight: 800;
+            color: var(--accent-deep);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        .wd-proof-stat span {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+        /* Process steps */
+        .wd-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .wd-process-step {
+            background: linear-gradient(165deg, #ffffff, #f7f4ff);
+            border: 1px solid rgba(17, 38, 61, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 24px rgba(13, 27, 42, 0.07);
+            padding: 20px;
+            position: relative;
+        }
+        .wd-process-step::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+            border-radius: 14px 14px 0 0;
+        }
+        .wd-step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+            color: #fff;
+            font-size: 0.88rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .wd-process-step h3 {
+            color: var(--primary-ink);
+            font-size: 1rem;
+            margin: 0 0 6px;
+        }
+        .wd-process-step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        /* Dark CTA Banner */
+        .page-website-development .cta-banner {
+            background:
+                radial-gradient(600px 340px at 0% 50%, rgba(91, 32, 207, 0.28), transparent 65%),
+                linear-gradient(135deg, #1a1438 0%, #231a57 100%);
+            border-radius: 24px;
+            color: #fff;
+            flex-direction: column;
+            align-items: flex-start;
+            border: 1px solid rgba(106, 45, 226, 0.24);
+            box-shadow: 0 28px 56px rgba(23, 18, 60, 0.24);
+        }
+        .page-website-development .cta-banner .meta-pill {
+            background: rgba(106, 45, 226, 0.22);
+            color: #d4c8ff;
+            border-color: rgba(106, 45, 226, 0.3);
+        }
+        .page-website-development .cta-banner h3 {
+            color: #ffffff;
+            font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+            line-height: 1.25;
+            margin: 0;
+        }
+        .page-website-development .cta-banner > p {
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 1.04rem;
+            max-width: 64ch;
+        }
+        .page-website-development .cta-banner .cta-banner-actions > .btn-primary {
+            background: linear-gradient(135deg, #6a2de2, #5b20cf);
+            border-color: rgba(106, 45, 226, 0.6);
+            box-shadow: 0 16px 32px rgba(106, 45, 226, 0.32);
+        }
+        .page-website-development .cta-banner .cta-banner-actions > .btn-primary:hover {
+            background: linear-gradient(135deg, #7b3df0, #6a2de2);
+        }
+        .page-website-development .cta-banner .cta-banner-actions > .btn-secondary {
+            border-color: rgba(255, 255, 255, 0.22);
+            color: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .page-website-development .cta-banner .cta-banner-actions > .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.38);
+            color: #fff;
+        }
+        @media (max-width: 1024px) {
+            .wd-process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .page-website-development .service-detail-hero { grid-template-columns: 1fr; }
+            .page-website-development .detail-photo-card img { min-height: 240px; }
+            .page-website-development .detail-copy-card {
+                border-left: 0;
+                border-top: 4px solid var(--accent);
+                padding-left: 0;
+                padding-top: 24px;
+            }
+            .wd-proof-strip { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .wd-process-grid { grid-template-columns: 1fr 1fr; }
+            .page-website-development .cta-banner { border-radius: 18px; }
+        }
+        @media (max-width: 480px) {
+            .wd-proof-strip { grid-template-columns: 1fr; }
+            .wd-process-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body class="page-website-development">
-    <nav class="navbar">
+        <a class="sr-only" href="#main-content">Skip to main content</a>
+        <nav class="navbar" aria-label="Main navigation">
         <a href="/" class="logo" aria-label="ClipDevs home"><span class="logo-badge" aria-hidden="true">CD</span><span class="logo-wordmark">ClipDevs</span></a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
         <ul class="nav-links" id="site-nav">
@@ -69,14 +309,14 @@
             </div>
             <div class="subpage-hero-visual" aria-hidden="true">
                 <div class="subpage-hero-frame">
-                    <img class="subpage-hero-image" src="./clipdevphoto/Maidpower.png" alt="Maidpower website preview" loading="eager">
+                    <img class="subpage-hero-image" src="./clipdevphoto/Maidpower.png" alt="Maidpower website preview" loading="eager" decoding="async" width="1280" height="905">
                 </div>
                 <span class="subpage-hero-tag">Website Builds</span>
                 <span class="subpage-hero-tag subpage-hero-tag-secondary">Landing Pages</span>
             </div>
         </div>
     </header>
-    <main>
+    <main id="main-content">
         <section class="container service-detail-layout">
             <div class="service-detail-hero">
                 <article class="doc-media detail-photo-card">
@@ -101,6 +341,20 @@
                     <a href="#contact" class="project-link">Request a Website Review</a>
                 </article>
             </div>
+            <div class="wd-proof-strip" role="list" aria-label="Service highlights">
+                <div class="wd-proof-stat" role="listitem">
+                    <strong>10+</strong>
+                    <span>Years in recruitment tech</span>
+                </div>
+                <div class="wd-proof-stat" role="listitem">
+                    <strong>50+</strong>
+                    <span>Business websites delivered</span>
+                </div>
+                <div class="wd-proof-stat" role="listitem">
+                    <strong>2 niches</strong>
+                    <span>Service businesses &amp; recruitment</span>
+                </div>
+            </div>
             <section class="featured-case">
                 <div class="section-title">
                     <h2>What A Stronger Website Usually Changes</h2>
@@ -121,11 +375,17 @@
                     </article>
                 </div>
             </section>
-            <div class="service-detail-grid">
-                <article class="service-card"><h3><i class="fas fa-window-maximize"></i> Landing Pages</h3><p>Single-offer pages built for campaigns, service launches, or recruitment pushes where one clean CTA matters most.</p></article>
-                <article class="service-card"><h3><i class="fas fa-building"></i> Business Websites</h3><p>Multi-page websites for teams that need stronger trust, better service explanation, and a more established digital front-end.</p></article>
-                <article class="service-card"><h3><i class="fab fa-whatsapp"></i> Inquiry Channel Integration</h3><p>WhatsApp, Messenger, forms, and contact routing configured so prospects do not get stuck after the first click.</p></article>
-            </div>
+            <section class="featured-case" aria-labelledby="wd-what-we-build">
+                <div class="section-title">
+                    <h2 id="wd-what-we-build">What We Build</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="service-detail-grid">
+                    <article class="service-card"><h3><i class="fas fa-window-maximize"></i> Landing Pages</h3><p>Single-offer pages built for campaigns, service launches, or recruitment pushes where one clean CTA matters most.</p></article>
+                    <article class="service-card"><h3><i class="fas fa-building"></i> Business Websites</h3><p>Multi-page websites for teams that need stronger trust, better service explanation, and a more established digital front-end.</p></article>
+                    <article class="service-card"><h3><i class="fab fa-whatsapp"></i> Inquiry Channel Integration</h3><p>WhatsApp, Messenger, forms, and contact routing configured so prospects do not get stuck after the first click.</p></article>
+                </div>
+            </section>
             <section class="featured-case">
                 <div class="section-title">
                     <h2>What We Focus On During The Build</h2>
@@ -167,9 +427,37 @@
                     </article>
                 </div>
             </section>
+            <section class="featured-case" aria-labelledby="wd-process">
+                <div class="section-title">
+                    <h2 id="wd-process">How a Typical Build Goes</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="wd-process-grid">
+                    <div class="wd-process-step">
+                        <span class="wd-step-num" aria-hidden="true">1</span>
+                        <h3>Discovery Call</h3>
+                        <p>We start with your offer, audience, and current bottleneck so the build solves the right problem first.</p>
+                    </div>
+                    <div class="wd-process-step">
+                        <span class="wd-step-num" aria-hidden="true">2</span>
+                        <h3>Structure &amp; Messaging</h3>
+                        <p>Page sections, hierarchy, and copy direction are mapped before any design work begins.</p>
+                    </div>
+                    <div class="wd-process-step">
+                        <span class="wd-step-num" aria-hidden="true">3</span>
+                        <h3>Build &amp; Review</h3>
+                        <p>Each page is built in functional sprints with feedback loops so revisions stay tight and purposeful.</p>
+                    </div>
+                    <div class="wd-process-step">
+                        <span class="wd-step-num" aria-hidden="true">4</span>
+                        <h3>Launch &amp; Handoff</h3>
+                        <p>We close with a working inquiry path, contact routing, and practical guidance after go-live.</p>
+                    </div>
+                </div>
+            </section>
             <section class="featured-case">
                 <div class="section-title">
-                    <h2>Example Outcome</h2>
+                    <h2>From the Portfolio</h2>
                     <div class="underline"></div>
                 </div>
                 <div class="featured-case-card">
@@ -198,19 +486,31 @@
                 </div>
             </section>
             <section class="cta-banner">
-                <div>
-                    <p class="meta-pill">Best Fit</p>
-                    <h3>Good website projects start with the bottleneck, not just the design style</h3>
-                    <p>This works best when you already have a real service or recruitment offer and need the website to explain it better, convert more cleanly, and support your team after launch.</p>
+                <p class="meta-pill">Ready to Start?</p>
+                <h3>Good website projects start with the bottleneck, not just the design style</h3>
+                <p>This works best when you already have a real service or recruitment offer and need the website to explain it better, convert more cleanly, and support your team after launch.</p>
+                <div class="cta-banner-actions">
+                    <a href="#contact" class="btn-primary">Request a Website Review</a>
+                    <a href="/portfolio" class="btn-secondary">See Portfolio Examples</a>
                 </div>
-                <div class="service-detail-grid">
-                    <article class="service-card">
-                        <h3><i class="fas fa-check-circle"></i> Best for you if</h3>
-                        <p>Your offer is real, but the current website feels weak, outdated, confusing, or not convincing enough for new visitors.</p>
+            </section>
+            <section class="featured-case" aria-labelledby="website-dev-faq">
+                <div class="section-title">
+                    <h2 id="website-dev-faq">Website Development FAQ</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="package-grid">
+                    <article class="package-card">
+                        <h3>How long does a typical website build take?</h3>
+                        <p>Most projects run in phased sprints. Timelines depend on page count, copy readiness, and revisions, but we always prioritize early clarity and launch momentum.</p>
                     </article>
-                    <article class="service-card">
-                        <h3><i class="fas fa-handshake"></i> Not just visuals</h3>
-                        <p>The work includes structure, CTA logic, and inquiry-path thinking so the site is commercially useful after it goes live.</p>
+                    <article class="package-card">
+                        <h3>Can you improve an existing website instead of starting from scratch?</h3>
+                        <p>Yes. If your current site already has useful content, we can restructure the messaging, CTA flow, and trust sections without rebuilding every page.</p>
+                    </article>
+                    <article class="package-card">
+                        <h3>Do you help with post-launch updates?</h3>
+                        <p>Yes. We support practical post-launch improvements such as inquiry routing, conversion fixes, and content updates based on real user behavior.</p>
                     </article>
                 </div>
             </section>
