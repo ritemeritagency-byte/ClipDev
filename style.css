@@ -878,8 +878,8 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .subpage-hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-    gap: 30px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 1fr);
+    gap: 40px;
     align-items: center;
 }
 
@@ -940,28 +940,44 @@ body.nav-open .nav-toggle span:nth-child(3) {
 }
 
 .subpage-hero-visual {
-    min-height: 320px;
+    min-height: 260px;
     display: grid;
     place-items: center;
 }
 
 .subpage-hero-frame {
     position: relative;
-    width: min(100%, 500px);
-    border-radius: 28px;
+    width: min(100%, 580px);
+    border-radius: 22px;
     overflow: hidden;
     border: 1px solid rgba(27, 116, 228, 0.12);
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
-    transform: rotate(1.8deg);
+    transform: rotate(1.2deg);
 }
 
 .subpage-hero-image {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
-    object-position: center center;
+    object-position: center top;
+}
+
+/* Screenshot images (website previews) — show full, no crop */
+.subpage-hero-frame.is-screenshot {
+    background:
+        radial-gradient(ellipse at top, #eef4ff 0%, #f7f9ff 100%);
+    border-color: rgba(27, 116, 228, 0.18);
+    padding: 14px 14px 0;
+    transform: rotate(1deg);
+}
+
+.subpage-hero-frame.is-screenshot .subpage-hero-image {
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    object-position: top center;
+    border-radius: 10px 10px 0 0;
 }
 
 .subpage-hero-tag {
