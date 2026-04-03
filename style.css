@@ -5628,10 +5628,15 @@ body.is-scrolled .wa-widget:not(.is-open) {
     grid-template-columns: 1fr;
     gap: 56px;
     align-items: start;
-    max-width: 1100px;
+    max-width: none;
     margin: 0 auto;
     padding-top: 48px;
     padding-bottom: 56px;
+}
+
+.page-article .container {
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .article-main,
