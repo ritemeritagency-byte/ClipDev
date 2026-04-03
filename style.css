@@ -5626,12 +5626,12 @@ body.is-scrolled .wa-widget:not(.is-open) {
 .article-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 56px;
+    gap: 72px;
     align-items: start;
     max-width: none;
     margin: 0 auto;
-    padding-top: 48px;
-    padding-bottom: 56px;
+    padding-top: 56px;
+    padding-bottom: 72px;
 }
 
 .page-article .container {
@@ -5663,8 +5663,8 @@ body.is-scrolled .wa-widget:not(.is-open) {
 }
 
 .article-feature-photo {
-    margin: 0 0 36px;
-    border-radius: 18px;
+    margin: 0 0 52px;
+    border-radius: 14px;
     overflow: hidden;
     border: none;
     box-shadow: none;
@@ -5674,78 +5674,99 @@ body.is-scrolled .wa-widget:not(.is-open) {
 .article-feature-photo img {
     display: block;
     width: 100%;
-    max-height: 520px;
-    object-fit: contain;
-    object-position: center;
+    max-height: 620px;
+    object-fit: cover;
+    object-position: center top;
 }
 
+/* Opening lead paragraphs */
 .article-main > p {
-    color: var(--text-muted);
-    font-size: 1.18rem;
-    line-height: 1.94;
+    color: var(--secondary-ink);
+    font-size: clamp(1.15rem, 1.6vw, 1.32rem);
+    line-height: 1.9;
     max-width: none;
+    margin-bottom: 1.4em;
 }
 
+/* Section spacing and dividers */
 .article-section + .article-section {
-    margin-top: 38px;
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(17, 38, 61, 0.08);
 }
 
+/* Section headline — large, editorial weight */
 .article-section h2 {
     color: var(--primary-ink);
-    margin-bottom: 18px;
-    font-size: clamp(1.7rem, 2.6vw, 2.45rem);
-    line-height: 1.2;
+    margin-bottom: 22px;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
 }
 
 .article-section p {
-    color: var(--text-muted);
-    font-size: 1.14rem;
-    line-height: 1.96;
+    color: var(--secondary-ink);
+    font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+    line-height: 1.92;
     max-width: none;
+    margin-bottom: 1.2em;
 }
 
 .article-list {
-    margin: 16px 0 0 22px;
+    margin: 18px 0 0 24px;
     color: var(--secondary-ink);
     max-width: none;
 }
 
 .article-list li {
-    margin-bottom: 14px;
-    line-height: 1.92;
-    font-size: 1.1rem;
+    margin-bottom: 16px;
+    line-height: 1.88;
+    font-size: clamp(1rem, 1.4vw, 1.16rem);
 }
 
 .article-metrics {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
-    margin: 14px 0;
+    margin: 28px 0;
+    padding: 24px 28px;
+    background: rgba(17, 38, 61, 0.03);
+    border-left: 3px solid var(--brand-accent, #1b74e4);
+    border-radius: 0 10px 10px 0;
 }
 
 .article-metrics span {
-    border: 1px solid rgba(17, 38, 61, 0.12);
-    background: #f7fbfb;
-    border-radius: 999px;
-    padding: 9px 13px;
-    font-size: 0.9rem;
+    border: none;
+    background: none;
+    border-radius: 0;
+    padding: 0 20px 0 0;
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
     color: var(--secondary-ink);
+    font-weight: 600;
+    border-right: 1px solid rgba(17, 38, 61, 0.15);
 }
 
+.article-metrics span:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+/* Sidebar — two-column summary below article */
 .article-sidebar {
     display: grid;
     gap: 0;
     max-width: none;
     width: 100%;
     margin: 0 auto;
-    border-top: 1px solid rgba(17,38,61,0.10);
-    padding-top: 40px;
+    border-top: 2px solid rgba(17,38,61,0.12);
+    padding-top: 48px;
 }
 
 .article-side-card {
-    padding: 28px 0;
+    padding: 32px 0;
     position: static;
-    border-bottom: 1px solid rgba(17,38,61,0.08);
+    border-bottom: 1px solid rgba(17,38,61,0.07);
 }
 
 .page-article .article-main strong {
@@ -5760,16 +5781,20 @@ body.is-scrolled .wa-widget:not(.is-open) {
 
 .article-sidebar {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 48px;
     border-top: none;
 }
 
 .article-side-card h3 {
     color: var(--primary-ink);
-    margin: 8px 0 10px;
+    margin: 8px 0 12px;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
 }
 
 .article-side-card p {
     color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
 .wa-send {
@@ -6188,14 +6213,18 @@ button:focus-visible {
     .article-layout {
         grid-template-columns: 1fr;
         max-width: 100%;
-        padding-top: 20px;
+        padding-top: 24px;
+        gap: 40px;
     }
     .article-side-card { position: static; }
-    .article-sidebar { grid-template-columns: 1fr; }
+    .article-sidebar { grid-template-columns: 1fr; gap: 0; }
     .article-main {
         max-width: 100%;
-        padding: 30px 28px 34px;
+        padding: 0;
     }
+    .article-metrics { flex-direction: column; gap: 10px; padding: 18px 20px; }
+    .article-metrics span { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(17,38,61,0.1); padding-bottom: 10px; }
+    .article-metrics span:last-child { border-bottom: none; padding-bottom: 0; }
     .article-main > p,
     .article-section p,
     .article-list li { max-width: none; }
