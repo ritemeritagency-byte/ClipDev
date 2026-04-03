@@ -260,54 +260,63 @@ const setupMegaMenu = () => {
             </div>
           </section>
           <section class="nav-mega-col">
-            <p class="nav-mega-label"><i class="fas fa-bullhorn"></i> Marketing & Social</p>
+            <p class="nav-mega-label"><i class="fas fa-bullhorn"></i> Marketing &amp; Social</p>
             <div class="nav-mega-links">
-              <a class="nav-mega-card" href="/facebook-social-media"><strong>Facebook Page & Social Media</strong><span>Page setup, content support, and message flow improvements.</span></a>
+              <a class="nav-mega-card" href="/facebook-social-media"><strong>Facebook Page &amp; Social Media</strong><span>Page setup, content support, and message flow improvements.</span></a>
               <a class="nav-mega-card" href="/facebook-social-media"><strong>Social Media Marketing</strong><span>Campaign ideas, posting support, and audience growth direction.</span></a>
-              <a class="nav-mega-card" href="/blog"><strong>Blog</strong><span>Published articles, lessons, and practical updates from our work.</span></a>
+              <a class="nav-mega-card" href="/chatmaxima-secret-scaling-agency"><strong>ChatMaxima Scaling Method</strong><span>How Facebook automation supports 200–300 applicants per day.</span></a>
             </div>
           </section>
           <section class="nav-mega-col">
             <p class="nav-mega-label"><i class="fas fa-diagram-project"></i> Agency Systems</p>
             <div class="nav-mega-links">
               <a class="nav-mega-card" href="/landbase-agency-process"><strong>A-Z Landbase Agency Process</strong><span>Bahrain, Qatar, and UAE recruitment workflow guidance.</span></a>
-              <a class="nav-mega-card" href="/insights#applicants-framework"><strong>Applicants Framework</strong><span>How stronger positioning and funnel flow produced 100+ daily applicants.</span></a>
-              <a class="nav-mega-card" href="/insights#office-show-system"><strong>Office Show System</strong><span>The follow-up and conversion logic behind 40+ office shows.</span></a>
+              <a class="nav-mega-card" href="/insights#applicants-framework"><strong>Applicants Framework</strong><span>How stronger positioning produced 100+ daily applicants.</span></a>
+              <a class="nav-mega-card" href="/insights#office-show-system"><strong>Office Show System</strong><span>The conversion logic behind 40+ office shows.</span></a>
             </div>
           </section>
         </div>
         <div class="nav-mega-footer">
           <a class="nav-mega-cta" href="/services">View All Services</a>
+          <a class="nav-mega-cta" href="/portfolio">See Portfolio</a>
+          <a class="nav-mega-cta" href="#contact">Get a Quote</a>
         </div>
       `,
     },
     {
-      href: "/blog",
-      menuClass: "nav-mega-blog",
+      href: "/courses",
+      menuClass: "nav-mega-learn",
       menuHtml: `
         <div class="nav-mega-grid">
           <section class="nav-mega-col">
-            <p class="nav-mega-label"><i class="fas fa-user-tie"></i> Founder Story</p>
+            <p class="nav-mega-label"><i class="fas fa-graduation-cap"></i> Courses &amp; Training</p>
             <div class="nav-mega-links">
-              <a class="nav-mega-card" href="/10-years-recruitment-tech"><strong>10 Years in Recruitment</strong><span>The founder story behind GCC recruitment experience and the shift into systems-driven agency work.</span></a>
+              <a class="nav-mega-card" href="/courses"><strong>Courses</strong><span>Recruitment and marketing courses with monthly membership access.</span></a>
+              <a class="nav-mega-card" href="/library"><strong>Course Library</strong><span>Access your active course videos and membership training.</span></a>
+              <a class="nav-mega-card" href="/login"><strong>Member Login</strong><span>Sign in to your account to access the course library.</span></a>
             </div>
           </section>
           <section class="nav-mega-col">
-            <p class="nav-mega-label"><i class="fas fa-robot"></i> Automation</p>
+            <p class="nav-mega-label"><i class="fas fa-lightbulb"></i> Knowledge &amp; Insights</p>
             <div class="nav-mega-links">
-              <a class="nav-mega-card" href="/chatmaxima-secret-scaling-agency"><strong>ChatMaxima Secret to Scaling</strong><span>How Facebook Page automation can help agencies handle 200 to 300 applicants a day.</span></a>
+              <a class="nav-mega-card" href="/insights"><strong>Insights</strong><span>Frameworks and case studies behind real recruitment results.</span></a>
+              <a class="nav-mega-card" href="/blog"><strong>Blog</strong><span>Articles on recruitment, digital marketing, and systems.</span></a>
+              <a class="nav-mega-card" href="/free-resources"><strong>Free Resources</strong><span>Free guides and frameworks — no signup needed.</span></a>
             </div>
           </section>
           <section class="nav-mega-col">
-            <p class="nav-mega-label"><i class="fas fa-table"></i> Database Systems</p>
+            <p class="nav-mega-label"><i class="fas fa-file-lines"></i> Featured Articles</p>
             <div class="nav-mega-links">
-              <a class="nav-mega-card" href="/google-sheets-secret-engine-agency"><strong>Google Sheets Secret Engine</strong><span>Why a structured tracker still works as the real-time engine behind recruitment follow-up.</span></a>
-              <a class="nav-mega-card" href="/google-sheets-database"><strong>Google Sheets Database Service</strong><span>See the service behind the systems and trackers mentioned in the article.</span></a>
+              <a class="nav-mega-card" href="/10-years-recruitment-tech"><strong>10 Years in Recruitment</strong><span>The founder story behind GCC experience and systems-driven agency work.</span></a>
+              <a class="nav-mega-card" href="/google-sheets-secret-engine-agency"><strong>Google Sheets Secret Engine</strong><span>Why a structured tracker is still the real-time engine behind follow-up.</span></a>
+              <a class="nav-mega-card" href="/chatmaxima-secret-scaling-agency"><strong>ChatMaxima Scaling</strong><span>How Facebook automation helps agencies handle 200–300 applicants daily.</span></a>
             </div>
           </section>
         </div>
         <div class="nav-mega-footer">
-          <a class="nav-mega-cta" href="/blog">Open Blog Hub</a>
+          <a class="nav-mega-cta" href="/courses">Join Course Club</a>
+          <a class="nav-mega-cta" href="/free-resources">Free Resources</a>
+          <a class="nav-mega-cta" href="/blog">Read the Blog</a>
         </div>
       `,
     },

@@ -5476,6 +5476,23 @@ body.is-scrolled .wa-widget:not(.is-open) {
     justify-content: center;
 }
 
+/* ── Free Resources centering fixes ─────────── */
+.page-free-resources .services-intro.about-card {
+    max-width: 860px;
+    text-align: center;
+    margin: 0 auto 32px;
+}
+
+.page-free-resources .free-resources-topics {
+    justify-content: center;
+}
+
+.page-free-resources .free-resources-cta-block {
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* ── Conversion improvements ─────────────────── */
 .package-urgency-note {
     display: inline-flex;
@@ -6157,8 +6174,8 @@ button:focus-visible {
         height: 100dvh;
         flex-direction: column;
         align-items: flex-start;
-        gap: 18px;
-        padding: 84px 24px 28px;
+        gap: 4px;
+        padding: 76px 20px 32px;
         background: rgba(255, 255, 255, 0.98);
         box-shadow: -14px 0 28px rgba(12, 41, 68, 0.16);
         transform: translateX(102%);
@@ -6166,6 +6183,11 @@ button:focus-visible {
         visibility: hidden;
         pointer-events: none;
         z-index: 1301;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav-links li {
+        width: 100%;
     }
     .nav-links li.has-mega-menu {
         width: 100%;
@@ -6178,9 +6200,9 @@ button:focus-visible {
         position: static;
         width: 100%;
         transform: none;
-        margin-top: 8px;
-        padding: 16px;
-        border-radius: 18px;
+        margin-top: 4px;
+        padding: 12px 14px;
+        border-radius: 14px;
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
@@ -6188,7 +6210,7 @@ button:focus-visible {
         box-shadow: none;
         background: rgba(244, 249, 255, 0.96);
         border-color: rgba(15, 39, 64, 0.08);
-        max-height: min(70dvh, 560px);
+        max-height: min(60dvh, 480px);
         overflow-y: auto;
     }
     .nav-links li.is-mega-open .nav-mega-menu {
@@ -6197,11 +6219,22 @@ button:focus-visible {
     }
     .nav-mega-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 14px;
+    }
+    .nav-mega-col {
+        padding: 0;
+    }
+    .nav-mega-col + .nav-mega-col {
+        border-left: 0;
+        border-top: 1px solid rgba(17, 38, 61, 0.1);
+        padding-top: 12px;
     }
     .nav-mega-label,
     .nav-mega-card strong {
         color: var(--primary-ink);
+    }
+    .nav-mega-card {
+        padding: 10px 0;
     }
     .nav-mega-card span {
         color: var(--text-muted);
@@ -6212,15 +6245,24 @@ button:focus-visible {
         border-color: rgba(111, 69, 216, 0.38);
         width: 100%;
         margin-left: 0;
+        justify-content: center;
+        min-height: 42px;
     }
     .nav-mega-footer {
         flex-direction: column;
         align-items: stretch;
+        gap: 8px;
+        padding: 12px 14px;
     }
     .nav-mega-footer::before {
-        flex: none;
+        display: none;
     }
-    .nav-links a { width: 100%; }
+    .nav-links a {
+        width: 100%;
+        min-height: 44px;
+        padding: 4px 0;
+        font-size: 1rem;
+    }
     .nav-search-item { width: 100%; }
     .nav-search { width: 100%; }
     .nav-search input { width: 100%; min-width: 0; }
@@ -6738,8 +6780,8 @@ button:focus-visible {
 .page-home .home-hero .hero-content {
     width: min(1240px, 100%);
     display: grid;
-    grid-template-columns: minmax(420px, 1.04fr) minmax(0, 0.96fr);
-    gap: 40px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
     align-items: center;
     justify-items: stretch;
     text-align: left;
@@ -6747,7 +6789,7 @@ button:focus-visible {
 
 .page-home .home-hero-copy {
     max-width: 620px;
-    justify-self: end;
+    justify-self: start;
 }
 
 .page-home .home-hero-copy h1 {
@@ -6796,6 +6838,37 @@ button:focus-visible {
 .page-home .home-hero-visual {
     position: relative;
 }
+
+.home-hero-tag {
+    position: absolute;
+    z-index: 10;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--primary-ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    box-shadow: 0 6px 18px rgba(16, 52, 90, 0.14);
+    border: 1px solid rgba(47, 128, 237, 0.18);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.home-hero-tag:nth-child(2) {
+    bottom: 34px;
+    left: -28px;
+}
+
+.home-hero-tag-secondary {
+    top: 28px;
+    right: 10px;
+    background: rgba(27, 116, 228, 0.96);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(27, 116, 228, 0.32);
+}
+
 
 .page-home .hero-visual-stage {
     position: relative;
@@ -6898,6 +6971,12 @@ button:focus-visible {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .home-hero-tag {
+        display: none;
+    }
 }
 
 .home-logo-strip {
