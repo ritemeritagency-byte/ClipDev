@@ -1798,27 +1798,27 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .course-hero-visual {
     position: relative;
-    min-height: 500px;
     display: grid;
     place-items: center;
 }
 
 .course-hero-photo-frame {
     position: relative;
-    width: min(100%, 520px);
-    border-radius: 30px;
+    width: min(100%, 580px);
+    border-radius: 22px;
     overflow: hidden;
     border: 1px solid rgba(27, 116, 228, 0.14);
     box-shadow: 0 28px 70px rgba(15, 23, 42, 0.18);
     background: #dfe9f6;
-    transform: rotate(-4deg);
+    transform: rotate(1.2deg);
 }
 
 .course-hero-photo-frame img {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
+    object-position: center top;
 }
 
 .course-hero-photo-card {
@@ -1903,15 +1903,15 @@ body.nav-open .nav-toggle span:nth-child(3) {
 }
 
 .course-hero-badge-primary {
-    top: 8px;
-    left: 18px;
+    top: -12px;
+    left: 20px;
     background: linear-gradient(135deg, #4d2fd2 0%, #6b32d0 100%);
     color: #f8f6ff;
 }
 
 .course-hero-badge-secondary {
-    left: 0;
-    bottom: 0;
+    bottom: -12px;
+    right: 20px;
     background: linear-gradient(135deg, #c6eef2 0%, #afe5ef 100%);
     color: #11596e;
 }
