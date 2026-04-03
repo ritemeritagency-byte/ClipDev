@@ -240,9 +240,53 @@ const setupCollabForm = () => {
   });
 };
 
+const setupQuickScopeForm = () => {
+  const quickForm = document.querySelector("#quick-scope-form");
+  if (!quickForm) return;
+
+  quickForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const goal = quickForm.querySelector("[name='quick_goal']")?.value?.trim() || "";
+    const timeline = quickForm.querySelector("[name='timeline']")?.value?.trim() || "";
+    const market = quickForm.querySelector("[name='market']")?.value?.trim() || "";
+    const notes = quickForm.querySelector("[name='notes']")?.value?.trim() || "";
+
+    const strategyForm = document.querySelector("#strategy-form");
+    if (strategyForm) {
+      const locationField = strategyForm.querySelector("[name='location']");
+      const messageField = strategyForm.querySelector("[name='message']");
+      const typeSelect = strategyForm.querySelector("[name='website_type']");
+
+      if (locationField && market) locationField.value = market;
+      if (messageField) {
+        const parts = [];
+        if (goal) parts.push(`Goal: ${goal}`);
+        if (timeline) parts.push(`Timeline: ${timeline}`);
+        if (notes) parts.push(notes);
+        messageField.value = parts.join("\n");
+      }
+      if (typeSelect && goal.toLowerCase().includes("applicant")) {
+        typeSelect.value = "Recruitment Funnel";
+      } else if (typeSelect && goal.toLowerCase().includes("site")) {
+        typeSelect.value = "Business Website";
+      }
+
+      strategyForm.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => strategyForm.querySelector("[name='name']")?.focus(), 500);
+    }
+
+    const hint = quickForm.querySelector("#quick-scope-hint");
+    if (hint) {
+      hint.textContent = "Your scope has been mapped below \u2014 add your name and contact to submit.";
+    }
+  });
+};
+
 export const setupForms = () => {
   setupGlobalCtaTracking();
   setupStrategyForm();
   setupWebsiteBriefForm();
   setupCollabForm();
+  setupQuickScopeForm();
 };

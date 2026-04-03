@@ -5476,6 +5476,46 @@ body.is-scrolled .wa-widget:not(.is-open) {
     justify-content: center;
 }
 
+/* ── Conversion improvements ─────────────────── */
+.package-urgency-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0a7a44;
+    background: rgba(15, 157, 88, 0.09);
+    border: 1px solid rgba(15, 157, 88, 0.2);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 8px;
+}
+
+.package-urgency-note .fa-circle {
+    font-size: 0.55rem;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+
+.testimonial-disclaimer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.quick-scope-hint {
+    font-size: 0.85rem;
+    color: #0a7a44;
+    font-weight: 600;
+    margin-top: 8px;
+    min-height: 1.2em;
+}
+
 .article-hero .hero-proof-badges {
     margin-top: 18px;
 }

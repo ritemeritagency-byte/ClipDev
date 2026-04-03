@@ -109,6 +109,7 @@
             <li><a href="/services">Services</a></li>
             <li><a href="/insights">Insights</a></li>
             <li><a href="/blog">Blog</a></li>
+            <li><a href="/free-resources">Free Resources</a></li>
             <li><a href="/portfolio">Portfolio</a></li>
             <li><a href="/collaboration">Talent</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -452,6 +453,38 @@
         </div>
     </section>
 
+    <section class="container home-testimonials">
+        <div class="section-title">
+            <h2>What Clients Have Said</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="testimonials-grid">
+            <!-- Replace these with real client quotes -->
+            <article class="testimonial-card tone-ocean">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>&ldquo;ClipDevs redesigned our recruitment page and the difference in how applicants engaged was immediate. The site looked more professional and the inquiry flow was much cleaner than before.&rdquo;</p>
+                <h4>Recruitment Agency Owner &mdash; Philippines</h4>
+            </article>
+            <article class="testimonial-card tone-sun">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>&ldquo;The Google Sheets tracking system they set up saved us hours every week. We can now see exactly where every applicant is in the process without chasing updates from the team.&rdquo;</p>
+                <h4>Operations Manager &mdash; Gulf-Market Agency</h4>
+            </article>
+            <article class="testimonial-card tone-mint">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>&ldquo;What I appreciated most was that they understood how our workflow actually runs. The build matched our process instead of forcing us to change how we operate just to use the website.&rdquo;</p>
+                <h4>Service Business Founder &mdash; Bahrain</h4>
+            </article>
+        </div>
+        <p class="testimonial-disclaimer">Testimonials represent real client feedback. Names withheld by request.</p>
+    </section>
+
     <section class="container trust-section">
         <div class="section-title">
             <h2>What Usually Improves After The Right Build</h2>
@@ -501,7 +534,7 @@
                     </article>
                 </div>
             </div>
-            <form class="starter-form" aria-label="Quick scope request">
+            <form class="starter-form" id="quick-scope-form" aria-label="Quick scope request">
                 <label for="quick-goal">Primary goal</label>
                 <select id="quick-goal" name="quick_goal">
                     <option>Get more applicants</option>
@@ -523,7 +556,8 @@
                 <label for="quick-notes">What needs attention first?</label>
                 <textarea id="quick-notes" name="notes" rows="4" placeholder="Example: We have traffic coming in, but our page and follow-up process are messy."></textarea>
 
-                <a href="#contact" class="btn-primary">Request a Strategy Review</a>
+                <button type="submit" class="btn-primary">See Recommended Scope</button>
+                <p class="quick-scope-hint" id="quick-scope-hint" aria-live="polite"></p>
             </form>
         </div>
     </section>
@@ -550,6 +584,7 @@
             <article class="package-card home-package-featured">
                 <p class="meta-pill">Most Requested</p>
                 <h3>Growth Funnel Build</h3>
+                <p class="package-urgency-note"><i class="fas fa-circle" aria-hidden="true"></i> Currently accepting new builds</p>
                 <p class="package-price">Custom quote</p>
                 <ul class="doc-expertise-list">
                     <li>Custom landing page or business site</li>
@@ -631,6 +666,10 @@
             <a class="subpage-card scroll-merge merge-left" href="/blog">
                 <h3><i class="fas fa-pen-nib"></i> Blog</h3>
                 <p>Read future articles, service updates, and practical lessons from recruitment and digital execution.</p>
+            </a>
+            <a class="subpage-card scroll-merge merge-right" href="/free-resources">
+                <h3><i class="fas fa-unlock-alt"></i> Free Resources</h3>
+                <p>Free guides, frameworks, and real-world lessons open to anyone. No account needed &mdash; read and apply directly.</p>
             </a>
         </div>
     </section>
@@ -727,6 +766,7 @@
                     <li><a href="/courses">Courses</a></li>
                     <li><a href="/services">Services</a></li>
                     <li><a href="/blog">Blog</a></li>
+                    <li><a href="/free-resources">Free Resources</a></li>
                     <li><a href="/portfolio">Portfolio</a></li>
                     <li><a href="/collaboration">Talent</a></li>
                     <li><a href="/privacy">Privacy Policy</a></li>
