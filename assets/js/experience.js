@@ -383,9 +383,13 @@ const setupMegaMenu = () => {
   });
 
   document.addEventListener("click", (event) => {
-    configuredItems.forEach(({ triggerItem }) => {
-      if (!triggerItem.contains(event.target)) setMegaOpen(triggerItem, false);
-    });
+    const clickedInsideAny = configuredItems.some(({ triggerItem }) => triggerItem.contains(event.target));
+    if (!clickedInsideAny) {
+      configuredItems.forEach(({ triggerItem, menu }) => {
+        triggerItem.classList.remove("is-mega-open");
+        menu?.setAttribute("aria-hidden", "true");
+      });
+    }
   });
 
   window.addEventListener("keydown", (event) => {
