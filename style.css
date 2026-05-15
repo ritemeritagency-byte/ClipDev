@@ -3540,6 +3540,84 @@ a.is-loading {
     max-width: 520px;
 }
 
+.resume-section {
+    margin-top: 10px;
+}
+
+.resume-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    align-items: start;
+}
+
+.resume-summary-card {
+    width: 100%;
+    max-width: none;
+    display: grid;
+    gap: 14px;
+}
+
+.resume-summary-card h3 {
+    color: var(--primary-ink);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.resume-summary-card p {
+    color: var(--text-muted);
+}
+
+.resume-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.resume-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #edf5ff;
+    border: 1px solid rgba(27, 116, 228, 0.12);
+    color: var(--secondary-ink);
+    font-size: 0.84rem;
+}
+
+.resume-meta strong {
+    color: var(--primary-ink);
+}
+
+.resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.resume-actions a {
+    text-decoration: none;
+}
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.resume-list {
+    margin: 12px 0 0 18px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+}
+
+.resume-list li {
+    margin-bottom: 6px;
+}
+
 .image-frame {
     position: relative;
     padding: 12px;
