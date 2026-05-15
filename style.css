@@ -3618,6 +3618,65 @@ a.is-loading {
     margin-bottom: 6px;
 }
 
+.page-resume .subpage-hero {
+    padding-top: 36px;
+    padding-bottom: 18px;
+}
+
+.page-resume .subpage-hero .hero-content {
+    padding: 34px 36px 30px;
+}
+
+.page-resume .container {
+    padding-top: 54px;
+    padding-bottom: 54px;
+}
+
+.page-resume .resume-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+    gap: 18px;
+}
+
+.page-resume .resume-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.page-resume .service-card,
+.page-resume .subpage-card {
+    padding: 22px 22px 20px;
+}
+
+.page-resume .resume-summary-card {
+    gap: 12px;
+}
+
+.page-resume .resume-summary-card p,
+.page-resume .service-card p,
+.page-resume .subpage-card p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.page-resume .resume-list {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+.page-resume .resume-list li {
+    margin-bottom: 5px;
+}
+
+.page-resume .resume-meta {
+    gap: 8px;
+}
+
+.page-resume .resume-meta span {
+    padding: 7px 11px;
+    font-size: 0.8rem;
+}
+
 .image-frame {
     position: relative;
     padding: 12px;
