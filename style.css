@@ -3624,7 +3624,8 @@ a.is-loading {
 }
 
 .page-resume .subpage-hero .hero-content {
-    padding: 34px 36px 30px;
+    max-width: min(820px, 100%);
+    padding: 30px 30px 28px;
 }
 
 .page-resume .container {
@@ -3632,16 +3633,133 @@ a.is-loading {
     padding-bottom: 54px;
 }
 
-.page-resume .resume-layout {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
-    gap: 18px;
+.page-resume .subpage-hero .hero-content::before,
+.page-resume .subpage-hero .hero-content::after {
+    display: none;
 }
 
-.page-resume .resume-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.page-resume .resume-hero-center {
+    display: grid;
+    place-items: center;
+    min-height: 300px;
+}
+
+.page-resume .resume-hero-visual {
+    width: min(100%, 420px);
+    display: grid;
+    place-items: center;
+}
+
+.page-resume .resume-portrait-frame {
+    width: min(100%, 360px);
+    transform: none;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.16);
+}
+
+.page-resume .resume-portrait {
+    aspect-ratio: 1 / 1.08;
+    object-position: center top;
+}
+
+.page-resume .resume-intro {
+    padding-top: 28px;
+}
+
+.page-resume .resume-intro-card {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 18px 40px rgba(13, 27, 42, 0.1);
+    display: grid;
     gap: 14px;
 }
 
+.page-resume .resume-intro-card h3 {
+    color: var(--primary-ink);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.page-resume .resume-intro-card p {
+    color: var(--text-muted);
+    max-width: 72ch;
+}
+
+.page-resume .resume-history-grid,
+.page-resume .project-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.page-resume .history-card,
+.page-resume .project-showcase-card {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(17, 38, 61, 0.1);
+    border-radius: 22px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 16px 36px rgba(13, 27, 42, 0.1);
+}
+
+.page-resume .history-card {
+    display: grid;
+    gap: 10px;
+}
+
+.page-resume .history-card h3,
+.page-resume .project-showcase-card h3 {
+    color: var(--primary-ink);
+    font-size: 1.22rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.page-resume .history-role {
+    color: var(--accent-deep);
+    font-weight: 700;
+}
+
+.page-resume .history-card p,
+.page-resume .project-showcase-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.58;
+}
+
+.page-resume .history-card-soft {
+    background:
+        radial-gradient(220px 160px at 100% 0%, rgba(232, 227, 255, 0.42), transparent 58%),
+        rgba(255, 255, 255, 0.88);
+}
+
+.page-resume .project-showcase-card {
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.page-resume .project-showcase-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(27, 116, 228, 0.22);
+    box-shadow: 0 22px 40px rgba(13, 27, 42, 0.14);
+}
+
+.page-resume .project-showcase-card .meta-pill {
+    margin-bottom: 6px;
+}
+
+.page-resume .project-showcase-card p {
+    margin-top: 8px;
+}
+
+.page-resume .resume-layout,
+.page-resume .resume-grid {
+    display: none;
+}
+
+.page-resume .resume-summary-card,
 .page-resume .service-card,
 .page-resume .subpage-card {
     padding: 22px 22px 20px;
@@ -3675,6 +3793,40 @@ a.is-loading {
 .page-resume .resume-meta span {
     padding: 7px 11px;
     font-size: 0.8rem;
+}
+
+.page-resume .cta-banner {
+    margin-top: 6px;
+}
+
+@media (max-width: 980px) {
+    .page-resume .resume-history-grid,
+    .page-resume .project-showcase-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-resume .subpage-hero .hero-content {
+        padding: 22px 18px 20px;
+    }
+
+    .page-resume .resume-hero-center {
+        min-height: 240px;
+    }
+
+    .page-resume .resume-portrait-frame {
+        width: min(100%, 300px);
+    }
+
+    .page-resume .resume-intro-card {
+        padding: 22px 20px;
+    }
+
+    .page-resume .resume-history-grid,
+    .page-resume .project-showcase-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .image-frame {
