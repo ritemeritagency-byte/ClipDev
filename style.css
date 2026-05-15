@@ -3705,8 +3705,18 @@ a.is-loading {
 }
 
 .page-resume .history-card {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
+}
+
+.page-resume .history-card .meta-pill {
+    align-self: flex-start;
+    max-width: fit-content;
+    margin-bottom: 2px;
+    padding: 4px 10px;
+    line-height: 1.1;
 }
 
 .page-resume .history-card h3,
@@ -3730,9 +3740,7 @@ a.is-loading {
 }
 
 .page-resume .history-card-soft {
-    background:
-        radial-gradient(220px 160px at 100% 0%, rgba(232, 227, 255, 0.42), transparent 58%),
-        rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.88);
 }
 
 .page-resume .project-showcase-card {
@@ -3748,6 +3756,7 @@ a.is-loading {
 
 .page-resume .project-showcase-card .meta-pill {
     margin-bottom: 6px;
+    padding: 4px 10px;
 }
 
 .page-resume .project-showcase-card p {
