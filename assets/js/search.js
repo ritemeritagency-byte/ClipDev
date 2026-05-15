@@ -17,6 +17,7 @@ export const setupSiteSearch = () => {
     { label: "Stop Typing, Start Deploying: Why Google Sheets is the Secret Engine of Your Agency", url: "/google-sheets-secret-engine-agency", keywords: ["google sheets", "data push", "recruitment database", "live data bridge", "lead tracking"] },
     { label: "Website Development", url: "/website-development", keywords: ["website development", "landing page", "web design"] },
     { label: "Portfolio", url: "/portfolio", keywords: ["portfolio", "case", "projects", "results"] },
+    { label: "Resume", url: "/resume", keywords: ["resume", "cv", "curriculum vitae", "experience"] },
     { label: "Talent", url: "/collaboration", keywords: ["talent", "join", "collaboration", "apply"] },
     { label: "Contact", url: "/#contact", keywords: ["contact", "whatsapp", "reach"] },
     { label: "Applicants Framework", url: "/insights#applicants-framework", keywords: ["100+ daily applicants", "khalid"] },
