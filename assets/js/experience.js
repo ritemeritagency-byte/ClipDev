@@ -358,6 +358,36 @@ const setupMegaMenu = () => {
 
   if (!configuredItems.length) return;
 
+  const getPathFromHref = (href) => {
+    if (!href || href.startsWith("#")) return null;
+
+    try {
+      return normalizePath(new URL(href, window.location.origin).pathname);
+    } catch {
+      return normalizePath(href.split("?")[0].split("#")[0]);
+    }
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
+
+  const syncCurrentMegaState = () => {
+    configuredItems.forEach(({ triggerLink, triggerItem }) => {
+      const triggerPath = getPathFromHref(triggerLink.getAttribute("href") || "");
+      const menuLinks = Array.from(triggerItem.querySelectorAll(".nav-mega-menu a"));
+      const matchingChild = menuLinks.find((link) => getPathFromHref(link.getAttribute("href") || "") === currentPath);
+      const isCurrentGroup = Boolean(matchingChild) || triggerPath === currentPath;
+
+      triggerLink.classList.toggle("is-current", isCurrentGroup);
+      triggerItem.classList.toggle("is-current-group", isCurrentGroup);
+
+      menuLinks.forEach((link) => {
+        link.classList.toggle("is-current", getPathFromHref(link.getAttribute("href") || "") === currentPath);
+      });
+    });
+  };
+
+  syncCurrentMegaState();
+
   const setMegaOpen = (targetItem, isOpen) => {
     configuredItems.forEach(({ triggerItem, menu }) => {
       const shouldOpen = triggerItem === targetItem ? isOpen : false;
