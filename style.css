@@ -6008,10 +6008,11 @@ body.is-scrolled .wa-widget:not(.is-open) {
 
 .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.62fr);
+    grid-template-columns: minmax(0, 860px) minmax(280px, 320px);
+    justify-content: center;
     gap: 32px;
     align-items: start;
-    max-width: 1320px;
+    max-width: 1260px;
     margin: 0 auto;
     padding-top: 28px;
     padding-bottom: 72px;
@@ -6035,6 +6036,7 @@ body.is-scrolled .wa-widget:not(.is-open) {
     max-width: none;
     width: 100%;
     margin: 0 auto;
+    justify-self: center;
 }
 
 .page-article .article-main.reveal-item,
