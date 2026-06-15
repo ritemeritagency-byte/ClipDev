@@ -4,6 +4,7 @@ import esbuild from "esbuild";
 
 const rootDir = process.cwd();
 const watchMode = process.argv.includes("--watch");
+const devMode = watchMode || process.env.NODE_ENV === "development";
 
 const fileExists = (filePath) => {
   try {
@@ -60,7 +61,7 @@ const buildOptions = {
   platform: "browser",
   target: ["es2020"],
   splitting: false,
-  sourcemap: false,
+  sourcemap: devMode ? "linked" : false,
   minify: true,
   logLevel: "info",
   entryNames: "[dir]/[name]",
@@ -104,6 +105,7 @@ if (watchMode) {
     contexts.push(
       await esbuild.context({
         ...buildOptions,
+        sourcemap: true,
         entryPoints: [browserEntry],
         platform: "browser",
       })
@@ -114,6 +116,7 @@ if (watchMode) {
     contexts.push(
       await esbuild.context({
         ...buildOptions,
+        sourcemap: true,
         entryPoints: apiEntries,
         platform: "node",
         target: ["node20"],
@@ -125,6 +128,7 @@ if (watchMode) {
     contexts.push(
       await esbuild.context({
         ...buildOptions,
+        sourcemap: true,
         entryPoints: railwayEntries,
         platform: "node",
         target: ["node20"],
