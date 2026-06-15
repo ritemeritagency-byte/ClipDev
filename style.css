@@ -6008,19 +6008,19 @@ body.is-scrolled .wa-widget:not(.is-open) {
 
 .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 860px) minmax(280px, 320px);
+    grid-template-columns: minmax(0, 800px) minmax(280px, 300px);
     justify-content: center;
-    gap: 32px;
+    gap: 28px;
     align-items: start;
-    max-width: 1260px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding-top: 28px;
+    padding-top: 36px;
     padding-bottom: 72px;
 }
 
 .page-article .container {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 .article-main,
@@ -6032,11 +6032,12 @@ body.is-scrolled .wa-widget:not(.is-open) {
 }
 
 .article-main {
-    padding: 42px 48px 48px;
+    padding: 48px 50px 52px;
     max-width: none;
     width: 100%;
     margin: 0 auto;
     justify-self: center;
+    backdrop-filter: saturate(1.08) blur(1px);
 }
 
 .page-article .article-main.reveal-item,
@@ -6134,7 +6135,7 @@ body.is-scrolled .wa-widget:not(.is-open) {
     width: 100%;
     margin: 0 auto;
     position: sticky;
-    top: 96px;
+    top: 88px;
     align-self: start;
 }
 
@@ -6611,7 +6612,7 @@ button:focus-visible {
         grid-template-columns: 1fr;
         max-width: 100%;
         padding-top: 24px;
-        gap: 40px;
+        gap: 32px;
     }
     .article-side-card { position: static; }
     .article-sidebar {
@@ -6622,7 +6623,7 @@ button:focus-visible {
     }
     .article-main {
         max-width: 100%;
-        padding: 28px 24px 32px;
+        padding: 30px 26px 34px;
     }
     .article-metrics {
         flex-direction: column;
