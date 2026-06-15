@@ -31,8 +31,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
 </head>
 <body class="page-courses">
     <a class="sr-only" href="#main-content">Skip to main content</a>
@@ -363,12 +361,14 @@
                         <li>Ask questions live and get direct implementation help</li>
                         <li>Sessions are held through Google Meet</li>
                     </ul>
-                    <p class="course-plan-note"><strong>Available schedule:</strong> Weekdays from 9:00 PM to 10:00 PM PH time, and weekends from 1:00 PM to 5:00 PM PH time.</p>
+                    <p class="course-plan-note"><strong>Available schedule:</strong> Weekdays from 9:00 PM to 10:00 PM PH time, and weekends from 1:00 PM to 5:00 PM PH time. Message us first to reserve a slot before paying.</p>
                     <div class="training-session-booking">
                         <p class="course-plan-label">Step 1</p>
                         <h5>Book your schedule</h5>
-                        <p class="course-plan-note">Choose an available Google Calendar slot first so your session does not get double-booked.</p>
-                        <div class="training-booking-button" data-training-booking-button></div>
+                        <p class="course-plan-note">Send your preferred slot on WhatsApp and we will confirm availability before the session is paid.</p>
+                        <div class="course-plan-actions">
+                            <a href="https://api.whatsapp.com/send?phone=639603780196&text=Hi%20ClipDevs%2C%20I%20want%20to%20book%20the%201-on-1%20training%20session%20and%20confirm%20an%20available%20time%20slot." class="btn-secondary" target="_blank" rel="noopener noreferrer">Book via WhatsApp</a>
+                        </div>
                     </div>
                     <form class="training-payment-form" data-training-payment-form>
                         <p class="course-plan-label">Step 2</p>
@@ -524,18 +524,6 @@
         </div>
     </div>
 
-    <script>
-    window.addEventListener("load", function () {
-        var target = document.querySelector("[data-training-booking-button]");
-        if (!target || !window.calendar || !window.calendar.schedulingButton) return;
-        window.calendar.schedulingButton.load({
-            url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3W0t80bupZ67wxyO6PP41Dh4n8rsjOrV1CN8V0QZczkYCoRVPOcN9gb-G_co6K-bgjNz3Us3NS?gv=true",
-            color: "#039BE5",
-            label: "Book an appointment",
-            target: target,
-        });
-    });
-    </script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
