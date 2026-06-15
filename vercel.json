@@ -1,6 +1,8 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/services.html", "destination": "/services", "permanent": true },
