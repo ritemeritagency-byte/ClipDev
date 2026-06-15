@@ -4,7 +4,7 @@ import {
   sendToGoogleSheet,
   showFormNotice,
   trackAnalyticsEvent,
-} from "./shared.js";
+} from "./shared.ts";
 
 const setupGlobalCtaTracking = () => {
   document.querySelectorAll(".btn-primary, .project-link, .contact-button").forEach((element) => {

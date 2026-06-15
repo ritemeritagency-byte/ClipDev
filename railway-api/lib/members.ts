@@ -1,4 +1,8 @@
-var y=(t,a)=>()=>(a||t((a={exports:{}}).exports,a),a.exports);var o=y((M,r)=>{var b=["cliperedbagundol@gmail.com"],A=["cliperedbagundol@gmail.com"],S={courseClubMonthly:"course-club",flagshipCourseOneTime:"flagship-course"},f={planCode:"courseClubMonthly",maxRedemptions:10,discountPercent:30,regularAmountCents:99900,discountedAmountCents:69900,currency:"PHP"},C=t=>{let a=String(t||"").trim().toLowerCase();return a&&(a==="recruitment_agency"||a==="individual")?a:null},l=()=>Array.from(new Set([...b,...String(process.env.ADMIN_EMAILS||"").split(",").map(t=>t.trim().toLowerCase()).filter(Boolean)])),u=t=>l().includes(String(t||"").trim().toLowerCase()),v=t=>A.includes(String(t||"").trim().toLowerCase()),h=t=>u(t)?"admin":"member";r.exports={SESSION_DURATION_DAYS:30,PLAN_TO_COURSE:S,COURSE_CLUB_LAUNCH_OFFER:f,normalizeAccountType:C,getAdminEmails:l,isAdminEmail:u,isTestAccessEmail:v,getUserRole:h}});var{getUserRole:_,isAdminEmail:d,isTestAccessEmail:E}=o(),T=async(t,a)=>{let c=await t.query(`
+const { getUserRole, isAdminEmail, isTestAccessEmail } = require("./config");
+
+const getMemberProfileByEmail = async (queryable, email) => {
+  const result = await queryable.query(
+    `
       select
         u.id as user_id,
         u.email,
@@ -32,7 +36,53 @@ var y=(t,a)=>()=>(a||t((a={exports:{}}).exports,a),a.exports);var o=y((M,r)=>{va
       group by u.id, s.id, p.plan_code, p.display_name
       order by s.created_at desc nulls last
       limit 1
-    `,[a]);if(!c.rows.length)return null;let e=c.rows[0],n={id:e.user_id,email:e.email,fullName:e.full_name,role:_(e.email),isAdmin:d(e.email),accountType:e.account_type,agencyName:e.agency_name,goals:e.goals,avatarUrl:e.avatar_url,accountStatus:e.account_status,subscriptionId:e.subscription_id,subscriptionStatus:e.subscription_status,currentPeriodEnd:e.current_period_end,planCode:e.plan_code,planName:e.display_name,access:e.access,hasTestAccess:E(e.email)};return n.hasTestAccess&&(n.subscriptionStatus="active",n.planCode=n.planCode||"courseClubMonthly",n.planName=n.planName||"Course Club Test Access",n.access=[{courseSlug:"course-club",accessStatus:"active",grantedAt:null,revokedAt:null}]),n},j=async t=>{let c=(await t.query(`
+    `,
+    [email]
+  );
+
+  if (!result.rows.length) return null;
+
+  const row = result.rows[0];
+  const member = {
+    id: row.user_id,
+    email: row.email,
+    fullName: row.full_name,
+    role: getUserRole(row.email),
+    isAdmin: isAdminEmail(row.email),
+    accountType: row.account_type,
+    agencyName: row.agency_name,
+    goals: row.goals,
+    avatarUrl: row.avatar_url,
+    accountStatus: row.account_status,
+    subscriptionId: row.subscription_id,
+    subscriptionStatus: row.subscription_status,
+    currentPeriodEnd: row.current_period_end,
+    planCode: row.plan_code,
+    planName: row.display_name,
+    access: row.access,
+    hasTestAccess: isTestAccessEmail(row.email),
+  };
+
+  if (member.hasTestAccess) {
+    member.subscriptionStatus = "active";
+    member.planCode = member.planCode || "courseClubMonthly";
+    member.planName = member.planName || "Course Club Test Access";
+    member.access = [
+      {
+        courseSlug: "course-club",
+        accessStatus: "active",
+        grantedAt: null,
+        revokedAt: null,
+      },
+    ];
+  }
+
+  return member;
+};
+
+const getAdminDashboardMembers = async (client) => {
+  const result = await client.query(
+    `
       with latest_subscription as (
         select distinct on (s.user_id)
           s.user_id,
@@ -104,4 +154,54 @@ var y=(t,a)=>()=>(a||t((a={exports:{}}).exports,a),a.exports);var o=y((M,r)=>{va
         lp.last_payment_at,
         lse.last_seen_at
       order by u.created_at desc
-    `)).rows.map(s=>({id:s.id,email:s.email,fullName:s.full_name,role:_(s.email),isAdmin:d(s.email),accountType:s.account_type,agencyName:s.agency_name,goals:s.goals,avatarUrl:s.avatar_url,accountStatus:s.account_status,createdAt:s.created_at,subscriptionId:s.subscription_id,subscriptionStatus:s.subscription_status,currentPeriodEnd:s.current_period_end,planCode:s.plan_code,planName:s.plan_name,lastPaymentAt:s.last_payment_at,lastSeenAt:s.last_seen_at,access:s.access})),n=Date.now()-1e3*60*60*24*7,p=c.filter(s=>s.subscriptionStatus==="active").length,m=c.filter(s=>Array.isArray(s.access)?s.access.some(i=>i?.accessStatus==="active"):!1).length,g=c.filter(s=>(s.createdAt?new Date(s.createdAt).getTime():0)>=n).length;return{summary:{totalMembers:c.length,activeMembers:p,activeViewers:m,recentSignups:g},members:c}};module.exports={getMemberProfileByEmail:T,getAdminDashboardMembers:j};
+    `
+  );
+
+  const members = result.rows.map((row) => ({
+    id: row.id,
+    email: row.email,
+    fullName: row.full_name,
+    role: getUserRole(row.email),
+    isAdmin: isAdminEmail(row.email),
+    accountType: row.account_type,
+    agencyName: row.agency_name,
+    goals: row.goals,
+    avatarUrl: row.avatar_url,
+    accountStatus: row.account_status,
+    createdAt: row.created_at,
+    subscriptionId: row.subscription_id,
+    subscriptionStatus: row.subscription_status,
+    currentPeriodEnd: row.current_period_end,
+    planCode: row.plan_code,
+    planName: row.plan_name,
+    lastPaymentAt: row.last_payment_at,
+    lastSeenAt: row.last_seen_at,
+    access: row.access,
+  }));
+
+  const now = Date.now();
+  const recentSignupThreshold = now - 1000 * 60 * 60 * 24 * 7;
+  const activeMembers = members.filter((member) => member.subscriptionStatus === "active").length;
+  const activeViewers = members.filter((member) =>
+    Array.isArray(member.access) ? member.access.some((item) => item?.accessStatus === "active") : false
+  ).length;
+  const recentSignups = members.filter((member) => {
+    const createdAt = member.createdAt ? new Date(member.createdAt).getTime() : 0;
+    return createdAt >= recentSignupThreshold;
+  }).length;
+
+  return {
+    summary: {
+      totalMembers: members.length,
+      activeMembers,
+      activeViewers,
+      recentSignups,
+    },
+    members,
+  };
+};
+
+module.exports = {
+  getMemberProfileByEmail,
+  getAdminDashboardMembers,
+};

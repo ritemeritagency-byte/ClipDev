@@ -1,4 +1,4 @@
-import { body, root, navToggle, navLinks, normalizePath, reducedMotionQuery, buildMessengerUrl } from "./shared.js";
+import { body, root, navToggle, navLinks, normalizePath, reducedMotionQuery, buildMessengerUrl } from "./shared.ts";
 
 const navAnchors = Array.from(document.querySelectorAll(".nav-links a"));
 

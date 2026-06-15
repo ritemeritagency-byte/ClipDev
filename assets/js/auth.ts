@@ -7,7 +7,7 @@ import {
   formatDateLabel,
   formatMembershipAccess,
   updateAvatarPreview,
-} from "./shared.js";
+} from "./shared.ts";
 
 const setupAuthForms = () => {
   const signupForm = document.querySelector("[data-signup-form]");

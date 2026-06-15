@@ -1,5 +1,1 @@
-const json = (res, status, payload) => res.status(status).json(payload);
-
-module.exports = {
-  json,
-};
+var n=(s,o,t)=>s.status(o).json(t);module.exports={json:n};

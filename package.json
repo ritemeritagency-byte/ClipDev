@@ -1,0 +1,11 @@
+{
+  "name": "clipdevs-site",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "build:watch": "node build.mjs --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10"
+  }
+}

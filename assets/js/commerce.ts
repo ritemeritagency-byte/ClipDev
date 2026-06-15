@@ -3,7 +3,7 @@ import {
   COURSE_PAYMENT_FALLBACK,
   formatPhpAmount,
   trackAnalyticsEvent,
-} from "./shared.js";
+} from "./shared.ts";
 
 const setupPaymentStatusBanners = () => {
   const hosts = document.querySelectorAll("[data-payment-status-host]");
