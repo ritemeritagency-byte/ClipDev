@@ -5801,6 +5801,24 @@ body.is-scrolled .wa-widget:not(.is-open) {
     margin-top: 8px;
 }
 
+.home-blog-highlight {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.home-blog-grid {
+    display: flex;
+    justify-content: center;
+}
+
+.home-blog-card {
+    width: min(100%, 980px);
+}
+
+.home-blog-card .insight-card-image img {
+    min-height: 300px;
+}
+
 /* ── Blog card meta row ──────────────────────── */
 .blog-card-meta {
     display: flex;
