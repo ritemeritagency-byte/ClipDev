@@ -1,0 +1,4 @@
+script.ts
+assets/js/**/*.ts
+api/**/*.ts
+railway-api/**/*.ts
