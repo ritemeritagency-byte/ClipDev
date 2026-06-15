@@ -224,6 +224,17 @@ const setupTrainingCheckout = () => {
   });
 };
 
+const setupWhatsAppBookingTracking = () => {
+  document.querySelectorAll("[data-whatsapp-booking-cta]").forEach((element) => {
+    element.addEventListener("click", () => {
+      trackAnalyticsEvent("whatsapp_booking_click", {
+        cta_label: (element.textContent || "").trim() || "Book via WhatsApp",
+        page_path: window.location.pathname || "/",
+      });
+    });
+  });
+};
+
 const setupCourseLaunchOffer = () => {
   const offerSections = document.querySelectorAll("[data-launch-offer-section]");
   if (!offerSections.length) return;
@@ -511,6 +522,7 @@ export const setupCommerce = () => {
   setupPaymentStatusBanners();
   setupCoursePaymentLinks();
   setupTrainingCheckout();
+  setupWhatsAppBookingTracking();
   setupHourlyServiceCards();
   setupHourlyWhatsAppBrief();
   setupCourseLaunchOffer();
