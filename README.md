@@ -29,6 +29,7 @@ Important environment variables used by the Vercel API routes:
 - `PAYMONGO_WEBHOOK_SECRET`
 - `BUNNY_LIBRARY_ID`
 - `BUNNY_STREAM_API_KEY`
+- `GOOGLE_SHEET_WEBHOOK_URL`
 
 ### Railway API
 
@@ -64,10 +65,11 @@ npm run check
 - Public pages remain plain HTML/CSS with a shared JavaScript entrypoint.
 - The browser code is now grouped by concerns:
   - `experience.js` for navigation, animation, showcase, and widget behavior
-  - `commerce.js` for payments, offers, paywall, and membership flows
-  - `auth.js` for signup, login, account, admin, and member library behavior
-  - `forms.js` for lead forms and CTA tracking
-  - `search.js` for site search
+- `commerce.js` for payments, offers, paywall, and membership flows
+- `auth.js` for signup, login, account, admin, and member library behavior
+- `forms.js` for lead forms and CTA tracking
+- `search.js` for site search
+- Form submissions now proxy through `/api/forms/submit`, which forwards to the Google Sheets webhook from server-side config.
 - The Railway API is split by route area:
   - `health`
   - `auth`

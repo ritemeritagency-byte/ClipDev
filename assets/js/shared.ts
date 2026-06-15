@@ -5,8 +5,6 @@ export const navLinks = document.querySelector(".nav-links");
 export const GA4_MEASUREMENT_ID = "";
 export const COURSE_PAYMENT_FALLBACK =
   "https://api.whatsapp.com/send?phone=639603780196&text=Hi%2C%20I%20want%20help%20buying%20a%20course%20from%20ClipDevs.";
-export const GOOGLE_SHEET_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycby05ygLXtRFHJVjqQ9sTju23nDqPn8Z_OsdMYuk_UMuEaCl2kZ9ePyj0C6llogUXf94Mg/exec";
 export const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 body.classList.add("has-motion-js");
@@ -143,26 +141,15 @@ export const formatMembershipAccess = (member) => {
 };
 
 export const sendToGoogleSheet = async (payload) => {
-  if (!GOOGLE_SHEET_WEBHOOK_URL) return;
-
-  const bodyPayload = JSON.stringify(payload);
-
-  if (navigator.sendBeacon) {
-    const blob = new Blob([bodyPayload], { type: "text/plain;charset=UTF-8" });
-    const queued = navigator.sendBeacon(GOOGLE_SHEET_WEBHOOK_URL, blob);
-    if (queued) return;
-  }
-
   try {
-    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+    await fetch("/api/forms/submit", {
       method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      body: bodyPayload,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
       keepalive: true,
     });
   } catch (error) {
-    console.error("Google Sheets submission failed:", error);
+    console.error("Form submission failed:", error);
   }
 };
 
