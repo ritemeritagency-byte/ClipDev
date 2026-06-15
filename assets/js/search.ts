@@ -15,6 +15,7 @@ export const setupSiteSearch = () => {
     { label: "10 Years in Recruitment: How I Finally Cracked the Code with Tech", url: "/10-years-recruitment-tech", keywords: ["10 years recruitment", "landbase", "agency automation", "digital recruitment process"] },
     { label: "200 to 300 Applicants a Day: The ChatMaxima Secret to Scaling Your Agency", url: "/chatmaxima-secret-scaling-agency", keywords: ["chatmaxima", "facebook page automation", "200 applicants", "300 applicants", "agency scaling"] },
     { label: "Stop Typing, Start Deploying: Why Google Sheets is the Secret Engine of Your Agency", url: "/google-sheets-secret-engine-agency", keywords: ["google sheets", "data push", "recruitment database", "live data bridge", "lead tracking"] },
+    { label: "The Ultimate Facebook Page Guide", url: "/facebook-page-guide", keywords: ["facebook page", "page setup", "username", "business page", "meta business suite"] },
     { label: "Website Development", url: "/website-development", keywords: ["website development", "landing page", "web design"] },
     { label: "Portfolio", url: "/portfolio", keywords: ["portfolio", "case", "projects", "results"] },
     { label: "Resume", url: "/resume", keywords: ["resume", "cv", "curriculum vitae", "experience"] },
