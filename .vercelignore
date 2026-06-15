@@ -1,4 +1,5 @@
 script.ts
 assets/js/**/*.ts
 api/**/*.ts
+!api/auth/[action].ts
 railway-api/**/*.ts
