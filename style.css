@@ -3749,6 +3749,30 @@ a.is-loading {
     align-content: center;
 }
 
+.page-resume .resume-hero-copy .hero-actions {
+    justify-content: flex-start;
+}
+
+.page-resume .resume-hero-copy .hero-actions a,
+.page-resume .resume-actions a {
+    min-height: 48px;
+    padding: 11px 22px;
+    font-size: 0.96rem;
+    line-height: 1;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+.page-resume .resume-hero-copy .btn-primary,
+.page-resume .resume-actions .btn-primary {
+    min-width: 168px;
+}
+
+.page-resume .resume-hero-copy .btn-secondary,
+.page-resume .resume-actions .btn-secondary {
+    min-width: 150px;
+}
+
 .page-resume .resume-hero-copy h1 {
     color: var(--primary-ink);
     font-size: clamp(2.4rem, 4.8vw, 4.8rem);
@@ -4026,10 +4050,26 @@ a.is-loading {
 }
 
 .page-resume .resume-meta span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
     padding: 12px 14px;
     font-size: 0.84rem;
     background: rgba(247, 242, 255, 0.86);
     border-radius: 16px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.35;
+}
+
+.page-resume .resume-meta strong {
+    color: var(--primary-ink);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .page-resume .cta-banner {
@@ -4052,6 +4092,17 @@ a.is-loading {
     .page-resume .subpage-hero .hero-content {
         padding: 20px;
         border-radius: 24px;
+    }
+
+    .page-resume .resume-hero-copy .hero-actions,
+    .page-resume .resume-actions {
+        width: 100%;
+    }
+
+    .page-resume .resume-hero-copy .hero-actions a,
+    .page-resume .resume-actions a {
+        width: 100%;
+        white-space: normal;
     }
 
     .page-resume .resume-portrait-frame {
