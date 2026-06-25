@@ -7747,6 +7747,7 @@ button:focus-visible {
     position: absolute;
     inset: 0;
     z-index: 1;
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
@@ -7761,13 +7762,20 @@ button:focus-visible {
     opacity: 1;
 }
 
-.page-home .hero-video-frame.is-video-ready .hero-video-fallback,
+.page-home .hero-video-frame.is-video-ready .hero-video-fallback {
+    opacity: 0;
+}
+
 .page-home .hero-video-frame.is-video-ready .hero-video-caption {
     opacity: 0;
 }
 
 .page-home .hero-video-frame.is-video-fallback .hero-video {
     display: none;
+}
+
+.page-home .hero-video-frame.is-video-fallback .hero-video-fallback {
+    opacity: 1;
 }
 
 .page-home .hero-video-caption {
