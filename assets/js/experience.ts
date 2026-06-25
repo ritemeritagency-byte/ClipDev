@@ -1,4 +1,4 @@
-import { body, root, navToggle, navLinks, normalizePath, reducedMotionQuery, buildMessengerUrl } from "./shared.ts";
+import { body, root, navToggle, navLinks, normalizePath, reducedMotionQuery, buildWhatsAppUrl } from "./shared.ts";
 
 const navAnchors = Array.from(document.querySelectorAll(".nav-links a"));
 
@@ -509,7 +509,7 @@ const setupDiamondShowcases = () => {
   });
 };
 
-const setupMessengerWidget = () => {
+const setupWhatsAppWidget = () => {
   const waWidget = document.querySelector("[data-wa-widget]");
   if (!waWidget) return;
 
@@ -567,10 +567,10 @@ const setupMessengerWidget = () => {
     });
   }
 
-  if (send && input) {
+    if (send && input) {
     send.addEventListener("click", () => {
       const raw = input.value.trim() || "Hi, I want help with my website or recruitment project.";
-      window.open(buildMessengerUrl(raw), "_blank", "noopener");
+      window.open(buildWhatsAppUrl(raw), "_blank", "noopener");
     });
   }
 };
@@ -584,5 +584,5 @@ export const setupExperience = () => {
   setupMegaMenu();
   setupMobileNav();
   setupDiamondShowcases();
-  setupMessengerWidget();
+  setupWhatsAppWidget();
 };
