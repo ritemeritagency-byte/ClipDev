@@ -7249,21 +7249,19 @@ button:focus-visible {
         bottom: 12px;
     }
     .wa-toggle {
-        width: auto;
+        width: 64px;
         min-width: 64px;
         height: 64px;
-        border-radius: 999px;
-        padding: 0 18px;
-        gap: 10px;
+        border-radius: 50%;
+        padding: 0;
+        gap: 0;
+        justify-content: center;
     }
     .wa-toggle i {
         font-size: 1.7rem;
     }
     .wa-toggle span {
-        display: inline;
-        font-size: 0.95rem;
-        line-height: 1;
-        white-space: nowrap;
+        display: none;
     }
     .wa-panel {
         width: min(86vw, 320px);
@@ -7462,17 +7460,19 @@ button:focus-visible {
         bottom: max(10px, env(safe-area-inset-bottom));
     }
     .wa-toggle {
+        width: 58px;
         min-width: 58px;
         height: 58px;
-        padding: 0 16px;
-        gap: 8px;
+        padding: 0;
+        gap: 0;
+        justify-content: center;
         box-shadow: 0 0 0 8px rgba(10, 124, 255, 0.08), 0 14px 28px rgba(11, 69, 145, 0.28);
     }
     .wa-toggle i {
         font-size: 1.45rem;
     }
     .wa-toggle span {
-        font-size: 0.88rem;
+        display: none;
     }
     .wa-panel {
         width: min(calc(100vw - 20px), 340px);
