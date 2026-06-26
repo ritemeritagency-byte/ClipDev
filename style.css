@@ -111,6 +111,17 @@ body::before {
     gap: 14px;
 }
 
+.site-intro-logo {
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    display: block;
+    border-radius: 20px;
+    background: #ffffff;
+    object-fit: cover;
+    box-shadow: 0 22px 38px rgba(47, 128, 237, 0.24);
+}
+
 .site-intro-badge {
     width: 66px;
     height: 66px;
@@ -254,6 +265,18 @@ body.is-scrolled .navbar {
     font-weight: 800;
     letter-spacing: 0.2px;
     line-height: 1;
+}
+
+.logo-mark {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: block;
+    margin-right: 10px;
+    border-radius: 12px;
+    background: #ffffff;
+    object-fit: cover;
+    box-shadow: 0 10px 24px rgba(31, 95, 170, 0.16);
 }
 
 .logo-badge {
