@@ -7490,6 +7490,75 @@ button:focus-visible {
     }
 }
 
+/* Show the homepage blog artwork at its full natural composition. */
+html .page-home .home-blog-card {
+    width: min(100%, 1080px);
+    overflow: hidden;
+    border-radius: 26px;
+    border-color: rgba(29, 110, 242, 0.16);
+    box-shadow: 0 24px 58px rgba(12, 35, 71, 0.13);
+}
+
+html .page-home .home-blog-card .insight-card-image {
+    position: relative;
+    min-height: 0;
+    padding: 44px 18px 18px;
+    background: linear-gradient(145deg, #dfeeff 0%, #f4f8ff 100%);
+}
+
+html .page-home .home-blog-card .insight-card-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1267 / 745;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 18px 42px rgba(12, 35, 71, 0.16);
+}
+
+.home-blog-image-bar {
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.home-blog-image-bar span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9ab2ce;
+}
+
+.home-blog-image-bar p {
+    margin-left: 8px;
+    color: #627791;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+html .page-home .home-blog-card .insight-card-content {
+    padding: clamp(24px, 4vw, 38px);
+}
+
+@media (max-width: 600px) {
+    html .page-home .home-blog-card .insight-card-image {
+        padding: 40px 10px 10px;
+    }
+
+    html .page-home .home-blog-card .insight-card-image img {
+        border-radius: 10px;
+    }
+}
+
 /* 11. RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
     .page-blog .container {
