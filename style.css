@@ -9543,3 +9543,107 @@ html .page-home .featured-case-media img {
         aspect-ratio: auto;
     }
 }
+
+/* Premium card shine: brand-blue glow with restrained gold highlights. */
+html .page-home .service-card,
+html .page-home .trust-card,
+html .page-home .package-card,
+html .page-home .about-card,
+html .page-home .subpage-card,
+html .page-home .testimonial-card,
+html .page-home .course-point-card,
+html .page-home .course-plan-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(300px 150px at 105% -10%, rgba(101, 199, 255, 0.16), transparent 64%),
+        linear-gradient(145deg, #ffffff 0%, #f4f8ff 100%);
+    border-color: rgba(29, 110, 242, 0.16);
+    box-shadow:
+        0 16px 38px rgba(12, 35, 71, 0.09),
+        0 0 0 rgba(101, 199, 255, 0);
+    transition:
+        transform 0.28s var(--motion-smooth),
+        border-color 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+html .page-home .service-card::after,
+html .page-home .trust-card::after,
+html .page-home .package-card::after,
+html .page-home .about-card::after,
+html .page-home .subpage-card::after,
+html .page-home .testimonial-card::after,
+html .page-home .course-point-card::after,
+html .page-home .course-plan-card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -90px;
+    right: -100px;
+    width: 220px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(101, 199, 255, 0.2), rgba(101, 199, 255, 0) 70%);
+    opacity: 0.55;
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.35s var(--motion-smooth);
+}
+
+html .page-home .service-card:hover,
+html .page-home .trust-card:hover,
+html .page-home .package-card:hover,
+html .page-home .about-card:hover,
+html .page-home .subpage-card:hover,
+html .page-home .testimonial-card:hover,
+html .page-home .course-point-card:hover,
+html .page-home .course-plan-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(29, 110, 242, 0.3);
+    box-shadow:
+        0 24px 54px rgba(12, 35, 71, 0.15),
+        0 0 32px rgba(101, 199, 255, 0.2);
+}
+
+html .page-home .service-card:hover::after,
+html .page-home .trust-card:hover::after,
+html .page-home .package-card:hover::after,
+html .page-home .about-card:hover::after,
+html .page-home .subpage-card:hover::after,
+html .page-home .testimonial-card:hover::after,
+html .page-home .course-point-card:hover::after,
+html .page-home .course-plan-card:hover::after {
+    opacity: 1;
+    transform: translate(-14px, 12px) scale(1.12);
+}
+
+html .page-home .home-package-featured {
+    border-color: rgba(244, 185, 66, 0.46);
+    box-shadow:
+        0 22px 48px rgba(12, 35, 71, 0.13),
+        0 0 26px rgba(244, 185, 66, 0.12);
+}
+
+html .page-home .home-package-featured::before {
+    background: linear-gradient(90deg, #f4b942, #ffe29a, #f4b942);
+}
+
+html .page-home .featured-case-card {
+    box-shadow:
+        0 30px 70px rgba(12, 35, 71, 0.22),
+        0 0 34px rgba(101, 199, 255, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html .page-home .service-card,
+    html .page-home .trust-card,
+    html .page-home .package-card,
+    html .page-home .about-card,
+    html .page-home .subpage-card,
+    html .page-home .testimonial-card,
+    html .page-home .course-point-card,
+    html .page-home .course-plan-card {
+        transition: none;
+    }
+}
