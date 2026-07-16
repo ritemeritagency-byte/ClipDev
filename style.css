@@ -9479,3 +9479,67 @@ html .page-resume .project-showcase-card { min-height: 240px; padding: 30px; bor
     html .page-resume .history-card { display: flex; padding: 0 0 42px 38px; }
     html .page-resume .history-card .meta-pill { align-self: flex-start; }
 }
+
+/* Final cascade lock for the homepage featured case study. */
+html .page-home .featured-case-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    overflow: hidden;
+    border: 0;
+    border-radius: 30px;
+    background: var(--primary-ink);
+    box-shadow: 0 30px 70px rgba(12, 35, 71, 0.2);
+}
+
+html .page-home .featured-case-content {
+    padding: clamp(32px, 4vw, 56px);
+    background: var(--primary-ink);
+}
+
+html .page-home .featured-case-content h3 {
+    color: #ffffff;
+}
+
+html .page-home .featured-case-content > p,
+html .page-home .featured-case-proof-list {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+html .page-home .featured-case-content .meta-pill {
+    color: #dcebff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+html .page-home .featured-case-metrics span {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+html .page-home .featured-case-media {
+    min-width: 0;
+    padding: 52px 24px 70px;
+    background: linear-gradient(145deg, #dfeeff, #f8fbff);
+}
+
+html .page-home .featured-case-media img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 11;
+    object-fit: contain;
+    object-position: top center;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+@media (max-width: 850px) {
+    html .page-home .featured-case-card {
+        grid-template-columns: 1fr;
+    }
+
+    html .page-home .featured-case-media img {
+        aspect-ratio: auto;
+    }
+}
